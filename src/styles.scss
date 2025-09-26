@@ -1,1 +1,168 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'bootstrap/scss/bootstrap';
+@use '@nebular/theme/styles/globals' as *;
+@use '@nebular/theme/styles/themes/default' as default-theme;
+@import 'themes';
+
+
+
+@include nb-install() {
+  @include nb-theme-global();
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #e4e9f2 #f7f9fc;
+}
+
+::-webkit-scrollbar {
+  width: 0.7rem !important;
+  height: 0.6rem !important;
+}
+i.fas, i.far, i.fab {
+  font-size: 1.2rem !important;
+  color: black !important;
+}
+::-webkit-scrollbar-track {
+  background: #f7f9fc;
+}
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+th.descHeader:before {
+  content: "\f062";
+  font-family: 'FontAwesome', sans-serif;
+  left: -5px;
+  position: relative;
+  top: 0;
+}
+
+th.ascHeader:before {
+  content: "\f063";
+  font-family: 'FontAwesome', sans-serif;
+  left: -5px;
+  position: relative;
+  top: 0;
+}
+
+.click:hover {
+  cursor: pointer;
+}
+
+nb-spinner {
+  z-index: 1000 !important;
+}
+
+nb-form-field {
+
+  nb-error {
+    position: absolute;
+    bottom: -1.2rem; // Spazio sotto il campo
+    left: 0;
+    font-size: 0.75rem;
+    color: #e53935;
+    white-space: nowrap;
+  }
+}
+.input-error-border {
+  border: 1px solid red !important;
+  border-radius: 0.25rem;
+}
+
+.button-back {
+  transition: background-color 0.3s ease;
+  nb-icon{
+    color: black !important;
+  }
+  span{
+    color: black !important;
+  }
+
+
+
+  .button-back:hover {
+    background-color: #8094b3 !important;
+    border-radius: 0.375rem;
+  }
+
+  .button-back:hover nb-icon,
+  .button-back:hover span {
+    color: #002866 !important;
+  }
+
+
+}
+
+.card_table_header{
+  background-color: white !important;
+  background-image: linear-gradient(to top, rgb(38, 72, 125) 0%, rgb(0, 40, 102) 70%, rgb(0, 36, 94) 100%)!important;
+  color: white;
+  padding: 0.75rem 1rem;
+
+  h6 {
+    color: white !important; // Ensure the h6 text is white
+  }
+}
+.card_accordion_header{
+  background-color: white !important;
+  background-image: linear-gradient(to top, rgb(38, 72, 125) 0%, rgb(0, 40, 102) 70%, rgb(0, 36, 94) 100%)!important;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.3rem;
+
+}
+.fieldSet{
+  border-radius: 0.3rem;
+}
+
+.sectionTitle {
+  font-variant: small-caps
+}
+div[class=separator] {
+  overflow: hidden;
+  height: 1.25rem;
+
+
+  &:after {
+    content: '';
+    display: block;
+    margin: -1.5625rem auto 0;
+    width: 100%;
+    height: 1.5625rem;
+    border-radius: 7.8125rem / 0.75rem;
+    box-shadow: 0 0 0.5rem #173853;
+  }
+}
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+// Responsive utility
+@media (max-width: 576px) {
+  .responsive-table {
+    font-size: 0.9rem;
+    th, td { padding: 0.25rem; }
+  }
+  .hide-xs { display: none !important; }
+}
+@media (max-width: 768px) {
+  .flex-column-md { flex-direction: column !important; }
+  .text-center-md { text-align: center !important; }
+}
+
+h6 {
+  color: white !important; // Ensure the h6 text is white
+}

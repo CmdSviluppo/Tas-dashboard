@@ -1,11 +1,4 @@
-<nb-layout>
-  <nb-layout-header fixed> HEADER </nb-layout-header>
-
-  <nb-sidebar>
-    MENU
-  </nb-sidebar>
-
-  <nb-layout-column>
-    <router-outlet></router-outlet>
-  </nb-layout-column>
-</nb-layout>
+<div *ngIf="showSpinner$ | async" class="spinner-overlay">
+  <nb-spinner status="primary" size="giant"></nb-spinner>
+</div>
+<router-outlet></router-outlet>
