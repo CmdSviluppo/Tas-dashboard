@@ -1,0 +1,20 @@
+{
+  "apiConnect": {
+    "headers": {
+      "x-ibm-client-id": "",
+      "x-ibm-client-secret": ""
+    }
+  },
+  "logConfig": {
+    "level": 100
+  },
+  "globalMockEnabled": false,
+  "storageConfig": {
+    "entryLimit": 1024,
+    "entryMaxSize": 12
+  },
+  "isMock": false,
+  "isLocal": false,
+  "apiBaseUrl": "https://aet-cpm-portal-backend-dev.servizi.gr-u.it/rest",
+  "localBaseUrl": "http://localhost:8080/rest"
+}

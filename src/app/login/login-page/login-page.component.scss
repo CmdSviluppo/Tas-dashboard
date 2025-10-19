@@ -1,0 +1,273 @@
+// login.component.scss
+
+:host {
+  display: block;
+  height: 100vh;
+  width: 100%;
+}
+
+nb-layout {
+  background: linear-gradient(to bottom, #0B0B0B, #0D1B2A);
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+// Background Grid Pattern
+.background-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+// Animated Chart Background
+.background-chart {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: 50%;
+  z-index: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, white 20%, transparent 70%);
+}
+
+// Main Content
+.login-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 450px;
+}
+
+// Logo Section
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.logo-container {
+  filter: drop-shadow(0 0 15px rgba(0, 191, 255, 0.4));
+  transition: filter 0.3s ease;
+
+  &:hover {
+    filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.6));
+  }
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #9aadbc;
+  margin: 0;
+}
+
+// Login Card
+.login-card {
+  width: 100%;
+  background-color: #141414;
+  border: 1px solid rgba(0, 140, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 140, 255, 0.1);
+  border-radius: 1rem;
+
+  ::ng-deep nb-card-body {
+    padding: 2rem;
+  }
+}
+
+// Form Styling
+.form-group {
+  margin-bottom: 1.5rem;
+
+  &:last-of-type {
+    margin-bottom: 2rem;
+  }
+}
+
+.label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+::ng-deep {
+  // Form Field Styling
+  nb-form-field {
+    .input-full-width {
+      background-color: #1C1C1C;
+      border-radius: 0.5rem;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      color: #ffffff;
+
+      &:focus {
+        border-color: #00BFFF;
+        box-shadow: 0 0 0 0.2rem rgba(0, 191, 255, 0.25);
+      }
+
+      &::placeholder {
+        color: #9aadbc;
+      }
+    }
+
+    nb-icon {
+      color: #9aadbc;
+    }
+
+    &.status-danger {
+      .input-full-width {
+        border-color: #ff3d71;
+      }
+    }
+  }
+
+  // Input Groups
+  .input-group {
+    background-color: #1C1C1C;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+
+    &.input-group-focus {
+      border-color: #00BFFF;
+      box-shadow: 0 0 0 0.2rem rgba(0, 191, 255, 0.25);
+    }
+
+    input {
+      background-color: transparent;
+      border: none;
+      color: #ffffff;
+      height: 3.5rem;
+
+      &::placeholder {
+        color: #9aadbc;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    .input-group-icon,
+    .input-group-text {
+      background-color: transparent;
+      border: none;
+      color: #9aadbc;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      color: #9aadbc;
+
+      &:hover {
+        color: #00BFFF;
+      }
+    }
+  }
+}
+
+// Login Button
+.login-button {
+  margin-top: 1rem;
+  height: 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  background-color: #008CFF;
+  border: none;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background-color: #00BFFF;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Footer Text
+.footer-text {
+  font-size: 0.875rem;
+  color: #6c757d;
+  text-align: center;
+  margin: 0;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .login-container {
+    padding: 1rem;
+  }
+
+  .login-content {
+    gap: 1.5rem;
+  }
+
+  .logo-container svg {
+    width: 140px;
+    height: 140px;
+  }
+
+  .login-card ::ng-deep nb-card-body {
+    padding: 1.5rem;
+  }
+
+  .background-chart {
+    width: 70%;
+    height: 40%;
+  }
+}
+
+// Dark Theme Adjustments
+:host-context(.nb-theme-dark) {
+  .login-card {
+    background-color: #141414;
+  }
+
+  ::ng-deep {
+    input {
+      background-color: #1C1C1C;
+      color: #ffffff;
+    }
+  }
+}
+
+// Spinner Overlay
+::ng-deep {
+  .nb-overlay-container {
+    .spinner-container {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
+}

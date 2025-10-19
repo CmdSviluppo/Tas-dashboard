@@ -1,0 +1,10 @@
+{
+  "apiBaseUrl": "https://backend-prod.example.com/api",
+  "localBaseUrl": "http://localhost:8080/api",
+  "isLocal": false,
+  "isMock": false,
+  "headers": {
+    "x-ibm-client-id": "",
+    "x-ibm-client-secret": ""
+  }
+}

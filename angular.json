@@ -23,14 +23,19 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              { "glob": "**/*", "input": "public", "output": "/" }
+              { "glob": "**/*", "input": "public", "output": "/" },
+              { "glob": "**/*", "input": "src/assets", "output": "/assets" }
             ],
             "styles": [
               "src/styles.scss",
               "node_modules/@nebular/theme/styles/prebuilt/default.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+                "moment",
+                "eva-icons"
+              ]
           },
           "configurations": {
             "production": {
@@ -75,7 +80,8 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              { "glob": "**/*", "input": "public", "output": "/" }
+              { "glob": "**/*", "input": "public", "output": "/" },
+              { "glob": "**/*", "input": "src/assets", "output": "/assets" }
             ],
             "styles": ["src/styles.scss"],
             "scripts": []

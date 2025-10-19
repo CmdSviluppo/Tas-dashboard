@@ -1,0 +1,84 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definizioni -->
+  <defs>
+    <!-- Gradiente principale -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00A8FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0086CC;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente secondario per profondità -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00C2FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00A8FF;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Ombra -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle (opzionale) -->
+  <circle cx="200" cy="200" r="180" fill="none" stroke="url(#mainGradient)" stroke-width="2" opacity="0.2"/>
+  
+  <!-- Elemento principale: forma geometrica che rappresenta analisi/grafici -->
+  <g filter="url(#shadow)">
+    <!-- Forma esagonale stilizzata -->
+    <path d="M 200 80 L 280 130 L 280 230 L 200 280 L 120 230 L 120 130 Z" 
+          fill="url(#mainGradient)" 
+          stroke="url(#accentGradient)" 
+          stroke-width="3"/>
+    
+    <!-- Linea grafico ascendente all'interno -->
+    <path d="M 145 220 L 170 195 L 190 205 L 215 170 L 240 155 L 255 145" 
+          fill="none" 
+          stroke="#00C2FF" 
+          stroke-width="4" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+    
+    <!-- Punti dati sul grafico -->
+    <circle cx="145" cy="220" r="5" fill="#FFFFFF"/>
+    <circle cx="170" cy="195" r="5" fill="#FFFFFF"/>
+    <circle cx="190" cy="205" r="5" fill="#FFFFFF"/>
+    <circle cx="215" cy="170" r="5" fill="#FFFFFF"/>
+    <circle cx="240" cy="155" r="5" fill="#FFFFFF"/>
+    <circle cx="255" cy="145" r="6" fill="#FFFFFF"/>
+    
+    <!-- Elemento "T" stilizzato integrato -->
+    <path d="M 180 240 L 220 240 M 200 240 L 200 260" 
+          stroke="#FFFFFF" 
+          stroke-width="6" 
+          stroke-linecap="round"/>
+  </g>
+  
+  <!-- Testo TAS sotto il logo -->
+  <text x="200" y="340" 
+        font-family="Arial, sans-serif" 
+        font-size="48" 
+        font-weight="bold" 
+        fill="url(#mainGradient)" 
+        text-anchor="middle">
+    TAS
+  </text>
+  
+  <!-- Sottotitolo -->
+  <text x="200" y="365" 
+        font-family="Arial, sans-serif" 
+        font-size="14" 
+        font-weight="300" 
+        fill="#7A7A7A" 
+        text-anchor="middle" 
+        letter-spacing="2">
+    TRADING ANALYSIS SYSTEM
+  </text>
+</svg>

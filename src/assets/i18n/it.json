@@ -1,7 +1,9 @@
 {
-  "LOGIN_PAGE" : {
-    "username_label": "Username:",
+  "LOGIN_PAGE": {
+    "subtitle": "Accesso alla piattaforma di analisi trading",
+    "username_label": "Email / Username",
     "password_label": "Password",
-    "login_button": "Login"
+    "login_button": "ACCEDI",
+    "footer_text": "Accesso riservato agli utenti autorizzati."
   }
 }
