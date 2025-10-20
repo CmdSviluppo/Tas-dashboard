@@ -14,9 +14,7 @@ import {
 } from '@nebular/theme';
 
 import { NbMomentDateModule, NbMomentDateService } from '@nebular/moment';
-// Temporarily omit direct Nebular auth module setup to avoid peer-dependency/type issues.
-// We'll add proper auth wiring once Nebular packages are aligned with Angular.
-// import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken } from '@nebular/auth';
+import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken } from '@nebular/auth';
 import { provideRouter } from '@angular/router';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import {
@@ -32,7 +30,6 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {registerLocaleData} from '@angular/common';
-import { NbAuthJWTToken, NbAuthModule, NbPasswordAuthStrategy } from '@nebular/auth';
 
 // factory per caricare i file JSON delle traduzioni
 export function HttpLoaderFactory(httpBackend: HttpBackend): MultiTranslateHttpLoader {

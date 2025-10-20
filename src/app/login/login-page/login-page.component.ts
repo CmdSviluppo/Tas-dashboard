@@ -19,6 +19,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
     selector: 'app-login-page',
+    standalone: true,
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -32,7 +33,7 @@ import {HttpErrorResponse} from '@angular/common/http';
         NbIconModule
     ],
     templateUrl: './login-page.component.html',
-    styleUrl: './login-page.component.scss'
+    styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
   loginResponse!: AuthResponse;
@@ -72,7 +73,7 @@ export class LoginPageComponent implements OnInit {
         next: (response) => {
           this.loginResponse = response.data;
           this.showSpinner = false;
-          this.router.navigate(['pages']).then(r =>
+          this.router.navigate(['system']).then(r =>
             console.log('Navigated to dashboard'));
         },
         error: (error: HttpErrorResponse) => {
