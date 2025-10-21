@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
         NbSpinnerModule,
         NbIconModule
     ],
+    standalone: true,
     templateUrl: './app.html',
     styleUrl: './app.scss'
 })

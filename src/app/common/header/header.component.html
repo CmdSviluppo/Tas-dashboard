@@ -1,0 +1,91 @@
+<!-- Header Left - Logo & Navigation -->
+<div class="header-left">
+  <button nbButton ghost class="hamburger-btn" (click)="toggleSidebar()">
+    <nb-icon icon="menu-outline" pack="eva"></nb-icon>
+  </button>
+
+  <!-- <a href="#" class="logo-container" (click)="goToHome($event)">
+    <div class="logo-icon">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+        <defs>
+          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00BFFF;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#00A8FF;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path d="M 200 80 L 280 130 L 280 230 L 200 280 L 120 230 L 120 130 Z"
+              fill="url(#logoGradient)"
+              stroke="#00C2FF"
+              stroke-width="3"/>
+        <path d="M 145 220 L 170 195 L 190 205 L 215 170 L 240 155 L 255 145"
+              fill="none"
+              stroke="#00C2FF"
+              stroke-width="4"
+              stroke-linecap="round"/>
+        <path d="M 180 240 L 220 240 M 200 240 L 200 260"
+              stroke="#FFFFFF"
+              stroke-width="6"
+              stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="logo-text">TAS</span>
+  </a> -->
+</div>
+
+<!-- Header Center - Global Search -->
+<!-- <div class="header-center">
+  <div class="global-search">
+    <nb-icon icon="search-outline" pack="eva" class="search-icon"></nb-icon>
+    <input
+      type="text"
+      nbInput
+      fullWidth
+      placeholder="Cerca simboli, strategie, modelli AI..."
+      [(ngModel)]="searchQuery"
+      (focus)="onSearchFocus()"
+      (blur)="onSearchBlur()"
+      (input)="onSearchInput()"> -->
+
+    <!-- Search Results Overlay -->
+    <!-- <div class="search-results-overlay" *ngIf="showSearchResults && searchQuery">
+      <div class="search-category" *ngFor="let category of searchResults">
+        <div class="category-title">{{ category.name }}</div>
+        <div class="search-item" *ngFor="let item of category.items" (click)="selectSearchResult(item)">
+          <nb-icon [icon]="item.icon" pack="eva"></nb-icon>
+          <span>{{ item.label }}</span>
+        </div>
+      </div>
+      <div class="no-results" *ngIf="searchResults.length === 0">
+        <nb-icon icon="search-outline" pack="eva"></nb-icon>
+        <p>Nessun risultato trovato</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Header Right - Status, Notifications, Profile -->
+<!-- <div class="header-right"> -->
+  <!-- Live Connection Indicator -->
+  <!-- <div
+    class="connection-indicator"
+    [class.connected]="isLiveConnected"
+    [nbTooltip]="isLiveConnected ? 'Server Live connesso' : 'Server Live disconnesso'"
+    nbTooltipStatus="basic">
+    <div class="status-dot"></div>
+  </div> -->
+
+  <!-- Notifications -->
+  <!-- <button nbButton ghost class="header-action-btn" (click)="toggleNotifications()">
+    <nb-icon icon="bell-outline" pack="eva"></nb-icon>
+    <span class="badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+  </button> -->
+
+  <!-- User Profile -->
+
+  <!-- <div class="user-profile" [nbContextMenu]="userMenu" nbContextMenuTag="user-menu">
+    <button class="user-avatar-btn" type="button" aria-label="User menu">
+      <img src="assets/img/default-avatar.png" alt="User" class="avatar"
+           onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2QzcyOTMiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxMiIgcj0iNiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNIDQgMjYgQyA0IDIwIDkgMTYgMTYgMTYgUyAyOCAyMCAyOCAyNiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K'" />
+    </button>
+  </div>
+</div>  -->

@@ -3,7 +3,7 @@ import {LoginPageComponent} from './login/login-page/login-page.component';
 
 export const routes: Routes = [
   {
-    path: 'system',
+    path: 'pages',
     canActivate: [],
     loadChildren: () => import('./pages/pages.routes').then(m => m.PAGES_ROUTES)
   },

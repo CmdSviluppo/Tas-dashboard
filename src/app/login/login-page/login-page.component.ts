@@ -73,7 +73,8 @@ export class LoginPageComponent implements OnInit {
         next: (response) => {
           this.loginResponse = response.data;
           this.showSpinner = false;
-          this.router.navigate(['system']).then(r =>
+          // Navigate to the main dashboard after successful login
+          this.router.navigate(['/pages/dashboard/home']).then(r =>
             console.log('Navigated to dashboard'));
         },
         error: (error: HttpErrorResponse) => {

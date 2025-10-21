@@ -1,0 +1,51 @@
+:host ::ng-deep nb-menu {
+  a[title="Dashboard"],
+  a[title="Strategie"] {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: #0f3250 !important;
+    color: #ffffff !important;
+    padding: 0.75rem 1rem !important;
+    text-align: center !important;
+
+    &:hover,
+    &.active {
+      background-color: #0f3250 !important;
+      color: #ffffff !important;
+    }
+  }
+  ::ng-deep .info-cookie-link .nb-menu-item {
+    justify-content: center; // centra il testo
+  }
+
+  ::ng-deep .info-cookie-link .nb-menu-item-title {
+    color: #2196f3 !important; // azzurrino (Material blue 500)
+    text-align: center;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  ::ng-deep .info-cookie-link .nb-menu-item:hover,
+  ::ng-deep .info-cookie-link .nb-menu-item.selected {
+    background: none !important; // niente background su hover o selezione
+  }
+}
+
+:host ::ng-deep nb-menu a[title="Informativa Cookie"] {
+  justify-content: center !important;
+}
+
+:host ::ng-deep nb-menu a[title="Informativa Cookie"] .menu-title {
+  color: #2196f3 !important; // azzurrino
+  text-align: center;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+:host ::ng-deep nb-menu a[title="Informativa Cookie"]:hover,
+:host ::ng-deep nb-menu a[title="Informativa Cookie"].selected {
+  background: none !important;
+}

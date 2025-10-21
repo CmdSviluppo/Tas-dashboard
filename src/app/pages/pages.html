@@ -1,1 +1,71 @@
-<p>pages works!</p>
+<nb-layout [withScroll]="false">
+
+  <!-- ============================================ -->
+  <!-- HEADER -->
+  <!-- ============================================ -->
+  <nb-layout-header fixed class="tas-header">
+    <app-header
+      (sidebarToggle)="onSidebarToggle()"
+      (notificationsToggle)="onNotificationsToggle()">
+    </app-header>
+  </nb-layout-header>
+
+  <!-- ============================================ -->
+  <!-- MAIN SIDEBAR -->
+  <!-- ============================================ -->
+  <nb-sidebar
+    class="menu"
+    tag="menu"
+    responsive
+    [state]="sidebarState">
+    <app-sidebar-menu [collapsed]="sidebarState === 'collapsed'"></app-sidebar-menu>
+  </nb-sidebar>
+
+  <!-- ============================================ -->
+  <!-- MAIN CONTENT AREA -->
+  <!-- ============================================ -->
+  <nb-layout-column class="main-content">
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+
+</nb-layout>
+
+<!-- ============================================ -->
+<!-- NOTIFICATION SIDEBAR -->
+<!-- ============================================ -->
+<nb-sidebar
+  class="notification-sidebar"
+  right
+  tag="notification-sidebar"
+  [state]="notificationSidebarState">
+
+  <div class="notification-header">
+    <h5>Notifiche</h5>
+    <button nbButton ghost size="small" (click)="closeNotifications()">
+      <nb-icon icon="close-outline" pack="eva"></nb-icon>
+    </button>
+  </div>
+
+  <div class="notification-list">
+    <div
+      class="notification-item"
+      *ngFor="let notification of notifications"
+      [class.unread]="!notification.read"
+      (click)="markAsRead(notification)">
+      <div class="notification-icon" [ngClass]="'type-' + notification.type">
+        <nb-icon [icon]="getNotificationIcon(notification.type)" pack="eva"></nb-icon>
+      </div>
+      <div class="notification-content">
+        <div class="notification-title">{{ notification.title }}</div>
+        <div class="notification-message">{{ notification.message }}</div>
+        <div class="notification-time">{{ notification.time }}</div>
+      </div>
+    </div>
+
+    <div class="empty-notifications" *ngIf="notifications.length === 0">
+      <nb-icon icon="bell-off-outline" pack="eva"></nb-icon>
+      <p>Nessuna notifica</p>
+    </div>
+  </div>
+
+</nb-sidebar>
