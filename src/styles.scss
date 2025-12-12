@@ -1,4 +1,4 @@
-/* Minimal global styles: Nebular setup, fonts, variables, and light layout tweaks */
+/* Minimal global styles: Nebular setup, fonts, variables, and light layout tweaks 
 @use '@nebular/theme/styles/globals' as *;
 @import 'themes';
 
@@ -48,4 +48,304 @@ nb-layout-column {
 nb-sidebar {
   background: var(--tas-secondary-bg);
   border-right: 1px solid var(--tas-border-color);
+}
+*/
+
+@use '@nebular/theme/styles/globals' as *;
+@use '@nebular/theme/styles/theming' as *;
+@use '@nebular/theme/styles/themes/corporate';
+@import './styles/variables';
+
+// ========================================
+// NEBULAR THEME CUSTOMIZATION
+// ========================================
+
+$nb-themes: nb-register-theme((
+  
+  // ========== LAYOUT ==========
+  layout-background-color: $tas-bg-primary,
+  layout-padding: 0,
+  layout-medium-padding: 0,
+  layout-text-color: $tas-text-primary,
+  
+  // ========== HEADER ==========
+  header-background-color: $tas-bg-secondary,
+  header-height: 4.5rem,
+  header-padding: 1rem 1.5rem,
+  header-text-color: $tas-text-primary,
+  header-shadow: $tas-shadow-md,
+  
+  // ========== SIDEBAR ==========
+  sidebar-background-color: $tas-bg-secondary,
+  sidebar-width: 260px,
+  sidebar-width-compact: 60px,
+  sidebar-padding: 0,
+  sidebar-shadow: $tas-shadow-lg,
+  sidebar-text-color: $tas-text-secondary,
+  
+  // ========== MENU ==========
+  menu-background-color: transparent,
+  menu-text-color: $tas-text-secondary,
+  menu-text-font-weight: $tas-font-weight-medium,
+  menu-item-padding: 0.75rem 1rem,
+  menu-item-border-radius: $tas-radius-md,
+  
+  menu-item-active-background-color: $tas-bg-active,
+  menu-item-active-text-color: $tas-primary-light,
+  menu-item-icon-active-color: $tas-primary-light,
+  
+  menu-item-hover-background-color: $tas-bg-hover,
+  menu-item-hover-text-color: $tas-text-primary,
+  menu-item-icon-hover-color: $tas-primary-main,
+  menu-item-hover-cursor: pointer,
+  
+  menu-submenu-background-color: rgba(0, 0, 0, 0.2),
+  menu-submenu-padding: 0.5rem 0,
+  menu-submenu-item-padding: 0.625rem 1rem 0.625rem 2.5rem,
+  
+  // ========== CARDS ==========
+  card-background-color: $tas-bg-secondary,
+  card-border-radius: $tas-radius-lg,
+  card-border-color: $tas-border-primary,
+  card-border-width: 1px,
+  card-shadow: $tas-shadow-md,
+  card-padding: 1.5rem,
+  card-margin: 0,
+  
+  card-header-background-color: transparent,
+  card-header-text-color: $tas-text-primary,
+  card-header-text-font-size: $tas-font-size-xl,
+  card-header-text-font-weight: $tas-font-weight-semibold,
+  card-header-padding: 1rem 1.5rem,
+  
+  card-divider-color: $tas-border-secondary,
+  card-divider-width: 1px,
+  
+  // ========== BUTTONS ==========
+  button-filled-primary-background-color: $tas-primary-main,
+  button-filled-primary-hover-background-color: $tas-primary-light,
+  button-filled-primary-active-background-color: $tas-primary-dark,
+  button-filled-primary-border-color: transparent,
+  button-filled-primary-text-color: $tas-text-primary,
+  
+  button-filled-success-background-color: $tas-bullish,
+  button-filled-danger-background-color: $tas-bearish,
+  button-filled-warning-background-color: $tas-warning,
+  button-filled-info-background-color: $tas-info,
+  
+  button-outline-primary-border-color: $tas-primary-main,
+  button-outline-primary-text-color: $tas-primary-main,
+  
+  button-ghost-text-color: $tas-text-secondary,
+  button-ghost-hover-text-color: $tas-primary-light,
+  
+  button-border-radius: $tas-radius-pill,
+  button-padding: 0.75rem 1.5rem,
+  button-cursor: pointer,
+  
+  // ========== INPUTS ==========
+  input-basic-background-color: $tas-bg-input,
+  input-basic-border-color: $tas-border-secondary,
+  input-basic-focus-border-color: $tas-primary-main,
+  input-basic-text-color: $tas-text-primary,
+  input-basic-placeholder-text-color: $tas-text-muted,
+  input-border-radius: $tas-radius-md,
+  input-padding: 0.75rem 1rem,
+  
+  input-disabled-background-color: rgba(255, 255, 255, 0.05),
+  input-disabled-text-color: $tas-text-disabled,
+  
+  // ========== FORM FIELD ==========
+  form-field-addon-background-color: transparent,
+  
+  // ========== TABLES ==========
+  table-background-color: $tas-bg-secondary,
+  table-border-color: $tas-border-secondary,
+  table-header-background-color: $tas-bg-tertiary,
+  table-header-text-color: $tas-text-primary,
+  table-row-hover-background-color: $tas-bg-hover,
+  
+  // ========== TOASTR ==========
+  toastr-border-radius: $tas-radius-lg,
+  toastr-shadow: $tas-shadow-lg,
+  
+  // ========== POPOVER ==========
+  popover-background-color: $tas-bg-tertiary,
+  popover-border-color: $tas-border-primary,
+  popover-shadow: $tas-shadow-lg,
+  popover-text-color: $tas-text-primary,
+  
+  // ========== TOOLTIP ==========
+  tooltip-background-color: $tas-bg-tertiary,
+  tooltip-text-color: $tas-text-primary,
+  tooltip-border-radius: $tas-radius-sm,
+  
+  // ========== MODAL ==========
+  dialog-background-color: $tas-bg-secondary,
+  dialog-border-radius: $tas-radius-xl,
+  dialog-shadow: $tas-shadow-xl,
+  
+  // ========== SPINNER ==========
+  spinner-primary-circle-filled-color: $tas-primary-main,
+  spinner-primary-circle-empty-color: rgba(0, 168, 255, 0.2),
+  
+  // ========== BADGE ==========
+  badge-border-radius: $tas-radius-pill,
+  
+  // ========== STATUS COLORS ==========
+  color-primary-default: $tas-primary-main,
+  color-success-default: $tas-bullish,
+  color-danger-default: $tas-bearish,
+  color-warning-default: $tas-warning,
+  color-info-default: $tas-info,
+  
+  color-primary-focus: $tas-primary-light,
+  color-primary-hover: $tas-primary-light,
+  color-primary-active: $tas-primary-dark,
+  
+), corporate, corporate);
+
+@include nb-install() {
+  @include nb-theme-global();
+}
+
+// ========================================
+// GLOBAL STYLES
+// ========================================
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: $tas-bg-primary;
+  color: $tas-text-primary;
+  font-size: $tas-font-size-md;
+  line-height: $tas-line-height-normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ========== SCROLLBAR STYLING ==========
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $tas-bg-primary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 168, 255, 0.3);
+  border-radius: $tas-radius-pill;
+  
+  &:hover {
+    background: rgba(0, 168, 255, 0.5);
+  }
+}
+
+// ========== UTILITY CLASSES ==========
+
+// Text utilities
+.text-primary { color: $tas-text-primary !important; }
+.text-secondary { color: $tas-text-secondary !important; }
+.text-muted { color: $tas-text-muted !important; }
+.text-bullish { color: $tas-bullish !important; }
+.text-bearish { color: $tas-bearish !important; }
+.text-warning { color: $tas-warning !important; }
+
+// Background utilities
+.bg-primary { background-color: $tas-bg-primary !important; }
+.bg-secondary { background-color: $tas-bg-secondary !important; }
+.bg-tertiary { background-color: $tas-bg-tertiary !important; }
+
+// Border utilities
+.border-primary { border-color: $tas-border-primary !important; }
+
+// Spacing utilities
+.mt-xs { margin-top: $tas-spacing-xs !important; }
+.mt-sm { margin-top: $tas-spacing-sm !important; }
+.mt-md { margin-top: $tas-spacing-md !important; }
+.mt-lg { margin-top: $tas-spacing-lg !important; }
+
+.mb-xs { margin-bottom: $tas-spacing-xs !important; }
+.mb-sm { margin-bottom: $tas-spacing-sm !important; }
+.mb-md { margin-bottom: $tas-spacing-md !important; }
+.mb-lg { margin-bottom: $tas-spacing-lg !important; }
+
+.p-xs { padding: $tas-spacing-xs !important; }
+.p-sm { padding: $tas-spacing-sm !important; }
+.p-md { padding: $tas-spacing-md !important; }
+.p-lg { padding: $tas-spacing-lg !important; }
+
+// Flexbox utilities
+.d-flex { display: flex !important; }
+.flex-column { flex-direction: column !important; }
+.flex-row { flex-direction: row !important; }
+.align-items-center { align-items: center !important; }
+.justify-content-center { justify-content: center !important; }
+.justify-content-between { justify-content: space-between !important; }
+.gap-sm { gap: $tas-spacing-sm !important; }
+.gap-md { gap: $tas-spacing-md !important; }
+.gap-lg { gap: $tas-spacing-lg !important; }
+
+// Shadow utilities
+.shadow-sm { box-shadow: $tas-shadow-sm !important; }
+.shadow-md { box-shadow: $tas-shadow-md !important; }
+.shadow-lg { box-shadow: $tas-shadow-lg !important; }
+.shadow-glow { box-shadow: $tas-shadow-glow !important; }
+
+// Border radius utilities
+.rounded-sm { border-radius: $tas-radius-sm !important; }
+.rounded-md { border-radius: $tas-radius-md !important; }
+.rounded-lg { border-radius: $tas-radius-lg !important; }
+.rounded-pill { border-radius: $tas-radius-pill !important; }
+
+// Animation utilities
+.transition-fast { transition: all $tas-transition-fast !important; }
+.transition-base { transition: all $tas-transition-base !important; }
+.transition-slow { transition: all $tas-transition-slow !important; }
+
+// ========== COMMON ANIMATIONS ==========
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+.slide-in-up {
+  animation: slideInUp 0.3s ease;
 }

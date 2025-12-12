@@ -1,0 +1,110 @@
+// ========================================
+// TAS DESIGN SYSTEM - VARIABLES
+// ========================================
+
+// ========== PRIMARY COLORS ==========
+$tas-primary-main: #00A8FF;
+$tas-primary-dark: #0086CC;
+$tas-primary-darker: #006BA8;
+$tas-primary-light: #00BFFF;
+
+// ========== BACKGROUNDS ==========
+$tas-bg-primary: #0A0E1A;
+$tas-bg-secondary: #141932;
+$tas-bg-tertiary: #1A1F3A;
+$tas-bg-input: #1C1C1C;
+$tas-bg-hover: rgba(0, 168, 255, 0.1);
+$tas-bg-active: rgba(0, 168, 255, 0.15);
+
+// ========== TEXT COLORS ==========
+$tas-text-primary: #FFFFFF;
+$tas-text-secondary: #9AADBC;
+$tas-text-muted: #6C757D;
+$tas-text-disabled: #4A4A4A;
+
+// ========== BORDER COLORS ==========
+$tas-border-primary: rgba(0, 168, 255, 0.3);
+$tas-border-secondary: rgba(255, 255, 255, 0.1);
+$tas-border-tertiary: rgba(255, 255, 255, 0.05);
+
+// ========== TRADING COLORS ==========
+$tas-bullish: #00C853;
+$tas-bullish-light: #4CAF50;
+$tas-bearish: #FF3D71;
+$tas-bearish-light: #FF5252;
+$tas-warning: #FFA726;
+$tas-info: #42A5F5;
+
+// ========== STATE COLORS ==========
+$tas-state-neutral: #6C757D;
+$tas-state-watching: #FFA726;
+$tas-state-signal-generated: #66BB6A;
+$tas-state-signal-strong: #00C853;
+$tas-state-cooling-down: #42A5F5;
+
+// ========== SCORE GRADIENT ==========
+$tas-score-low: #FF3D71;
+$tas-score-medium: #FFA726;
+$tas-score-high: #00C853;
+
+// ========== SHADOWS ==========
+$tas-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+$tas-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+$tas-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+$tas-shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.5);
+$tas-shadow-glow: 0 0 20px rgba(0, 168, 255, 0.3);
+$tas-shadow-glow-strong: 0 0 30px rgba(0, 168, 255, 0.5);
+
+// ========== BORDER RADIUS ==========
+$tas-radius-xs: 0.25rem;
+$tas-radius-sm: 0.375rem;
+$tas-radius-md: 0.75rem;
+$tas-radius-lg: 1rem;
+$tas-radius-xl: 1.5rem;
+$tas-radius-2xl: 2rem;
+$tas-radius-pill: 9999px;
+
+// ========== SPACING ==========
+$tas-spacing-xs: 0.25rem;
+$tas-spacing-sm: 0.5rem;
+$tas-spacing-md: 1rem;
+$tas-spacing-lg: 1.5rem;
+$tas-spacing-xl: 2rem;
+$tas-spacing-2xl: 2.5rem;
+$tas-spacing-3xl: 3rem;
+
+// ========== TYPOGRAPHY ==========
+$tas-font-size-xs: 0.75rem;
+$tas-font-size-sm: 0.875rem;
+$tas-font-size-md: 1rem;
+$tas-font-size-lg: 1.125rem;
+$tas-font-size-xl: 1.25rem;
+$tas-font-size-2xl: 1.5rem;
+$tas-font-size-3xl: 2rem;
+$tas-font-size-4xl: 2.5rem;
+
+$tas-font-weight-light: 300;
+$tas-font-weight-normal: 400;
+$tas-font-weight-medium: 500;
+$tas-font-weight-semibold: 600;
+$tas-font-weight-bold: 700;
+
+$tas-line-height-tight: 1.25;
+$tas-line-height-normal: 1.5;
+$tas-line-height-relaxed: 1.75;
+
+// ========== TRANSITIONS ==========
+$tas-transition-fast: 150ms ease;
+$tas-transition-base: 250ms ease;
+$tas-transition-slow: 350ms ease;
+
+// ========== Z-INDEX LAYERS ==========
+$tas-z-index-dropdown: 1000;
+$tas-z-index-sticky: 1020;
+$tas-z-index-fixed: 1030;
+$tas-z-index-modal-backdrop: 1040;
+$tas-z-index-modal: 1050;
+$tas-z-index-popover: 1060;
+$tas-z-index-tooltip: 1070;
+$tas-z-index-toast: 1080;
+$tas-z-index-spinner: 9999;
