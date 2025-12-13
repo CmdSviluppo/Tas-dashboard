@@ -1,0 +1,34 @@
+@use 'src/styles/variables' as *;
+
+.strategy-breakdown-chart {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+
+  h6 {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $tas-text-primary;
+    letter-spacing: 0.025em;
+  }
+}
+
+.chart-subtitle {
+  font-size: 0.75rem;
+  color: $text-hint;
+  font-style: italic;
+}
+
+.chart-container {
+  width: 100%;
+}

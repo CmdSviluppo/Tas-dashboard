@@ -1,110 +1,195 @@
-// ========================================
-// TAS DESIGN SYSTEM - VARIABLES
-// ========================================
+// ============================================================================
+// TAS TRADING SYSTEM - DESIGN VARIABLES
+// Bloomberg Terminal Inspired Theme
+// ============================================================================
 
-// ========== PRIMARY COLORS ==========
+// ----------------------------------------------------------------------------
+// PRIMARY COLORS
+// ----------------------------------------------------------------------------
 $tas-primary-main: #00A8FF;
-$tas-primary-dark: #0086CC;
-$tas-primary-darker: #006BA8;
-$tas-primary-light: #00BFFF;
+$tas-primary-hover: #0086CC;
+$tas-primary-active: #006BA8;
+$tas-primary-light: rgba(0, 168, 255, 0.1);
+$tas-primary-glow: rgba(0, 168, 255, 0.4);
 
-// ========== BACKGROUNDS ==========
-$tas-bg-primary: #0A0E1A;
-$tas-bg-secondary: #141932;
-$tas-bg-tertiary: #1A1F3A;
-$tas-bg-input: #1C1C1C;
-$tas-bg-hover: rgba(0, 168, 255, 0.1);
+// ----------------------------------------------------------------------------
+// BACKGROUND COLORS
+// ----------------------------------------------------------------------------
+$tas-bg-primary: #0A0E1A;        // Main app background
+$tas-bg-secondary: #141932;      // Cards, panels
+$tas-bg-tertiary: #1A1F3A;       // Elevated surfaces, modals
+$tas-bg-input: #0F1428;          // Input fields background
+$tas-bg-hover: rgba(0, 168, 255, 0.08);
 $tas-bg-active: rgba(0, 168, 255, 0.15);
+$tas-bg-disabled: #1C2138;
+$tas-bg-overlay: rgba(10, 14, 26, 0.95);
 
-// ========== TEXT COLORS ==========
+// ----------------------------------------------------------------------------
+// TEXT COLORS
+// ----------------------------------------------------------------------------
 $tas-text-primary: #FFFFFF;
 $tas-text-secondary: #9AADBC;
 $tas-text-muted: #6C757D;
-$tas-text-disabled: #4A4A4A;
+$tas-text-disabled: #4A5568;
+$tas-text-hint: #718096;
 
-// ========== BORDER COLORS ==========
-$tas-border-primary: rgba(0, 168, 255, 0.3);
-$tas-border-secondary: rgba(255, 255, 255, 0.1);
-$tas-border-tertiary: rgba(255, 255, 255, 0.05);
+// ----------------------------------------------------------------------------
+// BORDER COLORS
+// ----------------------------------------------------------------------------
+$tas-border-primary: rgba(255, 255, 255, 0.12);
+$tas-border-secondary: rgba(255, 255, 255, 0.08);
+$tas-border-focus: $tas-primary-main;
+$tas-border-error: #FF3D71;
+$tas-border-success: #00C853;
 
-// ========== TRADING COLORS ==========
-$tas-bullish: #00C853;
-$tas-bullish-light: #4CAF50;
-$tas-bearish: #FF3D71;
-$tas-bearish-light: #FF5252;
-$tas-warning: #FFA726;
-$tas-info: #42A5F5;
+// ----------------------------------------------------------------------------
+// TRADING COLORS
+// ----------------------------------------------------------------------------
+$tas-bullish: #00C853;           // Green for bullish
+$tas-bullish-light: rgba(0, 200, 83, 0.15);
+$tas-bearish: #FF3D71;           // Red for bearish
+$tas-bearish-light: rgba(255, 61, 113, 0.15);
+$tas-warning: #FFA726;           // Orange for warnings
+$tas-warning-light: rgba(255, 167, 38, 0.15);
+$tas-info: #00A8FF;              // Blue for info
+$tas-info-light: rgba(0, 168, 255, 0.15);
+$tas-neutral: #9AADBC;           // Neutral gray
 
-// ========== STATE COLORS ==========
-$tas-state-neutral: #6C757D;
-$tas-state-watching: #FFA726;
-$tas-state-signal-generated: #66BB6A;
-$tas-state-signal-strong: #00C853;
-$tas-state-cooling-down: #42A5F5;
+// ----------------------------------------------------------------------------
+// STATE MACHINE COLORS
+// ----------------------------------------------------------------------------
+$tas-state-neutral: #6C757D;         // Gray - No signal
+$tas-state-watching: #FFA726;        // Orange - Monitoring
+$tas-state-signal-generated: #00A8FF; // Blue - Signal ready
+$tas-state-signal-strong: #00C853;   // Green - Strong signal
+$tas-state-cooling-down: #8B5CF6;    // Purple - Cooldown
 
-// ========== SCORE GRADIENT ==========
-$tas-score-low: #FF3D71;
-$tas-score-medium: #FFA726;
-$tas-score-high: #00C853;
+// State backgrounds (lighter versions)
+$tas-state-neutral-bg: rgba(108, 117, 125, 0.15);
+$tas-state-watching-bg: rgba(255, 167, 38, 0.15);
+$tas-state-signal-generated-bg: rgba(0, 168, 255, 0.15);
+$tas-state-signal-strong-bg: rgba(0, 200, 83, 0.15);
+$tas-state-cooling-down-bg: rgba(139, 92, 246, 0.15);
 
-// ========== SHADOWS ==========
-$tas-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
-$tas-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-$tas-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
-$tas-shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.5);
+// ----------------------------------------------------------------------------
+// SCORE GRADIENT COLORS (for gauge charts)
+// ----------------------------------------------------------------------------
+$tas-score-low: #FF3D71;         // Red (0-30)
+$tas-score-medium: #FFA726;      // Orange (30-70)
+$tas-score-high: #00C853;        // Green (70-100)
+
+// Gradient stops for smooth transitions
+$tas-score-gradient: linear-gradient(
+  90deg,
+  $tas-score-low 0%,
+  $tas-score-medium 50%,
+  $tas-score-high 100%
+);
+
+// ----------------------------------------------------------------------------
+// SHADOWS
+// ----------------------------------------------------------------------------
+$tas-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+$tas-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+$tas-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+$tas-shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.6);
 $tas-shadow-glow: 0 0 20px rgba(0, 168, 255, 0.3);
 $tas-shadow-glow-strong: 0 0 30px rgba(0, 168, 255, 0.5);
 
-// ========== BORDER RADIUS ==========
-$tas-radius-xs: 0.25rem;
-$tas-radius-sm: 0.375rem;
-$tas-radius-md: 0.75rem;
-$tas-radius-lg: 1rem;
-$tas-radius-xl: 1.5rem;
-$tas-radius-2xl: 2rem;
+// ----------------------------------------------------------------------------
+// BORDER RADIUS
+// ----------------------------------------------------------------------------
+$tas-radius-xs: 2px;
+$tas-radius-sm: 4px;
+$tas-radius-md: 8px;
+$tas-radius-lg: 12px;
+$tas-radius-xl: 16px;
 $tas-radius-pill: 9999px;
 
-// ========== SPACING ==========
-$tas-spacing-xs: 0.25rem;
-$tas-spacing-sm: 0.5rem;
-$tas-spacing-md: 1rem;
-$tas-spacing-lg: 1.5rem;
-$tas-spacing-xl: 2rem;
-$tas-spacing-2xl: 2.5rem;
-$tas-spacing-3xl: 3rem;
+// ----------------------------------------------------------------------------
+// SPACING SCALE
+// ----------------------------------------------------------------------------
+$tas-spacing-xs: 4px;
+$tas-spacing-sm: 8px;
+$tas-spacing-md: 16px;
+$tas-spacing-lg: 24px;
+$tas-spacing-xl: 32px;
+$tas-spacing-2xl: 48px;
+$tas-spacing-3xl: 64px;
 
-// ========== TYPOGRAPHY ==========
-$tas-font-size-xs: 0.75rem;
-$tas-font-size-sm: 0.875rem;
-$tas-font-size-md: 1rem;
-$tas-font-size-lg: 1.125rem;
-$tas-font-size-xl: 1.25rem;
-$tas-font-size-2xl: 1.5rem;
-$tas-font-size-3xl: 2rem;
-$tas-font-size-4xl: 2.5rem;
+// ----------------------------------------------------------------------------
+// TYPOGRAPHY
+// ----------------------------------------------------------------------------
+$tas-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                  'Helvetica Neue', Arial, sans-serif;
+$tas-font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono',
+                       'Courier New', monospace;
 
-$tas-font-weight-light: 300;
-$tas-font-weight-normal: 400;
-$tas-font-weight-medium: 500;
-$tas-font-weight-semibold: 600;
-$tas-font-weight-bold: 700;
+// Font Sizes
+$tas-text-xs: 11px;
+$tas-text-sm: 12px;
+$tas-text-base: 14px;
+$tas-text-lg: 16px;
+$tas-text-xl: 18px;
+$tas-text-2xl: 24px;
+$tas-text-3xl: 32px;
 
-$tas-line-height-tight: 1.25;
-$tas-line-height-normal: 1.5;
-$tas-line-height-relaxed: 1.75;
+// Font Weights
+$tas-font-light: 300;
+$tas-font-normal: 400;
+$tas-font-medium: 500;
+$tas-font-semibold: 600;
+$tas-font-bold: 700;
 
-// ========== TRANSITIONS ==========
-$tas-transition-fast: 150ms ease;
-$tas-transition-base: 250ms ease;
-$tas-transition-slow: 350ms ease;
+// Line Heights
+$tas-leading-tight: 1.2;
+$tas-leading-normal: 1.5;
+$tas-leading-relaxed: 1.75;
 
-// ========== Z-INDEX LAYERS ==========
-$tas-z-index-dropdown: 1000;
-$tas-z-index-sticky: 1020;
-$tas-z-index-fixed: 1030;
-$tas-z-index-modal-backdrop: 1040;
-$tas-z-index-modal: 1050;
-$tas-z-index-popover: 1060;
-$tas-z-index-tooltip: 1070;
-$tas-z-index-toast: 1080;
-$tas-z-index-spinner: 9999;
+// ----------------------------------------------------------------------------
+// TRANSITIONS
+// ----------------------------------------------------------------------------
+$tas-transition-fast: 150ms ease-in-out;
+$tas-transition-base: 250ms ease-in-out;
+$tas-transition-slow: 350ms ease-in-out;
+
+// ----------------------------------------------------------------------------
+// Z-INDEX LAYERS
+// ----------------------------------------------------------------------------
+$tas-z-dropdown: 1000;
+$tas-z-sticky: 1020;
+$tas-z-fixed: 1030;
+$tas-z-modal-backdrop: 1040;
+$tas-z-modal: 1050;
+$tas-z-popover: 1060;
+$tas-z-tooltip: 1070;
+$tas-z-notification: 1080;
+
+// ----------------------------------------------------------------------------
+// BREAKPOINTS (for responsive design)
+// ----------------------------------------------------------------------------
+$tas-breakpoint-sm: 576px;
+$tas-breakpoint-md: 768px;
+$tas-breakpoint-lg: 992px;
+$tas-breakpoint-xl: 1200px;
+$tas-breakpoint-xxl: 1400px;
+
+// ----------------------------------------------------------------------------
+// CHART COLORS (for consistency across charts)
+// ----------------------------------------------------------------------------
+$tas-chart-primary: $tas-primary-main;
+$tas-chart-secondary: #8B5CF6;
+$tas-chart-tertiary: #FFA726;
+$tas-chart-grid: rgba(255, 255, 255, 0.05);
+$tas-chart-axis: rgba(255, 255, 255, 0.3);
+$tas-chart-crosshair: rgba(255, 255, 255, 0.2);
+
+// ----------------------------------------------------------------------------
+// MARKET REGIME COLORS
+// ----------------------------------------------------------------------------
+$tas-regime-strong-uptrend: #00C853;
+$tas-regime-weak-uptrend: #4CAF50;
+$tas-regime-sideways: #9AADBC;
+$tas-regime-weak-downtrend: #FF6B6B;
+$tas-regime-strong-downtrend: #FF3D71;
+$tas-regime-high-volatility: #FFA726;

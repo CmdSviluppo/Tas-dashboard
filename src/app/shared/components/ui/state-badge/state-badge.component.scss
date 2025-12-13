@@ -1,0 +1,80 @@
+@use 'src/styles/variables' as *;
+
+.state-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 2px solid;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  nb-icon {
+    font-size: 1rem;
+  }
+
+  &.variant-solid {
+    border-color: transparent;
+  }
+
+  &.variant-outline {
+    background-color: transparent !important;
+  }
+
+  &.variant-ghost {
+    border-color: transparent;
+    background-color: transparent !important;
+    opacity: 0.8;
+  }
+
+  &.pulse {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.state-label {
+  letter-spacing: 0.025em;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 12px 4px rgba(0, 200, 83, 0.6);
+  }
+}
+
+// Tooltip Styles
+.state-tooltip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 0.25rem;
+  min-width: 200px;
+}
+
+.tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+
+  strong {
+    color: $text-primary;
+    font-weight: 600;
+  }
+
+  span {
+    color: $text-secondary;
+  }
+}

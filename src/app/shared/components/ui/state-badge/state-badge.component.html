@@ -1,0 +1,16 @@
+<span
+  class="state-badge"
+  [class.variant-solid]="variant === 'solid'"
+  [class.variant-outline]="variant === 'outline'"
+  [class.variant-ghost]="variant === 'ghost'"
+  [class.pulse]="shouldPulse"
+  [style.background-color]="backgroundColor"
+  [style.border-color]="borderColor"
+  [style.color]="textColor"
+  [nbTooltip]="tooltipContent"
+  [nbTooltipStatus]="'basic'"
+  nbTooltipPlacement="top">
+
+  <nb-icon [icon]="config.icon"></nb-icon>
+  <span class="state-label">{{ config.label }}</span>
+</span>
