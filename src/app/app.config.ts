@@ -3,6 +3,7 @@ import {
   importProvidersFrom, LOCALE_ID,
   provideZoneChangeDetection,
 } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import localeIt from '@angular/common/locales/it';
 import {
   NbThemeModule,
@@ -22,6 +23,7 @@ import {
   HttpBackend,
   provideHttpClient,
   withFetch,
+  withInterceptors,
   withInterceptorsFromDi
 } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -30,6 +32,10 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {registerLocaleData} from '@angular/common';
+import { loadingInterceptor } from './utils/interceptor/loading.interceptor';
+import { apiErrorInterceptor } from './utils/interceptor/api-error.interceptor';
+import { authInterceptor } from './utils/interceptor/auth.interceptor';
+import { headerInterceptor } from './utils/interceptor';
 
 // factory per caricare i file JSON delle traduzioni
 export function HttpLoaderFactory(httpBackend: HttpBackend): MultiTranslateHttpLoader {
@@ -56,9 +62,14 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-
-    provideHttpClient(withFetch()),
-
+    provideAnimations(),
+    provideHttpClient(
+      withInterceptors([
+        authInterceptor,      // First: Add auth token
+        loadingInterceptor,   // Second: Manage loading state
+        apiErrorInterceptor,      // Last: Catch and handle errors
+        headerInterceptor
+      ])),
     importProvidersFrom(
       NbThemeModule.forRoot({ name: 'corporate' }),
       NbLayoutModule,

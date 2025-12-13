@@ -13,53 +13,79 @@ export const PAGES_ROUTES: Routes = [
         pathMatch: 'full'
       },
       {
+        path: '**',
+        redirectTo: 'dashboard'
+      },
+      {
         path: 'dashboard',
-        loadChildren: () => import('./dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES),
+        loadChildren: () => import('./dashboard/dashboard.routes')
+          .then(m => m.DASHBOARD_ROUTES),
         canActivate: [roleGuard],
         data: {
-          roles: ['ROLE_ADMIN', 'ROLE_USER']
+          roles: ['ROLE_ADMIN', 'ROLE_USER'],
+          title: 'Dashboard'
         }
       },
       {
         path: 'strategies',
-        loadChildren: () => import('./strategies/strategies.routes').then(m => m.STRATEGIES_ROUTES),
+        loadChildren: () => import('./strategy-management/strategy-management.routes')
+          .then(m => m.STRATEGY_MANAGEMENT_ROUTES),
         canActivate: [roleGuard],
         data: {
-          roles: ['ROLE_ADMIN']
+          roles: ['ROLE_ADMIN', 'ROLE_USER'],
+          title: 'Strategies'
         }
       },
       {
-        path: 'live',
-        loadChildren: () => import('./live/live.routes').then(m => m.LIVE_ROUTES),
+        path: 'profiles',
+        loadChildren: () => import('./profile-configuration/profile-configuration.routes')
+          .then(m => m.PROFILE_CONFIGURATION_ROUTES),
         canActivate: [roleGuard],
         data: {
-          roles: ['ROLE_ADMIN', 'ROLE_USER']
+          roles: ['ROLE_ADMIN', 'ROLE_USER'],
+          title: 'Profiles'
         }
       },
       {
-        path: 'ai',
-        loadChildren: () => import('./ai/ai.routes').then(m => m.AI_ROUTES),
+        path: 'symbols',
+        loadChildren: () => import('./symbol-monitoring/symbol-monitoring.routes')
+          .then(m => m.SYMBOL_MONITORING_ROUTES),
         canActivate: [roleGuard],
         data: {
-          roles: ['ROLE_ADMIN']
+          roles: ['ROLE_ADMIN', 'ROLE_USER'],
+          title: 'Symbols'
         }
       },
       {
-        path: 'analysis',
-        loadChildren: () => import('./analysis/analysis.routes').then(m => m.ANALYSIS_ROUTES),
+        path: 'signals',
+        loadChildren: () => import('./signal-management/signal-management.routes')
+          .then(m => m.SIGNAL_MANAGEMENT_ROUTES),
         canActivate: [roleGuard],
         data: {
-          roles: ['ROLE_ADMIN', 'ROLE_USER']
+          roles: ['ROLE_ADMIN', 'ROLE_USER'],
+          title: 'Signals'
         }
       },
       {
-        path: 'system',
-        loadChildren: () => import('./system/system.routes').then(m => m.SYSTEM_ROUTES),
+        path: 'analytics',
+        loadChildren: () => import('./analytics/analytics.routes')
+          .then(m => m.ANALYTICS_ROUTES),
         canActivate: [roleGuard],
         data: {
-          roles: ['ROLE_ADMIN']
+          roles: ['ROLE_ADMIN', 'ROLE_USER'],
+          title: 'Analytics'
+        }
+      },
+      {
+        path: 'settings',
+        loadChildren: () => import('./settings/settings.routes')
+          .then(m => m.SETTINGS_ROUTES),
+        canActivate: [roleGuard],
+        data: {
+          roles: ['ROLE_ADMIN'],
+          title: 'Settings'
         }
       }
     ]
   }
-]
+];

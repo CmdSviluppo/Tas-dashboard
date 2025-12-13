@@ -1,0 +1,139 @@
+<nb-card [class.compact]="compact">
+  <!-- Header -->
+  <nb-card-header>
+    <div class="signal-header">
+      <div class="header-left">
+        <app-direction-indicator
+          [direction]="signal.direction"
+          size="medium">
+        </app-direction-indicator>
+        <div class="symbol-info">
+          <span class="symbol">{{ signal.symbol }}</span>
+          <span class="profile">{{ signal.profileCode }}</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <app-state-badge
+          [state]="signal.currentState"
+          variant="solid"
+          [animated]="true">
+        </app-state-badge>
+      </div>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <!-- Score Row -->
+    <div class="score-row">
+      <app-score-display
+        [score]="signal.aggregatedScore"
+        [confidence]="signal.confidence"
+        size="small"
+        timeframe="Aggregated"
+        [animated]="true">
+      </app-score-display>
+
+      <app-timeframe-breakdown
+        [score4h]="signal.score4h || 0"
+        [confidence4h]="signal.confidence4h || 0"
+        [score1h]="signal.score1h || 0"
+        [confidence1h]="signal.confidence1h || 0"
+        [score30m]="signal.score30m || 0"
+        [confidence30m]="signal.confidence30m || 0">
+      </app-timeframe-breakdown>
+    </div>
+
+    <!-- Trade Setup (only if not compact) -->
+    <div class="trade-setup" *ngIf="!compact">
+      <div class="setup-header">
+        <nb-icon icon="settings-2-outline"></nb-icon>
+        <span>Trade Setup</span>
+      </div>
+
+      <div class="setup-grid">
+        <div class="setup-row">
+          <span class="label">Entry Price:</span>
+          <span class="value">{{ signal.suggestedEntry | number:'1.2-8' }}</span>
+        </div>
+
+        <div class="setup-row stop-loss">
+          <span class="label">Stop Loss:</span>
+          <div class="value-group">
+            <span class="value bearish">{{ signal.suggestedStopLoss | number:'1.2-8' }}</span>
+            <span class="distance" *ngIf="stopLossDistancePct">
+              ({{ stopLossDistancePct | percent:'1.2-2' }})
+            </span>
+          </div>
+        </div>
+
+        <div class="setup-row take-profit">
+          <span class="label">Take Profit:</span>
+          <div class="value-group">
+            <span class="value bullish">{{ signal.suggestedTakeProfit | number:'1.2-8' }}</span>
+            <span class="distance" *ngIf="takeProfitDistancePct">
+              ({{ takeProfitDistancePct | percent:'1.2-2' }})
+            </span>
+          </div>
+        </div>
+
+        <div class="setup-row risk-reward">
+          <span class="label">R/R Ratio:</span>
+          <span class="value highlight" [style.color]="riskRewardColor">
+            {{ signal.riskRewardRatio | number:'1.2-2' }}
+          </span>
+        </div>
+
+        <div class="setup-row position-size">
+          <span class="label">Position Size:</span>
+          <span class="value" [style.color]="positionSizeColor">
+            {{ signal.positionSizePct | percent:'1.2-2' }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Badge -->
+    <div class="status-section">
+      <nb-badge
+        [text]="getStatusLabel(signal.status)"
+        [status]="getStatusColor(signal.status)"
+        position="top right">
+      </nb-badge>
+      <span class="timestamp">{{ signal.timestamp | date:'short' }}</span>
+    </div>
+  </nb-card-body>
+
+  <!-- Actions -->
+  <nb-card-footer *ngIf="showActions">
+    <div class="actions-row">
+      <button
+        nbButton
+        status="success"
+        size="small"
+        *ngIf="signal.status === SignalStatus.PENDING"
+        (click)="executeSignal()">
+        <nb-icon icon="checkmark-circle-outline"></nb-icon>
+        Execute
+      </button>
+
+      <button
+        nbButton
+        status="danger"
+        size="small"
+        *ngIf="signal.status === SignalStatus.EXECUTED"
+        (click)="closeSignal()">
+        <nb-icon icon="close-circle-outline"></nb-icon>
+        Close
+      </button>
+
+      <button
+        nbButton
+        status="basic"
+        size="small"
+        (click)="viewSignal()">
+        <nb-icon icon="eye-outline"></nb-icon>
+        Details
+      </button>
+    </div>
+  </nb-card-footer>
+</nb-card>

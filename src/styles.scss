@@ -1,51 +1,426 @@
-/* Minimal global styles: Nebular setup, fonts, variables, and light layout tweaks */
 @use '@nebular/theme/styles/globals' as *;
-@import 'themes';
+@use '@nebular/theme/styles/theming' as *;
+@use '@nebular/theme/styles/themes/corporate';
+@use 'src/styles/variables' as *;
+
+
+// ============================================================================
+// NEBULAR THEME CUSTOMIZATION
+// ============================================================================
 
 @include nb-install() {
   @include nb-theme-global();
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+$nb-themes: nb-register-theme((
 
-:root {
-  --tas-primary-bg: #0E0E0E;
-  --tas-secondary-bg: #121212;
-  --tas-accent-blue: #00BFFF;
-  --tas-border-color: rgba(0, 191, 255, 0.2);
-  --tas-text-primary: #FFFFFF;
-  --tas-text-secondary: #B8BCC8;
-  --tas-text-muted: #6C7293;
-  --tas-spacing-unit: 8px;
-  --tas-header-height: 64px;
-  --tas-sidebar-width: 280px;
-  --tas-sidebar-collapsed-width: 80px;
-  --tas-border-radius: 8px;
+  // Layout
+  layout-background-color: $tas-bg-primary,
+  layout-text-color: $tas-text-primary,
+  layout-text-font-family: $tas-font-family,
+  layout-padding: 0,
+
+  // Header
+  header-background-color: $tas-bg-secondary,
+  header-text-color: $tas-text-primary,
+  header-height: 4.75rem,
+  header-padding: $tas-spacing-md,
+  header-shadow: $tas-shadow-md,
+
+  // Sidebar
+  sidebar-background-color: $tas-bg-secondary,
+  sidebar-text-color: $tas-text-secondary,
+  sidebar-width: 260px,
+  sidebar-width-compact: 64px,
+  sidebar-shadow: $tas-shadow-lg,
+
+  // Menu
+  menu-background-color: transparent,
+  menu-text-color: $tas-text-secondary,
+  menu-text-font-family: $tas-font-family,
+  menu-text-font-size: $tas-text-base,
+  menu-item-hover-background-color: $tas-bg-hover,
+  menu-item-hover-text-color: $tas-primary-main,
+  menu-item-active-background-color: $tas-bg-active,
+  menu-item-active-text-color: $tas-primary-main,
+  menu-item-icon-color: $tas-text-muted,
+  menu-item-icon-active-color: $tas-primary-main,
+  menu-item-padding: $tas-spacing-md,
+  menu-item-border-radius: $tas-radius-md,
+
+  // Cards
+  card-background-color: $tas-bg-secondary,
+  card-text-color: $tas-text-primary,
+  card-border-radius: $tas-radius-lg,
+  card-shadow: $tas-shadow-md,
+  card-padding: $tas-spacing-lg,
+  card-header-text-color: $tas-text-primary,
+  card-header-text-font-family: $tas-font-family,
+  card-header-text-font-size: $tas-text-lg,
+  card-header-text-font-weight: $tas-font-semibold,
+
+  // Buttons
+  button-filled-primary-background-color: $tas-primary-main,
+  button-filled-primary-border-color: $tas-primary-main,
+  button-filled-primary-text-color: white,
+  button-filled-primary-hover-background-color: $tas-primary-hover,
+  button-filled-primary-hover-border-color: $tas-primary-hover,
+  button-filled-primary-active-background-color: $tas-primary-active,
+  button-filled-primary-active-border-color: $tas-primary-active,
+  button-outline-primary-border-color: $tas-primary-main,
+  button-outline-primary-text-color: $tas-primary-main,
+  button-padding: $tas-spacing-sm $tas-spacing-md,
+  button-border-radius: $tas-radius-md,
+  button-text-font-family: $tas-font-family,
+  button-text-font-weight: $tas-font-medium,
+
+  // Inputs
+  input-background-color: $tas-bg-input,
+  input-border-color: $tas-border-primary,
+  input-text-color: $tas-text-primary,
+  input-placeholder-text-color: $tas-text-muted,
+  input-focus-border-color: $tas-primary-main,
+  input-disabled-background-color: $tas-bg-disabled,
+  input-disabled-text-color: $tas-text-disabled,
+  input-padding: $tas-spacing-sm $tas-spacing-md,
+  input-border-radius: $tas-radius-md,
+
+  // Select
+  select-background-color: $tas-bg-input,
+  select-border-color: $tas-border-primary,
+  select-text-color: $tas-text-primary,
+  select-focus-border-color: $tas-primary-main,
+  select-option-background-color: $tas-bg-tertiary,
+  select-option-hover-background-color: $tas-bg-hover,
+  select-option-selected-background-color: $tas-bg-active,
+
+  // Tables
+  table-background-color: transparent,
+  table-header-background-color: $tas-bg-tertiary,
+  table-header-text-color: $tas-text-secondary,
+  table-row-hover-background-color: $tas-bg-hover,
+  table-border-color: $tas-border-secondary,
+
+  // Modals
+  dialog-background-color: $tas-bg-tertiary,
+  dialog-border-radius: $tas-radius-lg,
+  dialog-shadow: $tas-shadow-xl,
+
+  // Toasts (Notifications)
+  toast-background-color: $tas-bg-tertiary,
+  toast-border-radius: $tas-radius-md,
+  toast-shadow: $tas-shadow-lg,
+  toast-success-background-color: rgba(0, 200, 83, 0.2),
+  toast-success-border-color: $tas-bullish,
+  toast-danger-background-color: rgba(255, 61, 113, 0.2),
+  toast-danger-border-color: $tas-bearish,
+  toast-warning-background-color: rgba(255, 167, 38, 0.2),
+  toast-warning-border-color: $tas-warning,
+  toast-info-background-color: rgba(0, 168, 255, 0.2),
+  toast-info-border-color: $tas-info,
+
+  // Tooltips
+  tooltip-background-color: $tas-bg-tertiary,
+  tooltip-text-color: $tas-text-primary,
+  tooltip-border-radius: $tas-radius-sm,
+  tooltip-shadow: $tas-shadow-md,
+
+  // Badges
+  badge-primary-background-color: $tas-primary-main,
+  badge-success-background-color: $tas-bullish,
+  badge-danger-background-color: $tas-bearish,
+  badge-warning-background-color: $tas-warning,
+  badge-info-background-color: $tas-info,
+  badge-border-radius: $tas-radius-sm,
+
+  // Scrollbar
+  scrollbar-color: rgba(255, 255, 255, 0.2),
+  scrollbar-background-color: transparent,
+  scrollbar-width: 8px,
+
+), default, default);
+
+// ============================================================================
+// GLOBAL RESETS & BASE STYLES
+// ============================================================================
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html, body {
   height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom, #0B0B0B, #0D1B2A);
-  color: var(--tas-text-primary);
+  font-family: $tas-font-family;
+  font-size: $tas-text-base;
+  line-height: $tas-leading-normal;
+  color: $tas-text-primary;
+  background-color: $tas-bg-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-nb-layout,
-nb-layout .layout,
-nb-layout .layout-container,
-nb-layout-column {
+// ============================================================================
+// CUSTOM SCROLLBAR
+// ============================================================================
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
   background: transparent;
 }
 
-// nb-layout-header {
-//   background: var(--tas-primary-bg);
-//   border-bottom: 1px solid var(--tas-border-color);
-//   height: var(--tas-header-height);
-// }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: $tas-radius-pill;
 
-nb-sidebar {
-  background: var(--tas-secondary-bg);
-  border-right: 1px solid var(--tas-border-color);
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+// Firefox scrollbar
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+// Text Colors
+.text-primary { color: $tas-text-primary !important; }
+.text-secondary { color: $tas-text-secondary !important; }
+.text-muted { color: $tas-text-muted !important; }
+.text-bullish { color: $tas-bullish !important; }
+.text-bearish { color: $tas-bearish !important; }
+.text-warning { color: $tas-warning !important; }
+.text-info { color: $tas-info !important; }
+
+// Background Colors
+.bg-primary { background-color: $tas-bg-primary !important; }
+.bg-secondary { background-color: $tas-bg-secondary !important; }
+.bg-tertiary { background-color: $tas-bg-tertiary !important; }
+.bg-hover { background-color: $tas-bg-hover !important; }
+.bg-active { background-color: $tas-bg-active !important; }
+
+// Spacing Utilities
+.mt-xs { margin-top: $tas-spacing-xs !important; }
+.mt-sm { margin-top: $tas-spacing-sm !important; }
+.mt-md { margin-top: $tas-spacing-md !important; }
+.mt-lg { margin-top: $tas-spacing-lg !important; }
+.mt-xl { margin-top: $tas-spacing-xl !important; }
+
+.mb-xs { margin-bottom: $tas-spacing-xs !important; }
+.mb-sm { margin-bottom: $tas-spacing-sm !important; }
+.mb-md { margin-bottom: $tas-spacing-md !important; }
+.mb-lg { margin-bottom: $tas-spacing-lg !important; }
+.mb-xl { margin-bottom: $tas-spacing-xl !important; }
+
+.ml-xs { margin-left: $tas-spacing-xs !important; }
+.ml-sm { margin-left: $tas-spacing-sm !important; }
+.ml-md { margin-left: $tas-spacing-md !important; }
+.ml-lg { margin-left: $tas-spacing-lg !important; }
+
+.mr-xs { margin-right: $tas-spacing-xs !important; }
+.mr-sm { margin-right: $tas-spacing-sm !important; }
+.mr-md { margin-right: $tas-spacing-md !important; }
+.mr-lg { margin-right: $tas-spacing-lg !important; }
+
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+.my-auto { margin-top: auto !important; margin-bottom: auto !important; }
+
+.p-xs { padding: $tas-spacing-xs !important; }
+.p-sm { padding: $tas-spacing-sm !important; }
+.p-md { padding: $tas-spacing-md !important; }
+.p-lg { padding: $tas-spacing-lg !important; }
+.p-xl { padding: $tas-spacing-xl !important; }
+
+.pt-md { padding-top: $tas-spacing-md !important; }
+.pb-md { padding-bottom: $tas-spacing-md !important; }
+.pl-md { padding-left: $tas-spacing-md !important; }
+.pr-md { padding-right: $tas-spacing-md !important; }
+
+// Flexbox Utilities
+.d-flex { display: flex !important; }
+.d-inline-flex { display: inline-flex !important; }
+.d-none { display: none !important; }
+.d-block { display: block !important; }
+
+.flex-row { flex-direction: row !important; }
+.flex-column { flex-direction: column !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+
+.justify-content-start { justify-content: flex-start !important; }
+.justify-content-center { justify-content: center !important; }
+.justify-content-end { justify-content: flex-end !important; }
+.justify-content-between { justify-content: space-between !important; }
+.justify-content-around { justify-content: space-around !important; }
+
+.align-items-start { align-items: flex-start !important; }
+.align-items-center { align-items: center !important; }
+.align-items-end { align-items: flex-end !important; }
+.align-items-stretch { align-items: stretch !important; }
+
+.flex-grow-1 { flex-grow: 1 !important; }
+.flex-shrink-0 { flex-shrink: 0 !important; }
+
+.gap-xs { gap: $tas-spacing-xs !important; }
+.gap-sm { gap: $tas-spacing-sm !important; }
+.gap-md { gap: $tas-spacing-md !important; }
+.gap-lg { gap: $tas-spacing-lg !important; }
+
+// Shadows
+.shadow-sm { box-shadow: $tas-shadow-sm !important; }
+.shadow-md { box-shadow: $tas-shadow-md !important; }
+.shadow-lg { box-shadow: $tas-shadow-lg !important; }
+.shadow-xl { box-shadow: $tas-shadow-xl !important; }
+.shadow-glow { box-shadow: $tas-shadow-glow !important; }
+.shadow-none { box-shadow: none !important; }
+
+// Border Radius
+.rounded-sm { border-radius: $tas-radius-sm !important; }
+.rounded-md { border-radius: $tas-radius-md !important; }
+.rounded-lg { border-radius: $tas-radius-lg !important; }
+.rounded-pill { border-radius: $tas-radius-pill !important; }
+.rounded-0 { border-radius: 0 !important; }
+
+// Text Utilities
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+
+.text-xs { font-size: $tas-text-xs !important; }
+.text-sm { font-size: $tas-text-sm !important; }
+.text-base { font-size: $tas-text-base !important; }
+.text-lg { font-size: $tas-text-lg !important; }
+.text-xl { font-size: $tas-text-xl !important; }
+
+.font-light { font-weight: $tas-font-light !important; }
+.font-normal { font-weight: $tas-font-normal !important; }
+.font-medium { font-weight: $tas-font-medium !important; }
+.font-semibold { font-weight: $tas-font-semibold !important; }
+.font-bold { font-weight: $tas-font-bold !important; }
+
+.text-uppercase { text-transform: uppercase !important; }
+.text-lowercase { text-transform: lowercase !important; }
+.text-capitalize { text-transform: capitalize !important; }
+
+.text-truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+// Width & Height Utilities
+.w-100 { width: 100% !important; }
+.w-auto { width: auto !important; }
+.h-100 { height: 100% !important; }
+.h-auto { height: auto !important; }
+
+// Cursor
+.cursor-pointer { cursor: pointer !important; }
+.cursor-default { cursor: default !important; }
+
+// Overflow
+.overflow-hidden { overflow: hidden !important; }
+.overflow-auto { overflow: auto !important; }
+.overflow-scroll { overflow: scroll !important; }
+
+// Position
+.position-relative { position: relative !important; }
+.position-absolute { position: absolute !important; }
+.position-fixed { position: fixed !important; }
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: $tas-shadow-glow;
+  }
+  50% {
+    box-shadow: $tas-shadow-glow-strong;
+  }
+}
+
+// Animation classes
+.animate-fadeIn {
+  animation: fadeIn $tas-transition-base;
+}
+
+.animate-slideInUp {
+  animation: slideInUp $tas-transition-base;
+}
+
+.animate-slideInDown {
+  animation: slideInDown $tas-transition-base;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
 }
