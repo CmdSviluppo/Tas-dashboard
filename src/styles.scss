@@ -1,7 +1,8 @@
 @use '@nebular/theme/styles/globals' as *;
 @use '@nebular/theme/styles/theming' as *;
 @use '@nebular/theme/styles/themes/corporate';
-@import './styles/variables';
+@use 'src/styles/variables' as *;
+
 
 // ============================================================================
 // NEBULAR THEME CUSTOMIZATION
