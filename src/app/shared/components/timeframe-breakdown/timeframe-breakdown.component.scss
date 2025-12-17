@@ -1,4 +1,4 @@
-@use 'src/styles/variables' as *;
+@use '../../../../styles/variables' as *;
 
 .timeframe-breakdown {
   display: flex;
@@ -49,7 +49,7 @@
 
 .last-update {
   font-size: 0.625rem;
-  color: $text-hint;
+  color: $tas-text-hint;
   font-style: italic;
 }
 

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TasLogoComponent } from '../../../assets/tas-logo.component';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {TasLogoComponent} from '../../../assets/tas-logo.component';
 
 @Component({
   selector: 'app-tas-spinner',

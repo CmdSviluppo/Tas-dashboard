@@ -1,8 +1,8 @@
-import { Injectable, signal } from '@angular/core';
-import { Observable, Subject, timer, EMPTY } from 'rxjs';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { retry, tap, delayWhen, retryWhen } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import {Injectable, signal} from '@angular/core';
+import {Observable, Subject, timer} from 'rxjs';
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
+import {delayWhen, retryWhen, tap} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 export type ConnectionStatus = 'CONNECTED' | 'DISCONNECTED' | 'CONNECTING' | 'RECONNECTING';
 
@@ -16,16 +16,14 @@ interface WebSocketMessage<T = any> {
   providedIn: 'root'
 })
 export class WebSocketService {
+  // Reactive state with signals
+  public connected = signal<boolean>(false);
+  public connectionStatus = signal<ConnectionStatus>('DISCONNECTED');
   private ws$: WebSocketSubject<any> | null = null;
   private reconnectAttempts = 0;
   private readonly maxReconnectAttempts = environment.ws.maxReconnectAttempts;
   private readonly reconnectInterval = environment.ws.reconnectInterval;
   private pingIntervalId: any;
-
-  // Reactive state with signals
-  public connected = signal<boolean>(false);
-  public connectionStatus = signal<ConnectionStatus>('DISCONNECTED');
-
   // Observable for connection status changes
   private connectionStatusSubject = new Subject<ConnectionStatus>();
   public connectionStatus$ = this.connectionStatusSubject.asObservable();
@@ -226,7 +224,7 @@ export class WebSocketService {
 
     this.pingIntervalId = setInterval(() => {
       if (this.isConnected()) {
-        this.send({ type: 'ping' });
+        this.send({type: 'ping'});
         this.log('Sent ping');
       }
     }, environment.ws.pingInterval);

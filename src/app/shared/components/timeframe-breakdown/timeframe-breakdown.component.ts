@@ -1,9 +1,8 @@
-import { Component, Input, AfterViewInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DecimalPipe, PercentPipe } from '@angular/common';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import {CommonModule, DecimalPipe, PercentPipe} from '@angular/common';
 import * as echarts from 'echarts/core';
-import { GaugeChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
+import {GaugeChart} from 'echarts/charts';
+import {CanvasRenderer} from 'echarts/renderers';
 
 echarts.use([GaugeChart, CanvasRenderer]);
 
@@ -27,9 +26,9 @@ export class TimeframeBreakdownComponent implements AfterViewInit, OnChanges {
   @Input() confidence30m: number = 0;
   @Input() lastUpdate30m?: Date;
 
-  @ViewChild('gauge4h', { static: false }) gauge4hRef?: ElementRef;
-  @ViewChild('gauge1h', { static: false }) gauge1hRef?: ElementRef;
-  @ViewChild('gauge30m', { static: false }) gauge30mRef?: ElementRef;
+  @ViewChild('gauge4h', {static: false}) gauge4hRef?: ElementRef;
+  @ViewChild('gauge1h', {static: false}) gauge1hRef?: ElementRef;
+  @ViewChild('gauge30m', {static: false}) gauge30mRef?: ElementRef;
 
   private chart4h?: echarts.ECharts;
   private chart1h?: echarts.ECharts;
@@ -45,6 +44,27 @@ export class TimeframeBreakdownComponent implements AfterViewInit, OnChanges {
     if (changes['score4h'] || changes['score1h'] || changes['score30m']) {
       this.updateCharts();
     }
+  }
+
+  getScoreColor(score: number): string {
+    if (score < 40) return '#FF3D71';
+    if (score < 60) return '#FFA726';
+    return '#00C853';
+  }
+
+  formatLastUpdate(date?: Date): string {
+    if (!date) return 'N/A';
+    const now = new Date();
+    const updateDate = new Date(date);
+    const diffMs = now.getTime() - updateDate.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    const diffHours = Math.floor(diffMins / 60);
+    if (diffHours < 24) return `${diffHours}h ago`;
+    const diffDays = Math.floor(diffHours / 24);
+    return `${diffDays}d ago`;
   }
 
   private initCharts(): void {
@@ -104,31 +124,10 @@ export class TimeframeBreakdownComponent implements AfterViewInit, OnChanges {
         detail: {
           show: false
         },
-        data: [{ value: score }]
+        data: [{value: score}]
       }]
     };
 
     chart.setOption(option);
-  }
-
-  getScoreColor(score: number): string {
-    if (score < 40) return '#FF3D71';
-    if (score < 60) return '#FFA726';
-    return '#00C853';
-  }
-
-  formatLastUpdate(date?: Date): string {
-    if (!date) return 'N/A';
-    const now = new Date();
-    const updateDate = new Date(date);
-    const diffMs = now.getTime() - updateDate.getTime();
-    const diffMins = Math.floor(diffMs / 60000);
-
-    if (diffMins < 1) return 'Just now';
-    if (diffMins < 60) return `${diffMins}m ago`;
-    const diffHours = Math.floor(diffMins / 60);
-    if (diffHours < 24) return `${diffHours}h ago`;
-    const diffDays = Math.floor(diffHours / 24);
-    return `${diffDays}d ago`;
   }
 }

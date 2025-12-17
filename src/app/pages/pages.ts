@@ -1,9 +1,16 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { NbSpinnerModule, NbLayoutModule, NbIconModule, NbSidebarModule, NbButtonModule, NbSidebarService } from "@nebular/theme";
-import { HeaderComponent } from "../common/header/header.component";
-import { SidebarMenuComponent } from "../common/sidebar-menu/sidebar-menu.component";
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterOutlet} from '@angular/router';
+import {
+  NbButtonModule,
+  NbIconModule,
+  NbLayoutModule,
+  NbSidebarModule,
+  NbSidebarService,
+  NbSpinnerModule
+} from "@nebular/theme";
+import {HeaderComponent} from "../common/header/header.component";
+import {SidebarMenuComponent} from "../common/sidebar-menu/sidebar-menu.component";
 
 interface Notification {
   id: string;
@@ -63,7 +70,8 @@ export class Pages {
     }
   ];
 
-  constructor(private sidebarService: NbSidebarService) {}
+  constructor(private sidebarService: NbSidebarService) {
+  }
 
   onSidebarToggle(): void {
     this.sidebarService.toggle(false, 'menu-sidebar');

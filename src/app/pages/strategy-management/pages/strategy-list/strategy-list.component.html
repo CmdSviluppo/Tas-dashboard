@@ -1,0 +1,236 @@
+<div class="strategy-list-container">
+
+  <!-- Header -->
+  <nb-card class="header-card">
+    <nb-card-header>
+      <div class="header-content">
+        <div class="title-section">
+          <h4>Strategy Management</h4>
+          <p class="subtitle">
+            Manage and monitor trading strategies
+          </p>
+        </div>
+
+        <div class="actions-section">
+
+          <button
+            nbButton
+            status="primary"
+            size="small"
+            (click)="navigateToCreate()">
+            <nb-icon icon="plus-outline"></nb-icon>
+            Create Strategy
+          </button>
+
+          <!-- View Mode Toggle -->
+          <button
+            (click)="toggleViewMode()"
+            nbButton
+            nbTooltip="Toggle view mode"
+            size="small"
+            status="basic">
+            <nb-icon [icon]="state.viewMode() === 'grid' ? 'list-outline' : 'grid-outline'"></nb-icon>
+          </button>
+
+          <!-- Refresh -->
+          <button
+            (click)="loadStrategies()"
+            [disabled]="state.loading()"
+            nbButton
+            nbTooltip="Refresh"
+            size="small"
+            status="basic">
+            <nb-icon icon="refresh-outline"></nb-icon>
+          </button>
+        </div>
+      </div>
+    </nb-card-header>
+  </nb-card>
+
+  <!-- Filters -->
+  <app-strategy-filter
+    (resetFilters)="resetFilters()"
+    (searchChange)="onSearchChange($event)"
+    (sortChange)="onSortChange($event)"
+    (typeChange)="onTypeFilterChange($event)"
+    [searchText]="state.searchText()"
+    [selectedType]="state.selectedType()"
+    [sortBy]="state.sortBy()"
+    [sortOrder]="state.sortOrder()">
+  </app-strategy-filter>
+
+  <!-- Stats Bar -->
+  <nb-card *ngIf="!state.loading()" class="stats-card">
+    <nb-card-body>
+      <div class="stats-content">
+        <div class="stat-item">
+          <span class="stat-label">Showing:</span>
+          <span class="stat-value">{{ state.strategyCount() }} / {{ state.totalCount() }}</span>
+        </div>
+
+        <div *ngIf="state.hasActiveFilters()" class="stat-item">
+          <nb-icon icon="funnel-outline" status="info"></nb-icon>
+          <span class="stat-label">Filters active</span>
+          <button (click)="resetFilters()" nbButton size="tiny" status="info">
+            Clear
+          </button>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Loading State -->
+  <nb-card *ngIf="state.loading()">
+    <nb-card-body class="loading-state">
+      <nb-spinner size="large" status="primary"></nb-spinner>
+      <p>Loading strategies...</p>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Error State -->
+  <nb-card *ngIf="state.error() && !state.loading()">
+    <nb-card-body>
+      <nb-alert (close)="state.setError(null)" closable status="danger">
+        <strong>Error:</strong> {{ state.error() }}
+        <button (click)="retry()" nbButton size="small" status="danger">
+          Retry
+        </button>
+      </nb-alert>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Empty State -->
+  <nb-card *ngIf="!state.loading() && !state.error() && state.filteredStrategies().length === 0">
+    <nb-card-body class="empty-state">
+      <nb-icon icon="search-outline" status="basic"></nb-icon>
+      <h5>No strategies found</h5>
+      <p *ngIf="state.hasActiveFilters()">
+        Try adjusting your filters
+      </p>
+      <p *ngIf="!state.hasActiveFilters()">
+        No strategies available yet
+      </p>
+      <button (click)="resetFilters()" *ngIf="state.hasActiveFilters()" nbButton status="primary">
+        Clear Filters
+      </button>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Grid View -->
+  <div
+    *ngIf="!state.loading() && !state.error() && state.filteredStrategies().length > 0 && state.viewMode() === 'grid'"
+    class="strategy-grid">
+    <app-strategy-card
+      *ngFor="let strategy of state.filteredStrategies()"
+      [strategy]="strategy"
+      (edit)="navigateToEdit($event)"
+      (toggleActive)="toggleActive($event)"
+      (delete)="openDeleteModal($event)">
+    </app-strategy-card>
+  </div>
+
+  <!-- List View -->
+  <nb-card
+    *ngIf="!state.loading() && !state.error() && state.filteredStrategies().length > 0 && state.viewMode() === 'list'"
+    class="list-view-card">
+    <nb-card-body class="table-container">
+      <table class="strategy-table">
+        <thead>
+        <tr>
+          <th (click)="onSortChange('name')" class="sortable">
+            Name
+            <nb-icon
+              *ngIf="state.sortBy() === 'name'"
+              [icon]="state.sortOrder() === 'asc' ? 'arrow-up' : 'arrow-down'">
+            </nb-icon>
+          </th>
+          <th>Code</th>
+          <th (click)="onSortChange('type')" class="sortable">
+            Type
+            <nb-icon
+              *ngIf="state.sortBy() === 'type'"
+              [icon]="state.sortOrder() === 'asc' ? 'arrow-up' : 'arrow-down'">
+            </nb-icon>
+          </th>
+          <th (click)="onSortChange('usage')" class="sortable">
+            Usage
+            <nb-icon
+              *ngIf="state.sortBy() === 'usage'"
+              [icon]="state.sortOrder() === 'asc' ? 'arrow-up' : 'arrow-down'">
+            </nb-icon>
+          </th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let strategy of state.filteredStrategies()">
+          <td>{{ strategy.name }}</td>
+          <td><code>{{ strategy.code }}</code></td>
+          <td>
+            <app-strategy-type-badge [type]="strategy.type"></app-strategy-type-badge>
+          </td>
+          <td>
+            <app-strategy-usage-indicator [strategyId]="strategy.id" [usageCount]="strategy.usageCount">
+            </app-strategy-usage-indicator>
+          </td>
+          <td>
+            <nb-badge
+              [status]="strategy.isActive ? 'success' : 'basic'"
+              [text]="strategy.isActive ? 'Active' : 'Inactive'">
+            </nb-badge>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <!-- View Details -->
+              <button
+                nbButton
+                size="tiny"
+                status="info"
+                ghost
+                (click)="openDetailModal(strategy)"
+                nbTooltip="View details">
+                <nb-icon icon="eye-outline"></nb-icon>
+              </button>
+
+              <!-- Edit -->
+              <button
+                nbButton
+                size="tiny"
+                status="primary"
+                ghost
+                (click)="navigateToEdit(strategy.id)"
+                nbTooltip="Edit strategy">
+                <nb-icon icon="edit-outline"></nb-icon>
+              </button>
+
+              <!-- Toggle Active/Inactive -->
+              <button
+                nbButton
+                size="tiny"
+                [status]="strategy.isActive ? 'success' : 'basic'"
+                ghost
+                (click)="toggleActive(strategy)"
+                [nbTooltip]="strategy.isActive ? 'Deactivate' : 'Activate'">
+                <nb-icon [icon]="strategy.isActive ? 'checkmark-circle-outline' : 'close-circle-outline'"></nb-icon>
+              </button>
+
+              <!-- Delete -->
+              <button
+                nbButton
+                size="tiny"
+                status="danger"
+                ghost
+                (click)="openDeleteModal(strategy)"
+                nbTooltip="Delete strategy">
+                <nb-icon icon="trash-2-outline"></nb-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </nb-card-body>
+  </nb-card>
+
+</div>

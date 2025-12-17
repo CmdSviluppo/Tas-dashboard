@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DirectionIndicatorComponent } from './direction-indicator.component';
+import {DirectionIndicatorComponent} from './direction-indicator.component';
 
 describe('DirectionIndicatorComponent', () => {
   let component: DirectionIndicatorComponent;
@@ -10,7 +10,7 @@ describe('DirectionIndicatorComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DirectionIndicatorComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DirectionIndicatorComponent);
     component = fixture.componentInstance;

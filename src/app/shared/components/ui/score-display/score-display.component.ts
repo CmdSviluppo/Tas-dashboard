@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NbPopoverModule, NbCardModule } from '@nebular/theme';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NbCardModule, NbPopoverModule} from '@nebular/theme';
 import * as echarts from 'echarts/core';
-import { GaugeChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
-import { EChartsCoreOption } from 'echarts/core';
+import {EChartsCoreOption} from 'echarts/core';
+import {GaugeChart} from 'echarts/charts';
+import {CanvasRenderer} from 'echarts/renderers';
 
 echarts.use([GaugeChart, CanvasRenderer]);
 
@@ -31,17 +31,25 @@ export class ScoreDisplayComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() showSparkline: boolean = false;
   @Input() sparklineData?: number[];
 
-  @ViewChild('gaugeContainer', { static: false }) gaugeContainer?: ElementRef;
-  @ViewChild('sparklineContainer', { static: false }) sparklineContainer?: ElementRef;
-
+  @ViewChild('gaugeContainer', {static: false}) gaugeContainer?: ElementRef;
+  @ViewChild('sparklineContainer', {static: false}) sparklineContainer?: ElementRef;
+  breakdownEntries: Array<{ key: string; value: StrategyScore }> = [];
   private gaugeChart?: echarts.ECharts;
   private sparklineChart?: echarts.ECharts;
 
-  breakdownEntries: Array<{ key: string; value: StrategyScore }> = [];
+  get confidencePercent(): string {
+    return `${Math.round(this.confidence * 100)}%`;
+  }
+
+  get scoreColor(): string {
+    if (this.score < 40) return '#FF3D71';
+    if (this.score < 60) return '#FFA726';
+    return '#00C853';
+  }
 
   ngOnInit(): void {
     if (this.breakdown) {
-      this.breakdownEntries = Object.entries(this.breakdown).map(([key, value]) => ({ key, value }));
+      this.breakdownEntries = Object.entries(this.breakdown).map(([key, value]) => ({key, value}));
     }
   }
 
@@ -56,7 +64,7 @@ export class ScoreDisplayComponent implements OnInit, OnChanges, AfterViewInit {
 
     if (changes['breakdown']) {
       this.breakdownEntries = this.breakdown
-        ? Object.entries(this.breakdown).map(([key, value]) => ({ key, value }))
+        ? Object.entries(this.breakdown).map(([key, value]) => ({key, value}))
         : [];
     }
   }
@@ -188,20 +196,10 @@ export class ScoreDisplayComponent implements OnInit, OnChanges, AfterViewInit {
 
   private getSizeConfig() {
     const configs = {
-      small: { gaugeWidth: 12, fontSize: 18 },
-      medium: { gaugeWidth: 15, fontSize: 24 },
-      large: { gaugeWidth: 18, fontSize: 32 }
+      small: {gaugeWidth: 12, fontSize: 18},
+      medium: {gaugeWidth: 15, fontSize: 24},
+      large: {gaugeWidth: 18, fontSize: 32}
     };
     return configs[this.size];
-  }
-
-  get confidencePercent(): string {
-    return `${Math.round(this.confidence * 100)}%`;
-  }
-
-  get scoreColor(): string {
-    if (this.score < 40) return '#FF3D71';
-    if (this.score < 60) return '#FFA726';
-    return '#00C853';
   }
 }

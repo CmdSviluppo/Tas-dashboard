@@ -1,9 +1,9 @@
-import { Component, Input, AfterViewInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import * as echarts from 'echarts/core';
-import { BarChart } from 'echarts/charts';
-import { GridComponent, TooltipComponent } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import {BarChart} from 'echarts/charts';
+import {GridComponent, TooltipComponent} from 'echarts/components';
+import {CanvasRenderer} from 'echarts/renderers';
 
 echarts.use([BarChart, GridComponent, TooltipComponent, CanvasRenderer]);
 
@@ -23,7 +23,7 @@ export class StrategyBreakdownChartComponent implements AfterViewInit, OnChanges
   @Input() breakdown!: Record<string, StrategyScore>;
   @Input() height: string = '300px';
 
-  @ViewChild('chartContainer', { static: false }) chartContainer?: ElementRef;
+  @ViewChild('chartContainer', {static: false}) chartContainer?: ElementRef;
 
   private chart?: echarts.ECharts;
 
@@ -36,6 +36,12 @@ export class StrategyBreakdownChartComponent implements AfterViewInit, OnChanges
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['breakdown'] && this.chart) {
       this.updateChart();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.chart) {
+      this.chart.dispose();
     }
   }
 
@@ -159,11 +165,5 @@ export class StrategyBreakdownChartComponent implements AfterViewInit, OnChanges
     };
 
     this.chart.setOption(option);
-  }
-
-  ngOnDestroy(): void {
-    if (this.chart) {
-      this.chart.dispose();
-    }
   }
 }

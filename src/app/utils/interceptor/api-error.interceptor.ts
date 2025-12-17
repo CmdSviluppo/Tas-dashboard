@@ -1,8 +1,8 @@
-import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
-import { NotificationService } from '../service/notification.service';
+import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
+import {inject} from '@angular/core';
+import {Router} from '@angular/router';
+import {catchError, throwError} from 'rxjs';
+import {NotificationService} from '../service/notification.service';
 
 /**
  * Error Interceptor - Handles HTTP errors globally

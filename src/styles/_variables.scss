@@ -27,7 +27,7 @@ $tas-bg-overlay: rgba(10, 14, 26, 0.95);
 // ----------------------------------------------------------------------------
 // TEXT COLORS
 // ----------------------------------------------------------------------------
-$tas-text-primary: #FFFFFF;
+$tas-text-primary: #f6f0f0;
 $tas-text-secondary: #9AADBC;
 $tas-text-muted: #6C757D;
 $tas-text-disabled: #4A5568;
@@ -38,6 +38,7 @@ $tas-text-hint: #718096;
 // ----------------------------------------------------------------------------
 $tas-border-primary: rgba(255, 255, 255, 0.12);
 $tas-border-secondary: rgba(255, 255, 255, 0.08);
+$tas-border-tertiary: rgba(255, 255, 255, 0.1);
 $tas-border-focus: $tas-primary-main;
 $tas-border-error: #FF3D71;
 $tas-border-success: #00C853;

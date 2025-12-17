@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NbIconModule, NbCardModule } from '@nebular/theme';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NbCardModule, NbIconModule} from '@nebular/theme';
 
 @Component({
   selector: 'app-home',

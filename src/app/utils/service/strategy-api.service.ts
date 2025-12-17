@@ -1,8 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BaseApiService } from './base-api.service';
-import { StrategyType } from '../model/enum';
-import { StrategySummary, Strategy, StrategyUsage, CreateStrategyRequest, UpdateStrategyRequest, UpdateParametersRequest, ParameterTemplate } from '../model/rest/strategy/strategy-api';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {BaseApiService} from './base-api.service';
+import {StrategyType} from '../model/enum';
+import {
+  CreateStrategyRequest,
+  ParameterTemplate,
+  Strategy,
+  StrategySummary,
+  StrategyUsage,
+  UpdateParametersRequest,
+  UpdateStrategyRequest
+} from '../model/rest/strategy/strategy-api';
 
 
 @Injectable({
@@ -15,7 +23,7 @@ export class StrategyApiService extends BaseApiService {
    * Lista di tutte le strategie con conteggio utilizzo
    */
   getAll(activeOnly?: boolean): Observable<StrategySummary[]> {
-    const params = activeOnly !== undefined ? { active: activeOnly } : undefined;
+    const params = activeOnly !== undefined ? {active: activeOnly} : undefined;
     return this.get<StrategySummary[]>('/strategies', params);
   }
 
@@ -40,7 +48,7 @@ export class StrategyApiService extends BaseApiService {
    * Filtra strategie per tipo
    */
   getByType(type: StrategyType, activeOnly?: boolean): Observable<StrategySummary[]> {
-    const params = activeOnly !== undefined ? { active: activeOnly } : undefined;
+    const params = activeOnly !== undefined ? {active: activeOnly} : undefined;
     return this.get<StrategySummary[]>(`/strategies/type/${type}`, params);
   }
 

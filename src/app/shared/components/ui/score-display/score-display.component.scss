@@ -11,6 +11,7 @@
       width: 80px;
       height: 50px;
     }
+
     .sparkline-container {
       width: 80px;
       height: 20px;
@@ -22,6 +23,7 @@
       width: 120px;
       height: 75px;
     }
+
     .sparkline-container {
       width: 120px;
       height: 30px;
@@ -33,6 +35,7 @@
       width: 160px;
       height: 100px;
     }
+
     .sparkline-container {
       width: 160px;
       height: 40px;
@@ -94,7 +97,7 @@
       margin: 0;
       font-size: 0.875rem;
       font-weight: 600;
-      color: $text-primary;
+      color: $tas-text-primary;
     }
   }
 
@@ -123,7 +126,7 @@
 
 .strategy-name {
   font-size: 0.75rem;
-  color: $text-secondary;
+  color: $tas-text-secondary;
   font-weight: 500;
 }
 
@@ -140,5 +143,5 @@
 
 .strategy-confidence {
   font-size: 0.75rem;
-  color: $text-hint;
+  color: $tas-text-hint;
 }

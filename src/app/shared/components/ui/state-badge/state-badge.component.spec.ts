@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StateBadgeComponent } from './state-badge.component';
+import {StateBadgeComponent} from './state-badge.component';
 
 describe('StateBadgeComponent', () => {
   let component: StateBadgeComponent;
@@ -10,7 +10,7 @@ describe('StateBadgeComponent', () => {
     await TestBed.configureTestingModule({
       imports: [StateBadgeComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(StateBadgeComponent);
     component = fixture.componentInstance;

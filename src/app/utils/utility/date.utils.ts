@@ -1,12 +1,12 @@
 import {
+  differenceInDays,
+  differenceInHours,
+  differenceInMinutes,
+  differenceInSeconds,
   format,
   formatDistanceToNow,
-  parseISO,
   isValid,
-  differenceInSeconds,
-  differenceInMinutes,
-  differenceInHours,
-  differenceInDays
+  parseISO
 } from 'date-fns';
 
 /**
@@ -41,7 +41,7 @@ export class DateUtils {
       return 'Invalid Date';
     }
 
-    return formatDistanceToNow(dateObj, { addSuffix: true });
+    return formatDistanceToNow(dateObj, {addSuffix: true});
   }
 
   /**
@@ -124,8 +124,8 @@ export class DateUtils {
     const today = new Date();
 
     return dateObj.getDate() === today.getDate() &&
-           dateObj.getMonth() === today.getMonth() &&
-           dateObj.getFullYear() === today.getFullYear();
+      dateObj.getMonth() === today.getMonth() &&
+      dateObj.getFullYear() === today.getFullYear();
   }
 
   /**
