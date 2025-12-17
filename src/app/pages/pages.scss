@@ -1,3 +1,22 @@
+@use 'src/styles/variables' as *;
+
+// ============================================================================
+// HEADER STYLES
+// ============================================================================
+
+nb-layout-header.tas-header {
+  background: $tas-bg-secondary;
+  border-bottom: 1px solid $tas-border-tertiary;
+  box-shadow: $tas-shadow-lg;
+  backdrop-filter: blur(12px);
+  height: 64px;
+  padding: 0;
+}
+
+// ============================================================================
+// RESPONSIVE LAYOUT
+// ============================================================================
+
 @media (min-width: 1200px) {
   .body-column-space {
     padding: 0 2rem;

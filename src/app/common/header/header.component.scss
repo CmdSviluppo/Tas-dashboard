@@ -1,0 +1,416 @@
+@use 'src/styles/variables' as *;
+
+// ============================================================================
+// HEADER - ENTERPRISE PROFESSIONAL STYLE
+// Bloomberg Terminal Inspired
+// ============================================================================
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 64px;
+  padding: 0 $tas-spacing-lg;
+  gap: $tas-spacing-lg;
+
+  @media (max-width: 768px) {
+    padding: 0 $tas-spacing-md;
+    gap: $tas-spacing-sm;
+  }
+}
+
+// ============================================================================
+// HEADER LEFT - Logo & Navigation
+// ============================================================================
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: $tas-spacing-md;
+  flex-shrink: 0;
+
+  .hamburger-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $tas-radius-md;
+    background: transparent;
+    border: 1px solid $tas-border-primary;
+    color: $tas-text-secondary;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background: $tas-bg-hover;
+      border-color: $tas-primary-main;
+      color: $tas-primary-main;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+    }
+
+    nb-icon {
+      font-size: 1.5rem;
+    }
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: $tas-spacing-sm;
+    text-decoration: none;
+    padding: $tas-spacing-xs $tas-spacing-md;
+    border-radius: $tas-radius-md;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: $tas-bg-hover;
+      transform: translateY(-1px);
+    }
+
+    .logo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.4));
+      transition: filter 0.3s ease;
+    }
+
+    &:hover .logo-icon {
+      filter: drop-shadow(0 0 12px rgba(0, 191, 255, 0.6));
+    }
+
+    .logo-text {
+      font-family: $tas-font-family;
+      font-size: 1.5rem;
+      font-weight: $tas-font-bold;
+      color: $tas-text-primary;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, #3b82f6 0%, #00bfff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+}
+
+// ============================================================================
+// HEADER CENTER - Global Search
+// ============================================================================
+
+.header-center {
+  flex: 1;
+  max-width: 600px;
+  position: relative;
+
+  @media (max-width: 992px) {
+    max-width: 400px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 250px;
+  }
+
+  .global-search {
+    position: relative;
+
+    .search-icon {
+      position: absolute;
+      left: $tas-spacing-md;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $tas-text-muted;
+      font-size: 1.25rem;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    input[nbInput] {
+      width: 100%;
+      padding: $tas-spacing-sm $tas-spacing-md $tas-spacing-sm 2.75rem;
+      background: $tas-bg-input;
+      border: 1px solid $tas-border-primary;
+      border-radius: $tas-radius-pill;
+      color: $tas-text-primary;
+      font-size: $tas-text-sm;
+      font-family: $tas-font-family;
+      transition: all 0.3s ease;
+
+      &::placeholder {
+        color: $tas-text-muted;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: $tas-primary-main;
+        background: $tas-bg-tertiary;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1),
+                    0 0 16px rgba(59, 130, 246, 0.2);
+      }
+
+      &:hover:not(:focus) {
+        border-color: $tas-border-tertiary;
+        background: $tas-bg-tertiary;
+      }
+    }
+  }
+
+  // Search Results Overlay
+  .search-results-overlay {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: $tas-bg-tertiary;
+    border: 1px solid $tas-border-tertiary;
+    border-radius: $tas-radius-lg;
+    box-shadow: $tas-shadow-xl;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1001;
+    backdrop-filter: blur(12px);
+
+    .search-category {
+      padding: $tas-spacing-sm 0;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid $tas-border-secondary;
+      }
+
+      .category-title {
+        padding: $tas-spacing-xs $tas-spacing-md;
+        font-size: $tas-text-xs;
+        font-weight: $tas-font-semibold;
+        color: $tas-text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .search-item {
+        display: flex;
+        align-items: center;
+        gap: $tas-spacing-sm;
+        padding: $tas-spacing-sm $tas-spacing-md;
+        color: $tas-text-primary;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        nb-icon {
+          color: $tas-text-muted;
+          font-size: 1.25rem;
+        }
+
+        &:hover {
+          background: $tas-bg-hover;
+          color: $tas-primary-main;
+
+          nb-icon {
+            color: $tas-primary-main;
+          }
+        }
+      }
+    }
+
+    .no-results {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: $tas-spacing-xl;
+      color: $tas-text-muted;
+
+      nb-icon {
+        font-size: 3rem;
+        margin-bottom: $tas-spacing-sm;
+        opacity: 0.3;
+      }
+
+      p {
+        margin: 0;
+        font-size: $tas-text-sm;
+      }
+    }
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: $tas-radius-pill;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+}
+
+// ============================================================================
+// HEADER RIGHT - Actions & Profile
+// ============================================================================
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: $tas-spacing-sm;
+  flex-shrink: 0;
+
+  // Connection Indicator
+  .connection-indicator {
+    display: flex;
+    align-items: center;
+    gap: $tas-spacing-xs;
+    padding: $tas-spacing-xs $tas-spacing-sm;
+    border-radius: $tas-radius-pill;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    transition: all 0.3s ease;
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $tas-bearish;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+      animation: pulse-disconnected 2s infinite;
+    }
+
+    &.connected {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+
+      .status-dot {
+        background: $tas-bullish;
+        box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+        animation: pulse-connected 2s infinite;
+      }
+    }
+  }
+
+  // Action Buttons
+  .header-action-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $tas-radius-md;
+    background: transparent;
+    border: 1px solid $tas-border-primary;
+    color: $tas-text-secondary;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    nb-icon {
+      font-size: 1.5rem;
+    }
+
+    .badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $tas-bearish;
+      color: white;
+      font-size: 0.625rem;
+      font-weight: $tas-font-bold;
+      border-radius: $tas-radius-pill;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+    }
+
+    &:hover {
+      background: $tas-bg-hover;
+      border-color: $tas-primary-main;
+      color: $tas-primary-main;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+    }
+  }
+
+  // User Profile
+  .user-profile {
+    position: relative;
+
+    .user-avatar-btn {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 2px solid $tas-border-tertiary;
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      overflow: hidden;
+
+      &:hover {
+        border-color: $tas-primary-main;
+        box-shadow: 0 0 16px rgba(59, 130, 246, 0.3);
+        transform: scale(1.05);
+      }
+
+      .avatar {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+
+@keyframes pulse-connected {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pulse-disconnected {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: 576px) {
+  .header-left {
+    .logo-text {
+      display: none;
+    }
+  }
+
+  .connection-indicator {
+    padding: $tas-spacing-xs !important;
+
+    span {
+      display: none;
+    }
+  }
+}

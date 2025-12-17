@@ -1,17 +1,26 @@
 @use 'src/styles/variables' as *;
 
 .profile-edit-page {
+  display: flex;
+  flex-direction: column;
+  gap: $tas-spacing-lg;
   padding: $tas-spacing-xl;
   max-width: 1400px;
   margin: 0 auto;
 
   .page-header {
-    margin-bottom: $tas-spacing-xl;
+    margin-bottom: 0;
 
     .header-left {
       display: flex;
       align-items: center;
       gap: $tas-spacing-lg;
+
+      button[nbButton] {
+        display: flex;
+        align-items: center;
+        gap: $tas-spacing-xs;
+      }
 
       .header-info {
         display: flex;
@@ -42,7 +51,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 400px;
+    padding: 4rem 2rem;
     gap: $tas-spacing-lg;
 
     p {
@@ -54,7 +63,8 @@
   .edit-card {
     background: $tas-bg-secondary;
     border: 1px solid $tas-border-secondary;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: $tas-shadow-md;
+    margin-bottom: 0;
 
     nb-card-body {
       padding: 0;
@@ -64,18 +74,19 @@
           .tabset {
             ul {
               background: $tas-bg-tertiary;
-              border-bottom: 2px solid $tas-border-primary;
+              border-bottom: 1px solid $tas-border-tertiary;
               padding: 0 $tas-spacing-lg;
               margin: 0;
 
               li {
                 a {
                   color: $tas-text-secondary;
-                  padding: $tas-spacing-lg $tas-spacing-xl;
+                  padding: $tas-spacing-md $tas-spacing-lg;
                   transition: all 0.3s ease;
                   font-size: $tas-text-base;
                   font-weight: $tas-font-medium;
                   position: relative;
+                  border: none;
 
                   nb-icon {
                     margin-right: $tas-spacing-sm;
@@ -84,20 +95,20 @@
 
                   &:hover {
                     color: $tas-text-primary;
-                    background: rgba($tas-bg-primary, 0.05);
+                    background: $tas-bg-hover;
                   }
                 }
 
                 &.active a {
-                  color: $tas-bg-primary;
-                  background: rgba($tas-bg-primary, 0.1);
-                  border-bottom: 3px solid $tas-bg-primary;
+                  color: $tas-primary-main;
+                  background: rgba($tas-primary-main, 0.1);
+                  border-bottom: 2px solid $tas-primary-main;
                 }
               }
             }
 
             .tab-content {
-              padding: $tas-spacing-2xl;
+              padding: $tas-spacing-xl;
               min-height: 500px;
             }
           }
@@ -109,15 +120,17 @@
   .strategy-assignment-tab,
   .scoring-rules-tab {
     .tab-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: $tas-spacing-xl;
       padding-bottom: $tas-spacing-lg;
-      border-bottom: 2px solid $tas-border-secondary;
+      border-bottom: 1px solid $tas-border-tertiary;
 
       .header-content {
         display: flex;
         align-items: center;
         gap: $tas-spacing-md;
-        margin-bottom: $tas-spacing-sm;
 
         h3 {
           margin: 0;
@@ -127,10 +140,10 @@
         }
 
         .strategy-count {
-          padding: 4px 12px;
+          padding: 0.25rem 0.75rem;
           background: $tas-bg-tertiary;
           border: 1px solid $tas-border-tertiary;
-          border-radius: $tas-radius-lg;
+          border-radius: $tas-radius-md;
           font-size: $tas-text-sm;
           color: $tas-text-secondary;
           font-weight: $tas-font-medium;
@@ -143,25 +156,31 @@
         font-size: $tas-text-sm;
         line-height: 1.5;
       }
+
+      button[nbButton] {
+        display: flex;
+        align-items: center;
+        gap: $tas-spacing-xs;
+      }
     }
 
     .form-actions {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: $tas-spacing-2xl;
-      padding-top: $tas-spacing-xl;
-      border-top: 2px solid $tas-border-secondary;
+      margin-top: $tas-spacing-xl;
+      padding-top: $tas-spacing-lg;
+      border-top: 1px solid $tas-border-tertiary;
 
       .action-info {
         display: flex;
         align-items: center;
         gap: $tas-spacing-sm;
         padding: $tas-spacing-sm $tas-spacing-md;
-        background: rgba($tas-score-high, 0.1);
-        border: 1px solid rgba($tas-score-high, 0.3);
+        background: rgba($tas-warning, 0.1);
+        border: 1px solid rgba($tas-warning, 0.3);
         border-radius: $tas-radius-md;
-        color: $tas-score-high;
+        color: $tas-warning;
         font-size: $tas-text-sm;
         font-weight: $tas-font-medium;
 
@@ -172,9 +191,13 @@
 
       button {
         min-width: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: $tas-spacing-xs;
 
-        nb-icon {
-          margin-right: $tas-spacing-xs;
+        nb-spinner {
+          margin: 0;
         }
       }
     }
@@ -206,9 +229,13 @@
       nb-card-body {
         ::ng-deep {
           nb-tabset .tabset {
-            ul li a {
-              padding: $tas-spacing-md;
-              font-size: $tas-text-sm;
+            ul {
+              padding: 0 $tas-spacing-sm;
+
+              li a {
+                padding: $tas-spacing-sm $tas-spacing-md;
+                font-size: $tas-text-sm;
+              }
             }
 
             .tab-content {
@@ -219,27 +246,35 @@
       }
     }
 
-    .tab-header {
-      flex-direction: column;
-      gap: $tas-spacing-md;
-
-      .header-content {
+    .strategy-assignment-tab,
+    .scoring-rules-tab {
+      .tab-header {
         flex-direction: column;
-        align-items: flex-start !important;
+        align-items: flex-start;
+        gap: $tas-spacing-md;
+
+        .header-content {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        button[nbButton] {
+          width: 100%;
+        }
       }
-    }
 
-    .form-actions {
-      flex-direction: column-reverse;
-      gap: $tas-spacing-md;
+      .form-actions {
+        flex-direction: column-reverse;
+        gap: $tas-spacing-md;
 
-      .action-info {
-        width: 100%;
-        justify-content: center;
-      }
+        .action-info {
+          width: 100%;
+          justify-content: center;
+        }
 
-      button {
-        width: 100%;
+        button {
+          width: 100%;
+        }
       }
     }
   }
