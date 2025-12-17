@@ -1,0 +1,83 @@
+.usage-indicator {
+  display: inline-flex;
+  align-items: center;
+
+  .usage-badge {
+    cursor: pointer;
+  }
+}
+
+.usage-popover {
+  min-width: 300px;
+  max-width: 400px;
+
+  .popover-loading,
+  .popover-error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+
+    nb-spinner {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .popover-content {
+    .popover-header {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-basic-color-3);
+
+      strong {
+        font-size: 0.875rem;
+      }
+    }
+
+    nb-list {
+      max-height: 300px;
+      overflow-y: auto;
+
+      nb-list-item {
+        padding: 0.75rem 1rem;
+
+        .profile-item {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+
+            .profile-name {
+              font-weight: 500;
+              font-size: 0.875rem;
+            }
+
+            .profile-code {
+              font-size: 0.75rem;
+              color: var(--text-hint-color);
+              background: var(--background-basic-color-2);
+              padding: 0.125rem 0.375rem;
+              border-radius: 3px;
+              align-self: flex-start;
+            }
+          }
+
+          .profile-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .timeframe {
+              font-size: 0.75rem;
+              color: var(--text-hint-color);
+            }
+          }
+        }
+      }
+    }
+  }
+}

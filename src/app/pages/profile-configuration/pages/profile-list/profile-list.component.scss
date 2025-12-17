@@ -1,0 +1,112 @@
+.profile-list-page {
+  padding: 1.5rem;
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h1 {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 600;
+    }
+  }
+
+  .filter-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    gap: 1rem;
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-hint-color);
+      }
+    }
+  }
+
+  .stats-bar {
+    padding: 0.75rem 1rem;
+    background: rgba(0, 168, 255, 0.1);
+    border-radius: 0.25rem;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+    color: var(--text-basic-color);
+  }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  .profile-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      tr {
+        border-bottom: 2px solid var(--border-basic-color-3);
+
+        th {
+          padding: 1rem;
+          text-align: left;
+          font-weight: 600;
+          cursor: pointer;
+          user-select: none;
+          transition: background-color 0.2s;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.05);
+          }
+
+          nb-icon {
+            margin-left: 0.25rem;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--border-basic-color-4);
+        transition: background-color 0.2s;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.03);
+        }
+
+        td {
+          padding: 1rem;
+
+          code {
+            background: rgba(0, 168, 255, 0.15);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+          }
+
+          .text-muted {
+            color: var(--text-hint-color);
+            font-style: italic;
+          }
+        }
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<div class="parameter-template-selector">
+
+  <button
+    (click)="loadTemplate()"
+    [disabled]="loading()"
+    nbButton
+    size="small"
+    status="info"
+    type="button">
+    <nb-spinner *ngIf="loading()" size="tiny" status="control"></nb-spinner>
+    <nb-icon *ngIf="!loading()" icon="download-outline"></nb-icon>
+    {{ loading() ? 'Loading...' : 'Load Default Template' }}
+  </button>
+
+  <div *ngIf="lastLoaded()" class="template-info">
+    <nb-icon icon="checkmark-circle-outline" status="success"></nb-icon>
+    <span>Template loaded with {{ paramCount() }} parameters</span>
+  </div>
+
+</div>

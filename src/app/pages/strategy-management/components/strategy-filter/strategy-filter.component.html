@@ -1,0 +1,61 @@
+<nb-card class="filter-card">
+  <nb-card-body>
+    <div class="filter-content">
+
+      <!-- Search -->
+      <div class="filter-item search-item">
+        <input
+          (input)="onSearchInput($any($event.target).value)"
+          [value]="searchText"
+          fullWidth
+          nbInput
+          placeholder="Search strategies...">
+        <nb-icon class="search-icon" icon="search-outline"></nb-icon>
+      </div>
+
+      <!-- Type Filter -->
+      <div class="filter-item">
+        <nb-select
+          (selectedChange)="onTypeSelect($event)"
+          [selected]="selectedType"
+          fullWidth
+          placeholder="Filter by type">
+          <nb-option
+            *ngFor="let type of strategyTypes"
+            [value]="type.value">
+            {{ type.label }}
+          </nb-option>
+        </nb-select>
+      </div>
+
+      <!-- Sort -->
+      <div class="filter-item">
+        <nb-select
+          (selectedChange)="onSortSelect($event)"
+          [selected]="sortBy"
+          fullWidth
+          placeholder="Sort by">
+          <nb-option
+            *ngFor="let option of sortOptions"
+            [value]="option.value">
+            Sort by {{ option.label }}
+          </nb-option>
+        </nb-select>
+      </div>
+
+      <!-- Reset Button -->
+      <div class="filter-item">
+        <button
+          (click)="onReset()"
+          fullWidth
+          nbButton
+          nbTooltip="Reset all filters"
+          status="basic">
+          <nb-icon icon="refresh-outline"></nb-icon>
+          Reset
+        </button>
+      </div>
+
+    </div>
+  </nb-card-body>
+</nb-card>

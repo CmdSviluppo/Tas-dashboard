@@ -1,0 +1,79 @@
+<div class="timeframe-weight-sliders">
+  <!-- 4h Slider -->
+  <div class="weight-slider-group">
+    <label class="label">
+      4h Weight: {{ weight4h | number:'1.2-2' }} ({{ (weight4h * 100) | number:'1.0-0' }}%)
+    </label>
+    <input
+      type="range"
+      [(ngModel)]="weight4h"
+      (input)="onWeight4hChange()"
+      min="0"
+      max="1"
+      step="0.01"
+      class="weight-slider">
+  </div>
+
+  <!-- 1h Slider -->
+  <div class="weight-slider-group">
+    <label class="label">
+      1h Weight: {{ weight1h | number:'1.2-2' }} ({{ (weight1h * 100) | number:'1.0-0' }}%)
+    </label>
+    <input
+      type="range"
+      [(ngModel)]="weight1h"
+      (input)="onWeight1hChange()"
+      min="0"
+      max="1"
+      step="0.01"
+      class="weight-slider">
+  </div>
+
+  <!-- 30m Slider -->
+  <div class="weight-slider-group">
+    <label class="label">
+      30m Weight: {{ weight30m | number:'1.2-2' }} ({{ (weight30m * 100) | number:'1.0-0' }}%)
+    </label>
+    <input
+      type="range"
+      [(ngModel)]="weight30m"
+      (input)="onWeight30mChange()"
+      min="0"
+      max="1"
+      step="0.01"
+      class="weight-slider">
+  </div>
+
+  <!-- Visual Distribution Bar -->
+  <div class="distribution-bar">
+    <div
+      class="bar-segment tf-4h"
+      [style.width.%]="weight4h * 100">
+      {{ (weight4h * 100) | number:'1.0-0' }}%
+    </div>
+    <div
+      class="bar-segment tf-1h"
+      [style.width.%]="weight1h * 100">
+      {{ (weight1h * 100) | number:'1.0-0' }}%
+    </div>
+    <div
+      class="bar-segment tf-30m"
+      [style.width.%]="weight30m * 100">
+      {{ (weight30m * 100) | number:'1.0-0' }}%
+    </div>
+  </div>
+
+  <!-- Sum Validation -->
+  <div class="sum-validation">
+    <div class="sum-indicator" [class.valid]="isValid()" [class.invalid]="!isValid()">
+      <nb-icon
+        [icon]="isValid() ? 'checkmark-circle-outline' : 'alert-circle-outline'"
+        [status]="isValid() ? 'success' : 'danger'">
+      </nb-icon>
+      <span>
+        Total: {{ sum() | number:'1.2-2' }}
+        {{ isValid() ? '✓ Valid' : '✗ Must equal 1.00' }}
+      </span>
+    </div>
+  </div>
+</div>

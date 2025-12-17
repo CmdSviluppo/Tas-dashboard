@@ -1,0 +1,41 @@
+.filter-card {
+  margin-bottom: 0;
+
+  nb-card-body {
+    padding: 1rem;
+  }
+
+  .filter-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 1rem;
+    align-items: center;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 576px) {
+      grid-template-columns: 1fr;
+    }
+
+    .filter-item {
+      position: relative;
+
+      &.search-item {
+        .search-icon {
+          position: absolute;
+          left: 0.75rem;
+          top: 50%;
+          transform: translateY(-50%);
+          color: var(--text-hint-color);
+          pointer-events: none;
+        }
+
+        input {
+          padding-left: 2.5rem;
+        }
+      }
+    }
+  }
+}

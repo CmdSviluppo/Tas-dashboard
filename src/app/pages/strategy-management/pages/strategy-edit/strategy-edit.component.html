@@ -1,0 +1,173 @@
+<div class="strategy-edit-page">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <button
+        (click)="navigateBack()"
+        nbButton
+        size="small"
+        status="basic">
+        <nb-icon icon="arrow-back-outline"></nb-icon>
+        Back to List
+      </button>
+      <h1>{{ strategy()?.name || 'Loading...' }}</h1>
+      <code *ngIf="strategy()">{{ strategy()!.code }}</code>
+    </div>
+    <div class="header-right">
+      <app-strategy-type-badge
+        *ngIf="strategy()"
+        [type]="strategy()!.type">
+      </app-strategy-type-badge>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading()" class="loading-container">
+    <nb-spinner size="giant" status="primary"></nb-spinner>
+    <p>Loading strategy...</p>
+  </div>
+
+  <!-- Edit Form (Tabs) -->
+  <nb-card *ngIf="!loading() && strategy()">
+    <nb-card-header>
+      <nb-tabset (changeTab)="onTabChange($event)">
+        <nb-tab tabIcon="edit-outline" tabTitle="Basic Information"></nb-tab>
+        <nb-tab tabIcon="code-outline" tabTitle="Parameters"></nb-tab>
+      </nb-tabset>
+    </nb-card-header>
+
+    <nb-card-body>
+
+      <!-- Tab 1: Basic Information -->
+      <div *ngIf="activeTab() === 0" class="basic-info-tab">
+        <form [formGroup]="basicForm">
+
+          <!-- Name -->
+          <div class="form-group">
+            <label class="label">Name *</label>
+            <input
+              [status]="getFieldStatus(basicForm, 'name')"
+              formControlName="name"
+              fullWidth
+              nbInput>
+            <span *ngIf="isFieldInvalid(basicForm, 'name')" class="caption status-danger">
+              {{ getFieldError(basicForm, 'name') }}
+            </span>
+          </div>
+
+          <!-- Code (readonly) -->
+          <div class="form-group">
+            <label class="label">Code</label>
+            <input
+              [value]="strategy()!.code"
+              disabled
+              fullWidth
+              nbInput>
+            <span class="caption">
+              Code cannot be changed after creation
+            </span>
+          </div>
+
+          <!-- Type (readonly) -->
+          <div class="form-group">
+            <label class="label">Type</label>
+            <div class="readonly-field">
+              <app-strategy-type-badge [type]="strategy()!.type"></app-strategy-type-badge>
+            </div>
+            <span class="caption">
+              Type cannot be changed after creation
+            </span>
+          </div>
+
+          <!-- Implementation Class (readonly) -->
+          <div class="form-group">
+            <label class="label">Implementation Class</label>
+            <input
+              [value]="strategy()!.implementationClass"
+              disabled
+              fullWidth
+              nbInput>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label class="label">Description</label>
+            <textarea
+              formControlName="description"
+              fullWidth
+              nbInput
+              rows="4">
+            </textarea>
+          </div>
+
+          <!-- Active Toggle -->
+          <div class="form-group">
+            <nb-checkbox formControlName="isActive">
+              Active Strategy
+            </nb-checkbox>
+            <span class="caption checkbox-caption">
+              Inactive strategies cannot be assigned to new profiles
+            </span>
+          </div>
+
+          <!-- Save Basic Info -->
+          <div class="form-actions">
+            <button
+              (click)="saveBasicInfo()"
+              [disabled]="basicForm.invalid || basicForm.pristine || submitting()"
+              nbButton
+              status="primary"
+              type="button">
+              <nb-spinner *ngIf="submitting()" size="tiny" status="control"></nb-spinner>
+              {{ submitting() ? 'Saving...' : 'Save Changes' }}
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Tab 2: Parameters -->
+      <div *ngIf="activeTab() === 1" class="parameters-tab">
+
+        <!-- Template Reload -->
+        <div class="template-reload-section">
+          <app-parameter-template-selector
+            (templateLoaded)="onTemplateLoaded($event)"
+            [strategyType]="strategy()!.type">
+          </app-parameter-template-selector>
+          <span class="caption">
+            Load default parameter template for {{ getTypeLabel(strategy()!.type) }} strategies
+          </span>
+        </div>
+
+        <!-- JSON Editor -->
+        <div class="form-group">
+          <label class="label">Parameters (JSON)</label>
+          <app-json-parameter-editor
+            (validChange)="onParametersValidChange($event)"
+            (valueChange)="onParametersChange($event)"
+            [isValid]="parametersValid()"
+            [value]="parametersValue()">
+          </app-json-parameter-editor>
+        </div>
+
+        <!-- Save Parameters -->
+        <div class="form-actions">
+          <button
+            (click)="saveParameters()"
+            [disabled]="!parametersChanged() || !parametersValid() || submitting()"
+            nbButton
+            status="primary"
+            type="button">
+            <nb-spinner *ngIf="submitting()" size="tiny" status="control"></nb-spinner>
+            {{ submitting() ? 'Saving...' : 'Save Parameters' }}
+          </button>
+        </div>
+
+      </div>
+
+    </nb-card-body>
+  </nb-card>
+
+</div>

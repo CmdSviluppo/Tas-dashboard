@@ -1,0 +1,61 @@
+.add-strategy-modal {
+  width: 600px;
+  max-width: 90vw;
+
+  nb-card-header h5 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    .label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-basic-color);
+    }
+
+    .caption {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+      color: var(--text-hint-color);
+
+      &.status-danger {
+        color: var(--color-danger-500);
+      }
+    }
+
+    .weight-slider {
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+
+    .slider-hints {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-hint-color);
+      margin-top: 0.25rem;
+    }
+
+    .json-editor {
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    nb-checkbox {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  nb-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+  }
+}

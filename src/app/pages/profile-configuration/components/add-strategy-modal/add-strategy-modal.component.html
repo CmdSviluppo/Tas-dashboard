@@ -1,0 +1,137 @@
+<nb-card class="add-strategy-modal">
+  <nb-card-header>
+    <div class="modal-header">
+      <h5>{{ mode === 'add' ? 'Add Strategy' : 'Edit Strategy' }}</h5>
+      <button nbButton status="basic" size="tiny" (click)="cancel()">
+        <nb-icon icon="close-outline"></nb-icon>
+      </button>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="form">
+      <!-- Step 1: Select Strategy -->
+      <div class="form-group">
+        <label class="label">Strategy *</label>
+        <nb-select
+          fullWidth
+          formControlName="strategyId"
+          placeholder="Select strategy"
+          [disabled]="mode === 'edit'"
+          (selectedChange)="onStrategySelected($event)">
+          <nb-option-group *ngFor="let group of strategiesByType()" [title]="group.type">
+            <nb-option
+              *ngFor="let strategy of group.strategies"
+              [value]="strategy.id">
+              {{ strategy.name }} ({{ strategy.code }})
+            </nb-option>
+          </nb-option-group>
+        </nb-select>
+        <span class="caption" *ngIf="mode === 'edit'">
+          <nb-icon icon="info-outline"></nb-icon>
+          Strategy cannot be changed when editing
+        </span>
+      </div>
+
+      <!-- Step 2: Select Timeframes (multiple checkboxes) -->
+      <div class="form-group" *ngIf="mode === 'add'">
+        <label class="label">Timeframes * (select one or more)</label>
+        <div class="timeframe-checkboxes">
+          <nb-checkbox
+            *ngFor="let tf of timeframes"
+            [checked]="isTimeframeSelected(tf)"
+            (checkedChange)="onTimeframeToggle(tf, $event)">
+            {{ tf }}
+          </nb-checkbox>
+        </div>
+        <span class="caption status-danger" *ngIf="selectedTimeframes().length === 0">
+          <nb-icon icon="alert-circle-outline"></nb-icon>
+          Select at least one timeframe
+        </span>
+      </div>
+
+      <!-- Step 2b: Show single timeframe in edit mode -->
+      <div class="form-group" *ngIf="mode === 'edit'">
+        <label class="label">Timeframe</label>
+        <nb-badge [text]="form.value.timeframe || ''" status="info"></nb-badge>
+      </div>
+
+      <!-- Step 3: Configure Weight -->
+      <div class="form-group">
+        <label class="label">
+          Weight: {{ form.value.weight | number:'1.1-1' }}
+          <span class="weight-description">
+            ({{ form.value.weight! < 0.8 ? 'Low' : form.value.weight! > 1.5 ? 'High' : 'Normal' }})
+          </span>
+        </label>
+        <input
+          type="range"
+          formControlName="weight"
+          min="0.5"
+          max="2.0"
+          step="0.1"
+          class="weight-slider">
+        <div class="weight-legend">
+          <span>0.5 (Low)</span>
+          <span>1.0 (Normal)</span>
+          <span>2.0 (High)</span>
+        </div>
+        <span class="caption">
+          <nb-icon icon="info-outline"></nb-icon>
+          Weight determines the importance of this strategy in scoring calculation
+        </span>
+      </div>
+
+      <!-- Step 4: Override Parameters -->
+      <div class="form-group">
+        <label class="label">Parameters (optional override)</label>
+        <div class="parameters-section">
+          <button
+            nbButton
+            status="basic"
+            size="tiny"
+            type="button"
+            (click)="loadDefaultParameters()">
+            <nb-icon icon="refresh-outline"></nb-icon>
+            Load Strategy Defaults
+          </button>
+        </div>
+
+        <app-json-parameter-editor
+          [value]="form.value.parametersJson"
+          [isValid]="parametersValid()"
+          (valueChange)="onParametersChange($event)"
+          (validChange)="onParametersValidChange($event)">
+        </app-json-parameter-editor>
+        <span class="caption">
+          <nb-icon icon="bulb-outline"></nb-icon>
+          Leave empty to use strategy default parameters. Override specific parameters as needed.
+        </span>
+      </div>
+
+      <!-- Step 5: Enabled Toggle -->
+      <div class="form-group">
+        <nb-checkbox formControlName="enabled">
+          Enabled
+        </nb-checkbox>
+        <span class="caption">
+          Disabled strategies are not evaluated during analysis
+        </span>
+      </div>
+    </form>
+  </nb-card-body>
+
+  <nb-card-footer>
+    <div class="modal-footer">
+      <button nbButton status="basic" (click)="cancel()">Cancel</button>
+      <button
+        nbButton
+        status="primary"
+        [disabled]="!canSave()"
+        (click)="save()">
+        <nb-icon icon="checkmark-outline"></nb-icon>
+        {{ mode === 'add' ? 'Add Strategy' : 'Save Changes' }}
+      </button>
+    </div>
+  </nb-card-footer>
+</nb-card>

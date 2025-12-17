@@ -1,0 +1,17 @@
+.parameter-template-selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .template-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-success-500);
+    font-size: 0.875rem;
+
+    nb-icon {
+      font-size: 1.25rem;
+    }
+  }
+}

@@ -1,0 +1,493 @@
+<div class="profile-detail-page">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <button
+        nbButton
+        status="basic"
+        size="small"
+        (click)="navigateBack()">
+        <nb-icon icon="arrow-back-outline"></nb-icon>
+        Back to Profiles
+      </button>
+      <h1>{{ profile()?.name || 'Loading...' }}</h1>
+    </div>
+
+    <div class="header-actions" *ngIf="profile() && !loading()">
+      <nb-badge
+        [text]="profile()!.active ? 'Active' : 'Inactive'"
+        [status]="profile()!.active ? 'success' : 'basic'"
+        class="status-badge">
+      </nb-badge>
+
+      <button
+        nbButton
+        status="info"
+        size="small"
+        (click)="navigateToEdit()"
+        nbTooltip="Edit Strategies & Scoring Rules">
+        <nb-icon icon="settings-outline"></nb-icon>
+        Configure
+      </button>
+
+      <button
+        nbButton
+        [status]="profile()!.active ? 'warning' : 'success'"
+        size="small"
+        [disabled]="toggling()"
+        (click)="toggleActive()"
+        [nbTooltip]="profile()!.active ? 'Deactivate Profile' : 'Activate Profile'">
+        <nb-spinner *ngIf="toggling()" size="tiny" status="control"></nb-spinner>
+        <nb-icon *ngIf="!toggling()" [icon]="profile()!.active ? 'pause-circle-outline' : 'play-circle-outline'"></nb-icon>
+        {{ toggling() ? 'Updating...' : (profile()!.active ? 'Deactivate' : 'Activate') }}
+      </button>
+
+      <button
+        nbButton
+        status="danger"
+        size="small"
+        [disabled]="deleting()"
+        (click)="openDeleteModal()"
+        nbTooltip="Delete Profile">
+        <nb-spinner *ngIf="deleting()" size="tiny" status="control"></nb-spinner>
+        <nb-icon *ngIf="!deleting()" icon="trash-2-outline"></nb-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="loading()">
+    <nb-spinner size="giant" status="primary"></nb-spinner>
+    <p>Loading profile details...</p>
+  </div>
+
+  <!-- Content -->
+  <div class="content" *ngIf="!loading() && profile()">
+
+    <!-- Basic Information Card -->
+    <nb-card class="basic-info-card">
+      <nb-card-header>
+        <div class="card-header-content">
+          <h6>
+            <nb-icon icon="info-outline"></nb-icon>
+            Basic Information
+          </h6>
+          <button
+            nbButton
+            status="primary"
+            size="tiny"
+            *ngIf="!editMode()"
+            (click)="toggleEditMode()">
+            <nb-icon icon="edit-outline"></nb-icon>
+            Edit
+          </button>
+        </div>
+      </nb-card-header>
+
+      <nb-card-body>
+        <form [formGroup]="basicInfoForm" *ngIf="editMode()">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="label">Name *</label>
+              <input
+                nbInput
+                fullWidth
+                formControlName="name"
+                [status]="getFieldStatus('name')">
+              <span class="caption status-danger" *ngIf="isFieldInvalid('name')">
+                {{ getFieldError('name') }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label class="label">Code *</label>
+              <input
+                nbInput
+                fullWidth
+                formControlName="code"
+                [status]="getFieldStatus('code')">
+              <span class="caption status-danger" *ngIf="isFieldInvalid('code')">
+                {{ getFieldError('code') }}
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="label">Description</label>
+            <textarea
+              nbInput
+              fullWidth
+              formControlName="description"
+              rows="3">
+            </textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="label">Market Regime</label>
+            <nb-select fullWidth formControlName="marketRegime">
+              <nb-option [value]="null">None (All Markets)</nb-option>
+              <nb-option *ngFor="let regime of regimes" [value]="regime">
+                {{ getRegimeLabel(regime) }}
+              </nb-option>
+            </nb-select>
+          </div>
+
+          <div class="form-actions">
+            <button
+              nbButton
+              status="basic"
+              (click)="toggleEditMode()">
+              Cancel
+            </button>
+            <button
+              nbButton
+              status="primary"
+              [disabled]="basicInfoForm.invalid || savingBasicInfo()"
+              (click)="saveBasicInfo()">
+              <nb-spinner *ngIf="savingBasicInfo()" size="tiny" status="control"></nb-spinner>
+              {{ savingBasicInfo() ? 'Saving...' : 'Save Changes' }}
+            </button>
+          </div>
+        </form>
+
+        <div class="info-display" *ngIf="!editMode()">
+          <div class="info-row">
+            <div class="info-item">
+              <label>Name</label>
+              <span class="value">{{ profile()!.name }}</span>
+            </div>
+            <div class="info-item">
+              <label>Code</label>
+              <code class="value">{{ profile()!.code }}</code>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-item">
+              <label>Description</label>
+              <span class="value">{{ profile()!.description || 'No description' }}</span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-item">
+              <label>Market Regime</label>
+              <nb-badge
+                *ngIf="profile()!.marketRegime"
+
+                status="info">
+              </nb-badge>
+              <span class="value" *ngIf="!profile()!.marketRegime">None (All Markets)</span>
+            </div>
+            <div class="info-item">
+              <label>Created At</label>
+              <span class="value">{{ formatDate(profile()!.createdAt) }}</span>
+            </div>
+            <div class="info-item">
+              <label>Last Updated</label>
+              <span class="value">{{ formatDate(profile()!.updatedAt) }}</span>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <!-- Statistics Card -->
+    <nb-card class="stats-card">
+      <nb-card-header>
+        <h6>
+          <nb-icon icon="activity-outline"></nb-icon>
+          Statistics
+        </h6>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+              <nb-icon icon="layers-outline"></nb-icon>
+            </div>
+            <div class="stat-content">
+              <label>Total Strategies</label>
+              <span class="stat-value">{{ totalStrategies() }}</span>
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+              <nb-icon icon="checkmark-circle-outline"></nb-icon>
+            </div>
+            <div class="stat-content">
+              <label>Enabled Strategies</label>
+              <span class="stat-value">{{ enabledStrategies() }}</span>
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+              <nb-icon icon="settings-2-outline"></nb-icon>
+            </div>
+            <div class="stat-content">
+              <label>Status</label>
+              <span class="stat-value">{{ profile()!.active ? 'Active' : 'Inactive' }}</span>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <!-- Strategy Configurations -->
+    <nb-card class="strategies-card">
+      <nb-card-header>
+        <h6>
+          <nb-icon icon="layers-outline"></nb-icon>
+          Strategy Configurations ({{ totalStrategies() }})
+        </h6>
+      </nb-card-header>
+      <nb-card-body>
+        <nb-accordion *ngIf="totalStrategies() > 0">
+          <!-- 4H Timeframe -->
+          <nb-accordion-item *ngIf="strategiesGroupedByTimeframe()['4h'].length > 0">
+            <nb-accordion-item-header>
+              <div class="accordion-header">
+                <nb-badge text="4H" status="primary"></nb-badge>
+                <span class="count">({{ strategiesGroupedByTimeframe()['4h'].length }} strategies)</span>
+              </div>
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+              <div class="strategy-list">
+                <div class="strategy-card" *ngFor="let config of strategiesGroupedByTimeframe()['4h']">
+                  <div class="strategy-header">
+                    <div class="strategy-title">
+                      <h6>{{ config.strategyName }}</h6>
+                      <code>{{ config.strategyCode }}</code>
+                    </div>
+                    <nb-badge
+                      [text]="config.isEnabled ? 'Enabled' : 'Disabled'"
+                      [status]="config.isEnabled ? 'success' : 'basic'">
+                    </nb-badge>
+                  </div>
+
+                  <div class="strategy-details">
+                    <div class="detail-item">
+                      <label>Weight</label>
+                      <span class="value">{{ config.weight | number:'1.1-1' }}</span>
+                    </div>
+
+                    <div class="detail-item full-width" *ngIf="parseParameters(config.parametersOverride).length > 0">
+                      <label>Parameters</label>
+                      <div class="params-grid">
+                        <div class="param-item" *ngFor="let param of parseParameters(config.parametersOverride)">
+                          <span class="param-key">{{ param.key }}</span>
+                          <span class="param-value">{{ param.value }}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="detail-item full-width" *ngIf="parseParameters(config.parametersOverride).length === 0">
+                      <label>Parameters</label>
+                      <span class="value muted">No custom parameters (using defaults)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+
+          <!-- 1H Timeframe -->
+          <nb-accordion-item *ngIf="strategiesGroupedByTimeframe()['1h'].length > 0">
+            <nb-accordion-item-header>
+              <div class="accordion-header">
+                <nb-badge text="1H" status="primary"></nb-badge>
+                <span class="count">({{ strategiesGroupedByTimeframe()['1h'].length }} strategies)</span>
+              </div>
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+              <div class="strategy-list">
+                <div class="strategy-card" *ngFor="let config of strategiesGroupedByTimeframe()['1h']">
+                  <div class="strategy-header">
+                    <div class="strategy-title">
+                      <h6>{{ config.strategyName }}</h6>
+                      <code>{{ config.strategyCode }}</code>
+                    </div>
+                    <nb-badge
+                      [text]="config.isEnabled ? 'Enabled' : 'Disabled'"
+                      [status]="config.isEnabled ? 'success' : 'basic'">
+                    </nb-badge>
+                  </div>
+
+                  <div class="strategy-details">
+                    <div class="detail-item">
+                      <label>Weight</label>
+                      <span class="value">{{ config.weight | number:'1.1-1' }}</span>
+                    </div>
+
+                    <div class="detail-item full-width" *ngIf="parseParameters(config.parametersOverride).length > 0">
+                      <label>Parameters</label>
+                      <div class="params-grid">
+                        <div class="param-item" *ngFor="let param of parseParameters(config.parametersOverride)">
+                          <span class="param-key">{{ param.key }}</span>
+                          <span class="param-value">{{ param.value }}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="detail-item full-width" *ngIf="parseParameters(config.parametersOverride).length === 0">
+                      <label>Parameters</label>
+                      <span class="value muted">No custom parameters (using defaults)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+
+          <!-- 30M Timeframe -->
+          <nb-accordion-item *ngIf="strategiesGroupedByTimeframe()['30m'].length > 0">
+            <nb-accordion-item-header>
+              <div class="accordion-header">
+                <nb-badge text="30M" status="primary"></nb-badge>
+                <span class="count">({{ strategiesGroupedByTimeframe()['30m'].length }} strategies)</span>
+              </div>
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+              <div class="strategy-list">
+                <div class="strategy-card" *ngFor="let config of strategiesGroupedByTimeframe()['30m']">
+                  <div class="strategy-header">
+                    <div class="strategy-title">
+                      <h6>{{ config.strategyName }}</h6>
+                      <code>{{ config.strategyCode }}</code>
+                    </div>
+                    <nb-badge
+                      [text]="config.isEnabled ? 'Enabled' : 'Disabled'"
+                      [status]="config.isEnabled ? 'success' : 'basic'">
+                    </nb-badge>
+                  </div>
+
+                  <div class="strategy-details">
+                    <div class="detail-item">
+                      <label>Weight</label>
+                      <span class="value">{{ config.weight | number:'1.1-1' }}</span>
+                    </div>
+
+                    <div class="detail-item full-width" *ngIf="parseParameters(config.parametersOverride).length > 0">
+                      <label>Parameters</label>
+                      <div class="params-grid">
+                        <div class="param-item" *ngFor="let param of parseParameters(config.parametersOverride)">
+                          <span class="param-key">{{ param.key }}</span>
+                          <span class="param-value">{{ param.value }}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="detail-item full-width" *ngIf="parseParameters(config.parametersOverride).length === 0">
+                      <label>Parameters</label>
+                      <span class="value muted">No custom parameters (using defaults)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+        </nb-accordion>
+
+        <div class="empty-state" *ngIf="totalStrategies() === 0">
+          <nb-icon icon="layers-outline" class="empty-icon"></nb-icon>
+          <p>No strategies configured yet</p>
+          <button nbButton status="primary" (click)="navigateToEdit()">
+            <nb-icon icon="plus-outline"></nb-icon>
+            Add Strategies
+          </button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <!-- Scoring Rules -->
+    <nb-card class="scoring-rules-card" *ngIf="scoringRules()">
+      <nb-card-header>
+        <h6>
+          <nb-icon icon="settings-2-outline"></nb-icon>
+          Scoring Rules
+        </h6>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="scoring-sections">
+          <!-- Timeframe Weights -->
+          <div class="scoring-section">
+            <h6>Timeframe Weights</h6>
+            <div class="weight-bars">
+              <div class="weight-bar">
+                <label>4H Weight</label>
+                <div class="bar-container">
+                  <div class="bar" [style.width.%]="scoringRules()!.weight4h * 100" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                  <span class="bar-value">{{ scoringRules()!.weight4h | number:'1.2-2' }}</span>
+                </div>
+              </div>
+
+              <div class="weight-bar">
+                <label>1H Weight</label>
+                <div class="bar-container">
+                  <div class="bar" [style.width.%]="scoringRules()!.weight1h * 100" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                  <span class="bar-value">{{ scoringRules()!.weight1h | number:'1.2-2' }}</span>
+                </div>
+              </div>
+
+              <div class="weight-bar">
+                <label>30M Weight</label>
+                <div class="bar-container">
+                  <div class="bar" [style.width.%]="scoringRules()!.weight30m * 100" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                  <span class="bar-value">{{ scoringRules()!.weight30m | number:'1.2-2' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Score Thresholds -->
+          <div class="scoring-section">
+            <h6>Score Thresholds</h6>
+            <div class="threshold-grid">
+              <div class="threshold-item">
+                <label>Min Score 4H</label>
+                <span class="value">{{ scoringRules()!.minScore4h }}</span>
+              </div>
+              <div class="threshold-item">
+                <label>Min Score 1H</label>
+                <span class="value">{{ scoringRules()!.minScore1h }}</span>
+              </div>
+              <div class="threshold-item">
+                <label>Min Score 30M</label>
+                <span class="value">{{ scoringRules()!.minScore30m }}</span>
+              </div>
+              <div class="threshold-item">
+                <label>Min Aggregated Score</label>
+                <span class="value highlight">{{ scoringRules()!.minAggregatedScore }}</span>
+              </div>
+              <div class="threshold-item">
+                <label>Min Confidence</label>
+                <span class="value">{{ scoringRules()!.minConfidence | number:'1.2-2' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Validation Rules -->
+          <div class="scoring-section">
+            <h6>Validation Rules</h6>
+            <div class="validation-list">
+              <div class="validation-item" [class.enabled]="scoringRules()!.require4hAlignment">
+                <nb-icon [icon]="scoringRules()!.require4hAlignment ? 'checkmark-circle-outline' : 'close-circle-outline'"></nb-icon>
+                <span>Require 4H Alignment</span>
+              </div>
+              <div class="validation-item" [class.enabled]="scoringRules()!.requireVolumeConfirmation">
+                <nb-icon [icon]="scoringRules()!.requireVolumeConfirmation ? 'checkmark-circle-outline' : 'close-circle-outline'"></nb-icon>
+                <span>Require Volume Confirmation</span>
+              </div>
+              <div class="validation-item">
+                <label>Max Volatility Threshold</label>
+                <span class="value">{{ scoringRules()!.maxVolatilityThreshold || 'N/A' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

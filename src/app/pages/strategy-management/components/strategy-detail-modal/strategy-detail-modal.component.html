@@ -1,0 +1,112 @@
+<nb-card class="strategy-detail-modal">
+
+  <!-- Header -->
+  <nb-card-header>
+    <div class="modal-header">
+      <h5>Strategy Details</h5>
+      <button (click)="close()" ghost nbButton size="small" status="basic">
+        <nb-icon icon="close-outline"></nb-icon>
+      </button>
+    </div>
+  </nb-card-header>
+
+  <!-- Body -->
+  <nb-card-body>
+
+    <!-- Loading -->
+    <div *ngIf="loading()" class="loading-state">
+      <nb-spinner size="large"></nb-spinner>
+      <p>Loading strategy details...</p>
+    </div>
+
+    <!-- Error -->
+    <nb-alert *ngIf="error() && !loading()" status="danger">
+      {{ error() }}
+    </nb-alert>
+
+    <!-- Content -->
+    <div *ngIf="strategy() && !loading()" class="modal-content">
+
+      <!-- Basic Info -->
+      <div class="info-section">
+        <h6>Basic Information</h6>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Name:</span>
+            <span class="value">{{ strategy()!.name }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Code:</span>
+            <code class="value">{{ strategy()!.code }}</code>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Type:</span>
+            <app-strategy-type-badge [type]="strategy()!.type"></app-strategy-type-badge>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Status:</span>
+            <nb-badge
+              [status]="strategy()!.isActive ? 'success' : 'basic'"
+              [text]="strategy()!.isActive ? 'Active' : 'Inactive'">
+            </nb-badge>
+          </div>
+
+          <div *ngIf="strategy()!.description" class="info-item full-width">
+            <span class="label">Description:</span>
+            <span class="value">{{ strategy()!.description }}</span>
+          </div>
+
+          <div class="info-item full-width">
+            <span class="label">Implementation Class:</span>
+            <code class="value implementation-class">{{ strategy()!.implementationClass }}</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parameters -->
+      <div class="info-section">
+        <h6>Default Parameters</h6>
+
+        <div *ngIf="strategy()!.defaultParameters" class="json-viewer">
+          <pre><code>{{ formatJson(strategy()!.defaultParameters) }}</code></pre>
+        </div>
+
+        <p *ngIf="!strategy()!.defaultParameters" class="no-data">
+          No default parameters configured
+        </p>
+      </div>
+
+      <!-- Metadata -->
+      <div class="info-section">
+        <h6>Metadata</h6>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Created:</span>
+            <span class="value">{{ strategy()!.createdAt | date:'medium' }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Updated:</span>
+            <span class="value">{{ strategy()!.updatedAt | date:'medium' }}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nb-card-body>
+
+  <!-- Footer -->
+  <nb-card-footer>
+    <div class="modal-footer">
+      <button (click)="close()" nbButton status="basic">
+        Close
+      </button>
+    </div>
+  </nb-card-footer>
+
+</nb-card>
