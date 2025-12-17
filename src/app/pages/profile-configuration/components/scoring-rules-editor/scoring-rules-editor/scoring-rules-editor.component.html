@@ -1,0 +1,126 @@
+<div class="scoring-rules-editor">
+  <form [formGroup]="form">
+    <!-- Multi-timeframe Weights -->
+    <div class="section">
+      <h6>Multi-Timeframe Weights (must sum to 1.0)</h6>
+      <app-weight-slider-group
+        [weights]="{
+          weight4h: form.value.weight4h,
+          weight1h: form.value.weight1h,
+          weight30m: form.value.weight30m
+        }"
+        (weightsChange)="updateWeights($event)">
+      </app-weight-slider-group>
+      <div class="weight-sum-indicator" [class.valid]="isWeightSumValid()">
+        <nb-icon
+          [icon]="isWeightSumValid() ? 'checkmark-circle-outline' : 'alert-circle-outline'"
+          [status]="isWeightSumValid() ? 'success' : 'danger'">
+        </nb-icon>
+        Sum: {{ weightSum() | number:'1.2-2' }} / 1.00
+      </div>
+    </div>
+
+    <!-- Thresholds -->
+    <div class="section">
+      <h6>Score Thresholds</h6>
+
+      <app-threshold-slider
+        label="Min Score 4H"
+        formControlName="minScore4h"
+        [min]="0"
+        [max]="100"
+        [step]="1">
+      </app-threshold-slider>
+
+      <app-threshold-slider
+        label="Min Score 1H"
+        formControlName="minScore1h"
+        [min]="0"
+        [max]="100"
+        [step]="1">
+      </app-threshold-slider>
+
+      <app-threshold-slider
+        label="Min Score 30M"
+        formControlName="minScore30m"
+        [min]="0"
+        [max]="100"
+        [step]="1">
+      </app-threshold-slider>
+
+      <app-threshold-slider
+        label="Min Aggregated Score"
+        formControlName="minAggregatedScore"
+        [min]="0"
+        [max]="100"
+        [step]="1">
+      </app-threshold-slider>
+
+      <app-threshold-slider
+        label="Min Confidence"
+        formControlName="minConfidence"
+        [min]="0"
+        [max]="1"
+        [step]="0.05">
+      </app-threshold-slider>
+    </div>
+
+    <!-- Advanced Options -->
+    <div class="section">
+      <h6>Advanced Options</h6>
+
+      <div class="checkbox-group">
+        <nb-checkbox formControlName="require4hAlignment">
+          Require 4H Alignment
+        </nb-checkbox>
+        <span class="caption">
+          Signals require 4H timeframe to be in same direction
+        </span>
+      </div>
+
+      <div class="checkbox-group">
+        <nb-checkbox formControlName="requireVolumeConfirmation">
+          Require Volume Confirmation
+        </nb-checkbox>
+        <span class="caption">
+          Signals require above-average volume
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label>Max Volatility Threshold</label>
+        <input
+          nbInput
+          type="number"
+          formControlName="maxVolatilityThreshold"
+          placeholder="e.g., 2.0"
+          step="0.1">
+        <span class="caption">
+          Optional: Reject signals if volatility exceeds this threshold
+        </span>
+      </div>
+    </div>
+
+    <!-- Live Preview -->
+    <div class="section">
+      <h6>Live Preview</h6>
+      <app-scoring-preview
+        [rules]="form.value"
+        [mockData]="mockScoreData">
+      </app-scoring-preview>
+    </div>
+
+    <!-- Save Button -->
+    <div class="form-actions">
+      <button
+        nbButton
+        status="primary"
+        size="large"
+        [disabled]="form.invalid || !isWeightSumValid()"
+        (click)="save()">
+        <nb-icon icon="save-outline"></nb-icon>
+        Save Scoring Rules
+      </button>
+    </div>
+  </form>
+</div>

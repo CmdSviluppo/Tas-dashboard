@@ -1,0 +1,149 @@
+@use 'src/styles/variables' as *;
+
+.assigned-strategies-table {
+  .empty-state {
+    text-align: center;
+    padding: $tas-spacing-xl 0;
+
+    .empty-icon {
+      font-size: 4rem;
+      color: $tas-text-muted;
+      margin-bottom: $tas-spacing-md;
+    }
+
+    p {
+      margin: $tas-spacing-xs 0;
+      color: $tas-text-secondary;
+
+      &.hint {
+        font-size: $tas-text-sm;
+        color: $tas-text-muted;
+      }
+    }
+  }
+
+  .table-container {
+    overflow-x: auto;
+    border-radius: $tas-radius-md;
+    border: 1px solid $tas-border-secondary;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: $tas-bg-secondary;
+
+      thead {
+        background: $tas-bg-tertiary;
+
+        th {
+          padding: $tas-spacing-md;
+          text-align: left;
+          color: $tas-text-primary;
+          font-weight: $tas-font-semibold;
+          font-size: $tas-text-sm;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          border-bottom: 2px solid $tas-border-primary;
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid $tas-border-tertiary;
+          transition: background-color 0.2s ease;
+
+          &:hover {
+            background: $tas-bg-hover;
+          }
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          td {
+            padding: $tas-spacing-md;
+            vertical-align: middle;
+
+            .strategy-cell {
+              strong {
+                display: block;
+                color: $tas-text-primary;
+                margin-bottom: $tas-spacing-xs;
+                font-size: $tas-text-base;
+              }
+
+              code {
+                font-size: $tas-text-xs;
+                color: $tas-text-muted;
+                background: $tas-bg-tertiary;
+                padding: 2px 6px;
+                border-radius: $tas-radius-sm;
+                font-family: 'Courier New', monospace;
+              }
+            }
+
+            .weight-value {
+              font-weight: $tas-font-semibold;
+              color: $tas-text-primary;
+              font-size: $tas-text-lg;
+              padding: 4px 8px;
+              border-radius: $tas-radius-sm;
+              display: inline-block;
+
+              &.high {
+                background: rgba(0, 200, 83, 0.1);
+                color: $tas-bullish;
+              }
+
+              &.low {
+                background: rgba(255, 193, 7, 0.1);
+                color: #FFC107;
+              }
+            }
+
+            .status-cell {
+              display: flex;
+              align-items: center;
+
+              nb-icon {
+                font-size: 1.5rem;
+              }
+            }
+
+            .action-buttons {
+              display: flex;
+              gap: $tas-spacing-xs;
+
+              button {
+                transition: transform 0.2s ease;
+
+                &:hover {
+                  transform: scale(1.1);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .assigned-strategies-table {
+    .table-container {
+      table {
+        thead th,
+        tbody td {
+          padding: $tas-spacing-sm;
+          font-size: $tas-text-xs;
+        }
+
+        .strategy-cell strong {
+          font-size: $tas-text-sm;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+<nb-card class="add-strategy-modal">
+  <nb-card-header>
+    <h5>{{ isEditMode ? 'Edit' : 'Add' }} Strategy: {{ strategy.name }}</h5>
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="form">
+      <!-- Timeframe Selection -->
+      <div class="form-group">
+        <label class="label">Timeframe *</label>
+        <nb-radio-group formControlName="timeframe">
+          <nb-radio value="4h">4 Hour</nb-radio>
+          <nb-radio value="1h">1 Hour</nb-radio>
+          <nb-radio value="30m">30 Minutes</nb-radio>
+        </nb-radio-group>
+      </div>
+
+      <!-- Weight Slider -->
+      <div class="form-group">
+        <label class="label">Weight: {{ form.value.weight | number:'1.1-1' }}</label>
+        <input
+          type="range"
+          formControlName="weight"
+          min="0.5"
+          max="2.0"
+          step="0.1"
+          class="weight-slider">
+        <div class="slider-hints">
+          <span>0.5 (Low)</span>
+          <span>1.0 (Normal)</span>
+          <span>2.0 (High)</span>
+        </div>
+        <span class="caption">
+          Controls how much this strategy influences the final score
+        </span>
+      </div>
+
+      <!-- Parameters JSON Editor -->
+      <div class="form-group">
+        <label class="label">Parameters (JSON)</label>
+        <textarea
+          nbInput
+          fullWidth
+          formControlName="parametersJson"
+          placeholder='{ "period": 14, "threshold": 0.5 }'
+          rows="6"
+          class="json-editor">
+        </textarea>
+        <span class="caption">
+          Strategy-specific parameters in JSON format
+        </span>
+        <span class="caption status-danger" *ngIf="form.get('parametersJson')?.hasError('invalidJson')">
+          Invalid JSON format
+        </span>
+      </div>
+
+      <!-- Enabled Toggle -->
+      <div class="form-group">
+        <nb-checkbox formControlName="enabled">
+          Enabled
+        </nb-checkbox>
+        <span class="caption">
+          Uncheck to temporarily disable this strategy without removing it
+        </span>
+      </div>
+    </form>
+  </nb-card-body>
+
+  <nb-card-footer>
+    <button nbButton status="basic" (click)="cancel()">Cancel</button>
+    <button
+      nbButton
+      status="primary"
+      [disabled]="form.invalid"
+      (click)="save()">
+      {{ isEditMode ? 'Update' : 'Add' }} Strategy
+    </button>
+  </nb-card-footer>
+</nb-card>

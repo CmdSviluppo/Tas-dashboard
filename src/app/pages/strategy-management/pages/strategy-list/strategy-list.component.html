@@ -145,42 +145,42 @@
             </nb-icon>
           </th>
           <th>Code</th>
-          <th (click)="onSortChange('type')" class="sortable">
+          <th (click)="onSortChange('type')" class="sortable text-center">
             Type
             <nb-icon
               *ngIf="state.sortBy() === 'type'"
               [icon]="state.sortOrder() === 'asc' ? 'arrow-up' : 'arrow-down'">
             </nb-icon>
           </th>
-          <th (click)="onSortChange('usage')" class="sortable">
+          <th (click)="onSortChange('usage')" class="sortable text-center">
             Usage
             <nb-icon
               *ngIf="state.sortBy() === 'usage'"
               [icon]="state.sortOrder() === 'asc' ? 'arrow-up' : 'arrow-down'">
             </nb-icon>
           </th>
-          <th>Status</th>
-          <th>Actions</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let strategy of state.filteredStrategies()">
           <td>{{ strategy.name }}</td>
           <td><code>{{ strategy.code }}</code></td>
-          <td>
+          <td class="text-center">
             <app-strategy-type-badge [type]="strategy.type"></app-strategy-type-badge>
           </td>
-          <td>
+          <td class="text-center">
             <app-strategy-usage-indicator [strategyId]="strategy.id" [usageCount]="strategy.usageCount">
             </app-strategy-usage-indicator>
           </td>
-          <td>
+          <td class="text-center">
             <nb-badge
               [status]="strategy.isActive ? 'success' : 'basic'"
               [text]="strategy.isActive ? 'Active' : 'Inactive'">
             </nb-badge>
           </td>
-          <td>
+          <td class="text-center">
             <div class="action-buttons">
               <!-- View Details -->
               <button

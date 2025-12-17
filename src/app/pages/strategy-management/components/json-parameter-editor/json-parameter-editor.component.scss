@@ -1,0 +1,61 @@
+.json-parameter-editor {
+
+  .editor-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--background-basic-color-2);
+    border-radius: 4px 4px 0 0;
+
+    .validation-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      nb-icon {
+        font-size: 1.25rem;
+      }
+
+      .status-text {
+        font-size: 0.875rem;
+        font-weight: 600;
+
+        &.success {
+          color: var(--color-success-500);
+        }
+
+        &.error {
+          color: var(--color-danger-500);
+        }
+      }
+    }
+  }
+
+  .json-editor {
+    width: 100%;
+    padding: 1rem;
+    background: var(--background-basic-color-1);
+    color: var(--text-basic-color);
+    border: 1px solid var(--border-basic-color-3);
+    border-radius: 0 0 4px 4px;
+    font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    resize: vertical;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary-500);
+    }
+
+    &.invalid {
+      border-color: var(--color-danger-500);
+    }
+
+    &::placeholder {
+      color: var(--text-hint-color);
+    }
+  }
+}

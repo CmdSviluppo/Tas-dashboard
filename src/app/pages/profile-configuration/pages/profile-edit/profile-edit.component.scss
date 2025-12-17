@@ -1,0 +1,246 @@
+@use 'src/styles/variables' as *;
+
+.profile-edit-page {
+  padding: $tas-spacing-xl;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  .page-header {
+    margin-bottom: $tas-spacing-xl;
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: $tas-spacing-lg;
+
+      .header-info {
+        display: flex;
+        align-items: center;
+        gap: $tas-spacing-md;
+
+        h1 {
+          margin: 0;
+          color: $tas-text-primary;
+          font-size: $tas-text-2xl;
+          font-weight: $tas-font-bold;
+        }
+
+        code {
+          font-size: $tas-text-sm;
+          color: $tas-text-muted;
+          background: $tas-bg-tertiary;
+          padding: 4px 8px;
+          border-radius: $tas-radius-sm;
+          font-family: 'Courier New', monospace;
+        }
+      }
+    }
+  }
+
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    gap: $tas-spacing-lg;
+
+    p {
+      color: $tas-text-secondary;
+      font-size: $tas-text-base;
+    }
+  }
+
+  .edit-card {
+    background: $tas-bg-secondary;
+    border: 1px solid $tas-border-secondary;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+    nb-card-body {
+      padding: 0;
+
+      ::ng-deep {
+        nb-tabset {
+          .tabset {
+            ul {
+              background: $tas-bg-tertiary;
+              border-bottom: 2px solid $tas-border-primary;
+              padding: 0 $tas-spacing-lg;
+              margin: 0;
+
+              li {
+                a {
+                  color: $tas-text-secondary;
+                  padding: $tas-spacing-lg $tas-spacing-xl;
+                  transition: all 0.3s ease;
+                  font-size: $tas-text-base;
+                  font-weight: $tas-font-medium;
+                  position: relative;
+
+                  nb-icon {
+                    margin-right: $tas-spacing-sm;
+                    font-size: 1.2rem;
+                  }
+
+                  &:hover {
+                    color: $tas-text-primary;
+                    background: rgba($tas-bg-primary, 0.05);
+                  }
+                }
+
+                &.active a {
+                  color: $tas-bg-primary;
+                  background: rgba($tas-bg-primary, 0.1);
+                  border-bottom: 3px solid $tas-bg-primary;
+                }
+              }
+            }
+
+            .tab-content {
+              padding: $tas-spacing-2xl;
+              min-height: 500px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .strategy-assignment-tab,
+  .scoring-rules-tab {
+    .tab-header {
+      margin-bottom: $tas-spacing-xl;
+      padding-bottom: $tas-spacing-lg;
+      border-bottom: 2px solid $tas-border-secondary;
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        gap: $tas-spacing-md;
+        margin-bottom: $tas-spacing-sm;
+
+        h3 {
+          margin: 0;
+          color: $tas-text-primary;
+          font-size: $tas-text-xl;
+          font-weight: $tas-font-semibold;
+        }
+
+        .strategy-count {
+          padding: 4px 12px;
+          background: $tas-bg-tertiary;
+          border: 1px solid $tas-border-tertiary;
+          border-radius: $tas-radius-lg;
+          font-size: $tas-text-sm;
+          color: $tas-text-secondary;
+          font-weight: $tas-font-medium;
+        }
+      }
+
+      .tab-description {
+        margin: 0;
+        color: $tas-text-secondary;
+        font-size: $tas-text-sm;
+        line-height: 1.5;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: $tas-spacing-2xl;
+      padding-top: $tas-spacing-xl;
+      border-top: 2px solid $tas-border-secondary;
+
+      .action-info {
+        display: flex;
+        align-items: center;
+        gap: $tas-spacing-sm;
+        padding: $tas-spacing-sm $tas-spacing-md;
+        background: rgba($tas-score-high, 0.1);
+        border: 1px solid rgba($tas-score-high, 0.3);
+        border-radius: $tas-radius-md;
+        color: $tas-score-high;
+        font-size: $tas-text-sm;
+        font-weight: $tas-font-medium;
+
+        nb-icon {
+          font-size: 1.2rem;
+        }
+      }
+
+      button {
+        min-width: 220px;
+
+        nb-icon {
+          margin-right: $tas-spacing-xs;
+        }
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .profile-edit-page {
+    padding: $tas-spacing-md;
+
+    .page-header {
+      .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $tas-spacing-md;
+
+        .header-info {
+          flex-wrap: wrap;
+
+          h1 {
+            font-size: $tas-text-xl;
+          }
+        }
+      }
+    }
+
+    .edit-card {
+      nb-card-body {
+        ::ng-deep {
+          nb-tabset .tabset {
+            ul li a {
+              padding: $tas-spacing-md;
+              font-size: $tas-text-sm;
+            }
+
+            .tab-content {
+              padding: $tas-spacing-md;
+            }
+          }
+        }
+      }
+    }
+
+    .tab-header {
+      flex-direction: column;
+      gap: $tas-spacing-md;
+
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start !important;
+      }
+    }
+
+    .form-actions {
+      flex-direction: column-reverse;
+      gap: $tas-spacing-md;
+
+      .action-info {
+        width: 100%;
+        justify-content: center;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

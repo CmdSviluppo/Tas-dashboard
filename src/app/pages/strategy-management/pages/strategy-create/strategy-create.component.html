@@ -1,0 +1,170 @@
+<div class="strategy-create-page">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <button
+        (click)="navigateBack()"
+        nbButton
+        size="small"
+        status="basic">
+        <nb-icon icon="arrow-back-outline"></nb-icon>
+        Back to List
+      </button>
+      <h1>Create New Strategy</h1>
+    </div>
+  </div>
+
+  <!-- Form Card -->
+  <nb-card>
+    <nb-card-body>
+      <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+        <!-- Name -->
+        <div class="form-group">
+          <label class="label">Name *</label>
+          <input
+            [status]="getFieldStatus('name')"
+            formControlName="name"
+            fullWidth
+            nbInput
+            placeholder="e.g., RSI Divergence Advanced">
+          <span *ngIf="isFieldInvalid('name')" class="caption status-danger">
+            {{ getFieldError('name') }}
+          </span>
+        </div>
+
+        <!-- Code (auto-generated with manual override) -->
+        <div class="form-group">
+          <label class="label">Code *</label>
+          <div class="code-input-group">
+            <input
+              [status]="getFieldStatus('code')"
+              formControlName="code"
+              fullWidth
+              nbInput
+              placeholder="AUTO_GENERATED">
+            <button
+              (click)="generateCode()"
+              nbButton
+              size="small"
+              status="basic"
+              type="button">
+              <nb-icon icon="sync-outline"></nb-icon>
+              Auto-Generate
+            </button>
+          </div>
+          <span class="caption">
+            Uppercase letters, numbers, and underscores only. Auto-generated from name.
+          </span>
+          <span *ngIf="isFieldInvalid('code')" class="caption status-danger">
+            {{ getFieldError('code') }}
+          </span>
+        </div>
+
+        <!-- Type -->
+        <div class="form-group">
+          <label class="label">Strategy Type *</label>
+          <nb-select
+            (selectedChange)="onTypeChange($event)"
+            formControlName="type"
+            fullWidth
+            placeholder="Select strategy type">
+            <nb-option *ngFor="let type of strategyTypes" [value]="type">
+              {{ getTypeLabel(type) }}
+            </nb-option>
+          </nb-select>
+          <span *ngIf="isFieldInvalid('type')" class="caption status-danger">
+            Type is required
+          </span>
+        </div>
+
+        <!-- Implementation Class -->
+        <div class="form-group">
+          <label class="label">Implementation Class *</label>
+          <input
+            [status]="getFieldStatus('implementationClass')"
+            formControlName="implementationClass"
+            fullWidth
+            nbInput
+            placeholder="com.doc.tas.strategy.impl.momentum.RsiStrategy">
+          <span class="caption">
+            Fully qualified Java class name that implements this strategy
+          </span>
+          <span *ngIf="isFieldInvalid('implementationClass')" class="caption status-danger">
+            {{ getFieldError('implementationClass') }}
+          </span>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label class="label">Description</label>
+          <textarea
+            formControlName="description"
+            fullWidth
+            nbInput
+            placeholder="Detailed strategy description..."
+            rows="4">
+          </textarea>
+          <span class="caption">
+            Optional: Explain how this strategy works and what it detects
+          </span>
+        </div>
+
+        <!-- Parameter Template Selector -->
+        <div *ngIf="form.value.type" class="form-group">
+          <label class="label">Load Parameter Template</label>
+          <app-parameter-template-selector
+            (templateLoaded)="onTemplateLoaded($event)"
+            [strategyType]="form.value.type">
+          </app-parameter-template-selector>
+        </div>
+
+        <!-- JSON Parameter Editor -->
+        <div class="form-group">
+          <label class="label">Default Parameters (JSON)</label>
+          <app-json-parameter-editor
+            (validChange)="onParametersValidChange($event)"
+            (valueChange)="onParametersChange($event)"
+            [isValid]="parametersValid()"
+            [value]="form.value.defaultParameters">
+          </app-json-parameter-editor>
+          <span class="caption">
+            Strategy-specific parameters in JSON format. Will be used as defaults for new profile assignments.
+          </span>
+        </div>
+
+        <!-- Active Toggle -->
+        <div class="form-group">
+          <nb-checkbox formControlName="isActive">
+            Active Strategy
+          </nb-checkbox>
+          <span class="caption checkbox-caption">
+            Active strategies can be assigned to profiles. Inactive strategies are hidden.
+          </span>
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+          <button
+            (click)="navigateBack()"
+            nbButton
+            status="basic"
+            type="button">
+            Cancel
+          </button>
+          <button
+            [disabled]="form.invalid || !parametersValid() || submitting()"
+            nbButton
+            status="primary"
+            type="submit">
+            <nb-spinner *ngIf="submitting()" size="tiny" status="control"></nb-spinner>
+            {{ submitting() ? 'Creating...' : 'Create Strategy' }}
+          </button>
+        </div>
+
+      </form>
+    </nb-card-body>
+  </nb-card>
+
+</div>

@@ -1,0 +1,66 @@
+<div class="usage-indicator">
+
+  <!-- Badge con popover (se usageCount > 0) -->
+  <nb-badge
+    *ngIf="usageCount > 0"
+    [nbPopover]="popoverContent"
+    [status]="getBadgeStatus()"
+    [text]="usageCount.toString()"
+    class="usage-badge"
+    nbPopoverPlacement="top"
+    nbPopoverTrigger="hover">
+  </nb-badge>
+
+  <!-- Badge senza popover (se usageCount = 0) -->
+  <nb-badge
+    *ngIf="usageCount === 0"
+    class="usage-badge"
+    status="basic"
+    text="0">
+  </nb-badge>
+
+  <!-- Popover Content -->
+  <ng-template #popoverContent>
+    <div class="usage-popover">
+
+      <!-- Loading -->
+      <div *ngIf="loading()" class="popover-loading">
+        <nb-spinner size="small"></nb-spinner>
+        <span>Loading usage...</span>
+      </div>
+
+      <!-- Error -->
+      <div *ngIf="error() && !loading()" class="popover-error">
+        <nb-icon icon="alert-circle-outline" status="danger"></nb-icon>
+        <span>Failed to load usage</span>
+      </div>
+
+      <!-- Success -->
+      <div *ngIf="usage() && !loading() && !error()" class="popover-content">
+        <div class="popover-header">
+          <strong>Used by {{ usage()!.totalUsageCount }} profile(s)</strong>
+        </div>
+
+        <nb-list *ngIf="usage()!.usedByProfiles.length > 0">
+          <nb-list-item *ngFor="let profile of usage()!.usedByProfiles">
+            <div class="profile-item">
+              <div class="profile-info">
+                <span class="profile-name">{{ profile.profileName }}</span>
+                <code class="profile-code">{{ profile.profileCode }}</code>
+              </div>
+              <div class="profile-meta">
+                <span class="timeframe">{{ profile.timeframe }}</span>
+                <nb-badge
+                  [status]="profile.isEnabled ? 'success' : 'basic'"
+                  [text]="profile.isEnabled ? 'Active' : 'Inactive'">
+                </nb-badge>
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+      </div>
+
+    </div>
+  </ng-template>
+
+</div>

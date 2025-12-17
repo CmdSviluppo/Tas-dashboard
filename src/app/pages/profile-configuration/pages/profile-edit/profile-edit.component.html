@@ -1,0 +1,128 @@
+<div class="profile-edit-page">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <button nbButton status="basic" size="small" (click)="navigateBack()">
+        <nb-icon icon="arrow-back-outline"></nb-icon>
+        Back to List
+      </button>
+      <div class="header-info">
+        <h1>{{ profile()?.name || 'Loading...' }}</h1>
+        <code *ngIf="profile()">{{ profile()!.code }}</code>
+        <nb-badge
+          *ngIf="profile()"
+          [text]="profile()!.active ? 'Active' : 'Inactive'"
+          [status]="profile()!.active ? 'success' : 'basic'">
+        </nb-badge>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="loading()">
+    <nb-spinner size="giant" status="primary"></nb-spinner>
+    <p>Loading profile configuration...</p>
+  </div>
+
+  <!-- Edit Form (Tabs) - CORRECTED VERSION -->
+  <nb-card *ngIf="!loading() && profile()" class="edit-card">
+    <nb-card-body>
+      <nb-tabset (changeTab)="onTabChange($event)">
+
+        <!-- TAB 1: STRATEGY ASSIGNMENT -->
+        <nb-tab
+          tabTitle="Strategy Assignment"
+          tabIcon="layers-outline"
+          [badgeText]="strategiesChanged() ? '●' : ''"
+          [badgeStatus]="strategiesChanged() ? 'warning' : 'basic'"
+          [badgePosition]="'top right'">
+
+          <div class="strategy-assignment-tab">
+            <div class="tab-header">
+              <div class="header-content">
+                <h3>Assigned Strategies</h3>
+                <span class="strategy-count">
+                  {{ assignedStrategies().length }} strateg{{ assignedStrategies().length !== 1 ? 'ies' : 'y' }}
+                </span>
+              </div>
+              <button
+                nbButton
+                status="primary"
+                (click)="openAddStrategyModal()">
+                <nb-icon icon="plus-outline"></nb-icon>
+                Add Strategy
+              </button>
+            </div>
+
+            <app-assigned-strategies-table
+              [strategies]="assignedStrategies()"
+              (onEdit)="openEditStrategyModal($event)"
+              (onDelete)="deleteStrategy($event)">
+            </app-assigned-strategies-table>
+
+            <!-- Save Button -->
+            <div class="form-actions">
+              <div class="action-info" *ngIf="strategiesChanged()">
+                <nb-icon icon="alert-circle-outline" status="warning"></nb-icon>
+                <span>You have unsaved changes</span>
+              </div>
+              <button
+                nbButton
+                status="primary"
+                size="large"
+                [disabled]="!strategiesChanged() || savingStrategies()"
+                (click)="saveStrategies()">
+                <nb-spinner *ngIf="savingStrategies()" size="tiny" status="control"></nb-spinner>
+                <nb-icon *ngIf="!savingStrategies()" icon="save-outline"></nb-icon>
+                {{ savingStrategies() ? 'Saving...' : 'Save All Strategies' }}
+              </button>
+            </div>
+          </div>
+        </nb-tab>
+
+        <!-- TAB 2: SCORING RULES -->
+        <nb-tab
+          tabTitle="Scoring Rules"
+          tabIcon="options-2-outline"
+          [badgeText]="scoringRulesChanged() ? '●' : ''"
+          [badgeStatus]="scoringRulesChanged() ? 'warning' : 'basic'"
+          [badgePosition]="'top right'">
+
+          <div class="scoring-rules-tab">
+            <div class="tab-header">
+              <h3>Scoring & Aggregation Rules</h3>
+              <p class="tab-description">
+                Configure how strategies are weighted and aggregated to generate trading signals
+              </p>
+            </div>
+
+            <app-scoring-rules-form
+              *ngIf="scoringRules()"
+              [scoringRules]="scoringRules()!"
+              (rulesChange)="onScoringRulesChange($event)">
+            </app-scoring-rules-form>
+
+            <!-- Save Button -->
+            <div class="form-actions">
+              <div class="action-info" *ngIf="scoringRulesChanged()">
+                <nb-icon icon="alert-circle-outline" status="warning"></nb-icon>
+                <span>You have unsaved changes</span>
+              </div>
+              <button
+                nbButton
+                status="primary"
+                size="large"
+                [disabled]="!scoringRulesChanged() || !scoringRulesValid() || savingRules()"
+                (click)="saveScoringRules()">
+                <nb-spinner *ngIf="savingRules()" size="tiny" status="control"></nb-spinner>
+                <nb-icon *ngIf="!savingRules()" icon="save-outline"></nb-icon>
+                {{ savingRules() ? 'Saving...' : 'Save Scoring Rules' }}
+              </button>
+            </div>
+          </div>
+        </nb-tab>
+
+      </nb-tabset>
+    </nb-card-body>
+  </nb-card>
+</div>

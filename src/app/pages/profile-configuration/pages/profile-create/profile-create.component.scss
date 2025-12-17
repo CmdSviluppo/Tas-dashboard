@@ -1,0 +1,55 @@
+.profile-create-page {
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .page-header {
+    margin-bottom: 1.5rem;
+
+    h1 {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 600;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    .label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-basic-color);
+    }
+
+    .caption {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+      color: var(--text-hint-color);
+
+      &.status-danger {
+        color: var(--color-danger-500);
+      }
+    }
+
+    .code-input-group {
+      display: flex;
+      gap: 0.5rem;
+
+      input {
+        flex: 1;
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-basic-color-4);
+  }
+}

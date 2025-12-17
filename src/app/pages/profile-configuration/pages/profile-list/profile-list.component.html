@@ -1,0 +1,162 @@
+<div class="profile-list-page">
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Profile Management</h1>
+    <button nbButton status="primary" (click)="navigateToCreate()">
+      <nb-icon icon="plus-outline"></nb-icon>
+      Create Profile
+    </button>
+  </div>
+
+  <!-- Filters -->
+  <nb-card>
+    <nb-card-body>
+      <div class="filter-row">
+        <!-- Search -->
+        <div class="filter-group">
+          <label>Search</label>
+          <input
+            nbInput
+            fullWidth
+            placeholder="Search by name or code..."
+            [value]="searchText()"
+            (input)="updateSearch($event)">
+        </div>
+
+        <!-- Regime Filter -->
+        <div class="filter-group">
+          <label>Market Regime</label>
+          <nb-select
+            fullWidth
+            [selected]="selectedRegime()"
+            (selectedChange)="updateRegime($event)">
+            <nb-option value="ALL">All Regimes</nb-option>
+            <nb-option *ngFor="let regime of regimes" [value]="regime">
+              {{ getRegimeLabel(regime) }}
+            </nb-option>
+          </nb-select>
+        </div>
+
+        <!-- Active Only Toggle -->
+        <div class="filter-group">
+          <label>Status</label>
+          <nb-toggle
+            [checked]="showActiveOnly()"
+            (checkedChange)="updateActiveOnly($event)">
+            Active Only
+          </nb-toggle>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    Showing {{ profileCount() }} of {{ totalCount() }} profiles
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="loading()">
+    <nb-spinner size="giant" status="primary"></nb-spinner>
+  </div>
+
+  <!-- Table -->
+  <nb-card *ngIf="!loading()">
+    <nb-card-body>
+      <table class="profile-table">
+        <thead>
+        <tr>
+          <th (click)="updateSort('name')">
+            Name
+            <nb-icon
+              *ngIf="sortBy() === 'name'"
+              [icon]="sortOrder() === 'asc' ? 'arrow-up-outline' : 'arrow-down-outline'">
+            </nb-icon>
+          </th>
+          <th (click)="updateSort('code')">
+            Code
+            <nb-icon
+              *ngIf="sortBy() === 'code'"
+              [icon]="sortOrder() === 'asc' ? 'arrow-up-outline' : 'arrow-down-outline'">
+            </nb-icon>
+          </th>
+          <th>Regime</th>
+          <th (click)="updateSort('strategiesCount')">
+            Strategies
+            <nb-icon
+              *ngIf="sortBy() === 'strategiesCount'"
+              [icon]="sortOrder() === 'asc' ? 'arrow-up-outline' : 'arrow-down-outline'">
+            </nb-icon>
+          </th>
+          <th>Active</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let profile of filteredProfiles(); trackBy: trackById">
+          <td>{{ profile.name }}</td>
+          <td><code>{{ profile.code }}</code></td>
+          <td>
+            <nb-badge
+              *ngIf="profile.marketRegime"
+              [text]="getRegimeLabel(profile.marketRegime)"
+              status="info">
+            </nb-badge>
+            <span *ngIf="!profile.marketRegime" class="text-muted">N/A</span>
+          </td>
+          <td>
+            <nb-badge
+              [text]="(profile.strategiesCount || 0).toString()"
+              status="basic">
+            </nb-badge>
+          </td>
+          <td>
+            <nb-toggle
+              [checked]="profile.active"
+              (checkedChange)="toggleActive(profile, $event)">
+            </nb-toggle>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button
+                nbButton
+                status="info"
+                size="tiny"
+                (click)="navigateToDetail(profile.id)"
+                nbTooltip="View Details">
+                <nb-icon icon="eye-outline"></nb-icon>
+                View
+              </button>
+              <button
+                nbButton
+                status="primary"
+                size="tiny"
+                (click)="navigateToEdit(profile.id)"
+                nbTooltip="Edit Strategies">
+                <nb-icon icon="edit-outline"></nb-icon>
+                Edit
+              </button>
+              <button
+                nbButton
+                status="info"
+                size="tiny"
+                (click)="openCloneModal(profile)">
+                <nb-icon icon="copy-outline"></nb-icon>
+                Clone
+              </button>
+              <button
+                nbButton
+                status="danger"
+                size="tiny"
+                (click)="openDeleteModal(profile)">
+                <nb-icon icon="trash-2-outline"></nb-icon>
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </nb-card-body>
+  </nb-card>
+</div>

@@ -1,0 +1,75 @@
+<div class="assigned-strategies-table">
+  <nb-alert status="info" *ngIf="strategies.length === 0">
+    <div class="empty-state">
+      <nb-icon icon="layers-outline" class="empty-icon"></nb-icon>
+      <p>No strategies assigned yet.</p>
+      <p class="hint">Click "Add Strategy" to get started.</p>
+    </div>
+  </nb-alert>
+
+  <div class="table-container" *ngIf="strategies.length > 0">
+    <table>
+      <thead>
+      <tr>
+        <th>Strategy</th>
+        <th>Timeframe</th>
+        <th>Weight</th>
+        <th>Enabled</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let strategy of strategies; trackBy: trackById">
+        <td>
+          <div class="strategy-cell">
+            <strong>{{ strategy.strategyName }}</strong>
+            <code>{{ strategy.strategyCode }}</code>
+          </div>
+        </td>
+        <td>
+          <nb-badge [text]="strategy.timeframe" status="info"></nb-badge>
+        </td>
+        <td>
+            <span class="weight-value" [class.high]="strategy.weight >= 1.5" [class.low]="strategy.weight < 0.8">
+              {{ strategy.weight | number:'1.1-1' }}
+            </span>
+        </td>
+        <td>
+          <div class="status-cell">
+            <nb-icon
+              *ngIf="strategy.isEnabled"
+              icon="checkmark-circle-outline"
+              status="success">
+            </nb-icon>
+            <nb-icon
+              *ngIf="!strategy.isEnabled"
+              icon="close-circle-outline"
+              status="basic">
+            </nb-icon>
+          </div>
+        </td>
+        <td>
+          <div class="action-buttons">
+            <button
+              nbButton
+              status="primary"
+              size="tiny"
+              nbTooltip="Edit strategy configuration"
+              (click)="onEdit.emit(strategy)">
+              <nb-icon icon="edit-outline"></nb-icon>
+            </button>
+            <button
+              nbButton
+              status="danger"
+              size="tiny"
+              nbTooltip="Remove strategy"
+              (click)="onDelete.emit(strategy)">
+              <nb-icon icon="trash-2-outline"></nb-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

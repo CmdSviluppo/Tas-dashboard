@@ -1,0 +1,122 @@
+.scoring-rules-form {
+  .form-section {
+    margin-bottom: $tas-spacing-2xl;
+    padding-bottom: $tas-spacing-xl;
+    border-bottom: 1px solid $tas-border-secondary;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    h4 {
+      margin: 0 0 $tas-spacing-sm 0;
+      color: $tas-text-primary;
+      font-size: $tas-font-size-xl;
+      display: flex;
+      align-items: center;
+      gap: $tas-spacing-md;
+    }
+
+    .section-description {
+      margin: 0 0 $tas-spacing-lg 0;
+      color: $tas-text-secondary;
+      font-size: $tas-font-size-sm;
+      line-height: 1.5;
+    }
+  }
+
+  .form-group {
+    margin-bottom: $tas-spacing-lg;
+
+    .label {
+      display: block;
+      margin-bottom: $tas-spacing-xs;
+      color: $tas-text-primary;
+      font-size: $tas-font-size-md;
+      font-weight: $tas-font-weight-medium;
+    }
+
+    .caption {
+      display: block;
+      margin-top: $tas-spacing-xs;
+      font-size: $tas-font-size-xs;
+      color: $tas-text-secondary;
+      font-style: italic;
+    }
+
+    .score-slider,
+    .confidence-slider {
+      width: 100%;
+      margin: $tas-spacing-sm 0;
+      height: 6px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: $tas-bg-tertiary;
+      border-radius: $tas-radius-sm;
+      outline: none;
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        background: $tas-accent;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: all 0.2s;
+
+        &:hover {
+          background: $tas-accent-light;
+          transform: scale(1.2);
+        }
+      }
+
+      &::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        background: $tas-accent;
+        cursor: pointer;
+        border-radius: 50%;
+        border: none;
+        transition: all 0.2s;
+
+        &:hover {
+          background: $tas-accent-light;
+          transform: scale(1.2);
+        }
+      }
+
+      &.aggregated {
+        height: 8px;
+
+        &::-webkit-slider-thumb {
+          width: 22px;
+          height: 22px;
+          background: $tas-primary;
+        }
+
+        &::-moz-range-thumb {
+          width: 22px;
+          height: 22px;
+          background: $tas-primary;
+        }
+      }
+    }
+
+    .score-legend {
+      display: flex;
+      justify-content: space-between;
+      font-size: $tas-font-size-xs;
+      color: $tas-text-secondary;
+      margin-top: $tas-spacing-xs;
+    }
+  }
+
+  .advanced-section {
+    margin-top: $tas-spacing-lg;
+    padding: $tas-spacing-lg;
+    background: $tas-bg-tertiary;
+    border-radius: $tas-radius-md;
+    border-left: 4px solid $tas-primary;
+  }
+}

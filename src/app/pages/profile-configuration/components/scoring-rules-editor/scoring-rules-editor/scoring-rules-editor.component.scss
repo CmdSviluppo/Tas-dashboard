@@ -1,0 +1,78 @@
+.scoring-rules-editor {
+  .section {
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-basic-color-4);
+    border-radius: 0.5rem;
+
+    h6 {
+      margin: 0 0 1.5rem 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-primary-500);
+    }
+
+    .weight-sum-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+      border-radius: 0.25rem;
+      font-weight: 600;
+
+      &.valid {
+        background: rgba(0, 255, 0, 0.1);
+        border-color: rgba(0, 255, 0, 0.3);
+        color: var(--color-success-500);
+      }
+
+      nb-icon {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .checkbox-group {
+    margin-bottom: 1rem;
+
+    nb-checkbox {
+      margin-bottom: 0.25rem;
+    }
+
+    .caption {
+      display: block;
+      margin-left: 1.75rem;
+      font-size: 0.75rem;
+      color: var(--text-hint-color);
+    }
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-basic-color);
+    }
+
+    .caption {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+      color: var(--text-hint-color);
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-basic-color-4);
+  }
+}

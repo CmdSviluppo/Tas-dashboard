@@ -1,0 +1,53 @@
+<div class="json-parameter-editor">
+
+  <!-- Toolbar -->
+  <div class="editor-toolbar">
+    <button
+      (click)="prettify()"
+      [disabled]="!canPrettify()"
+      nbButton
+      size="tiny"
+      status="basic"
+      type="button">
+      <nb-icon icon="code-outline"></nb-icon>
+      Format JSON
+    </button>
+
+    <div class="validation-status">
+      <nb-icon
+        *ngIf="isValid && !errorMessage"
+        icon="checkmark-circle-outline"
+        status="success">
+      </nb-icon>
+      <span *ngIf="isValid && !errorMessage" class="status-text success">
+        Valid JSON
+      </span>
+
+      <nb-icon
+        *ngIf="!isValid || errorMessage"
+        icon="alert-circle-outline"
+        status="danger">
+      </nb-icon>
+      <span *ngIf="!isValid || errorMessage" class="status-text error">
+        {{ errorMessage || 'Invalid JSON' }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Editor -->
+  <textarea
+    (input)="onJsonChange()"
+    [(ngModel)]="jsonText"
+    [class.invalid]="!isValid || errorMessage"
+    class="json-editor"
+    placeholder='Example:
+{
+  "period": 14,
+  "overbought": 70,
+  "oversold": 30
+}'
+    rows="15"
+    spellcheck="false">
+  </textarea>
+
+</div>

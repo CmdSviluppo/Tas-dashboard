@@ -1,0 +1,162 @@
+<div class="scoring-rules-form">
+  <form [formGroup]="form">
+    <!-- Section 1: Timeframe Weights -->
+    <div class="form-section">
+      <h4>Timeframe Weights</h4>
+      <p class="section-description">
+        Configure the relative importance of each timeframe in the final aggregated score.
+        Total must equal 100%.
+      </p>
+
+      <app-timeframe-weight-sliders
+        [weight4h]="form.value.weight4h!"
+        [weight1h]="form.value.weight1h!"
+        [weight30m]="form.value.weight30m!"
+        (weightsChange)="onWeightsChange($event)">
+      </app-timeframe-weight-sliders>
+    </div>
+
+    <!-- Section 2: Minimum Scores -->
+    <div class="form-section">
+      <h4>Minimum Scores</h4>
+      <p class="section-description">
+        Set minimum score thresholds for each timeframe and aggregated score.
+      </p>
+
+      <!-- Min Score 4h -->
+      <div class="form-group">
+        <label class="label">
+          Min Score 4h: {{ form.value.minScore4h }}
+        </label>
+        <input
+          type="range"
+          formControlName="minScore4h"
+          min="-100"
+          max="100"
+          step="5"
+          class="score-slider">
+        <div class="score-legend">
+          <span>-100 (Very Bearish)</span>
+          <span>0 (Neutral)</span>
+          <span>+100 (Very Bullish)</span>
+        </div>
+      </div>
+
+      <!-- Min Score 1h -->
+      <div class="form-group">
+        <label class="label">
+          Min Score 1h: {{ form.value.minScore1h }}
+        </label>
+        <input
+          type="range"
+          formControlName="minScore1h"
+          min="-100"
+          max="100"
+          step="5"
+          class="score-slider">
+      </div>
+
+      <!-- Min Score 30m -->
+      <div class="form-group">
+        <label class="label">
+          Min Score 30m: {{ form.value.minScore30m }}
+        </label>
+        <input
+          type="range"
+          formControlName="minScore30m"
+          min="-100"
+          max="100"
+          step="5"
+          class="score-slider">
+      </div>
+
+      <!-- Min Aggregated Score -->
+      <div class="form-group">
+        <label class="label">
+          Min Aggregated Score: {{ form.value.minAggregatedScore }}
+        </label>
+        <input
+          type="range"
+          formControlName="minAggregatedScore"
+          min="-100"
+          max="100"
+          step="5"
+          class="score-slider aggregated">
+        <span class="caption">
+          Final threshold for signal generation. Must exceed this to create signal.
+        </span>
+      </div>
+
+      <!-- Min Confidence -->
+      <div class="form-group">
+        <label class="label">
+          Min Confidence: {{ form.value.minConfidence | number:'1.2-2' }}
+        </label>
+        <input
+          type="range"
+          formControlName="minConfidence"
+          min="0"
+          max="1"
+          step="0.05"
+          class="confidence-slider">
+        <div class="score-legend">
+          <span>0.0 (Low)</span>
+          <span>0.5 (Medium)</span>
+          <span>1.0 (High)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Advanced Rules -->
+    <div class="form-section">
+      <h4>
+        Advanced Rules
+        <button
+          nbButton
+          status="basic"
+          size="tiny"
+          type="button"
+          (click)="toggleAdvanced()">
+          {{ showAdvanced() ? 'Hide' : 'Show' }}
+        </button>
+      </h4>
+
+      <div *ngIf="showAdvanced()" class="advanced-section">
+        <!-- Require 4h Alignment -->
+        <div class="form-group">
+          <nb-checkbox formControlName="require4hAlignment">
+            Require 4h Alignment
+          </nb-checkbox>
+          <span class="caption">
+            All timeframes must agree on direction (bullish or bearish)
+          </span>
+        </div>
+
+        <!-- Require Volume Confirmation -->
+        <div class="form-group">
+          <nb-checkbox formControlName="requireVolumeConfirmation">
+            Require Volume Confirmation
+          </nb-checkbox>
+          <span class="caption">
+            At least one VOLUME strategy must be positive
+          </span>
+        </div>
+
+        <!-- Max Volatility Threshold -->
+        <div class="form-group">
+          <label class="label">Max Volatility Threshold (optional)</label>
+          <input
+            nbInput
+            fullWidth
+            type="number"
+            formControlName="maxVolatilityThreshold"
+            placeholder="e.g., 0.05"
+            step="0.01">
+          <span class="caption">
+            Maximum allowed ATR% for signal generation. Leave empty for no limit.
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

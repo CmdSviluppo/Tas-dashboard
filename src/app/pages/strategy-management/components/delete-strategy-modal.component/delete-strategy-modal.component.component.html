@@ -1,0 +1,56 @@
+<nb-card class="delete-strategy-modal">
+
+  <nb-card-header>
+    <div class="modal-header">
+      <h5>Delete Strategy</h5>
+      <button (click)="cancel()" ghost nbButton size="small" status="basic">
+        <nb-icon icon="close-outline"></nb-icon>
+      </button>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+
+    <!-- Loading State -->
+    <div *ngIf="loading()" class="loading-state">
+      <nb-spinner size="medium" status="primary"></nb-spinner>
+      <p>Checking strategy usage...</p>
+    </div>
+
+    <!-- Can Delete -->
+    <div *ngIf="!loading() && canDelete()">
+      <nb-alert status="warning">
+        <p><strong>Are you sure you want to delete strategy "{{ strategy.name }}"?</strong></p>
+        <p class="strategy-code">Code: <code>{{ strategy.code }}</code></p>
+        <p>This action cannot be undone.</p>
+      </nb-alert>
+    </div>
+
+    <!-- Cannot Delete (In Use) -->
+    <div *ngIf="!loading() && !canDelete()">
+      <nb-alert status="danger">
+        <p><strong>Cannot delete this strategy!</strong></p>
+        <p>This strategy is currently used by <strong>{{ usageCount() }} profile(s)</strong>.</p>
+        <p>Please remove this strategy from all profiles before deleting.</p>
+      </nb-alert>
+    </div>
+
+  </nb-card-body>
+
+  <nb-card-footer>
+    <div class="modal-footer">
+      <button (click)="cancel()" nbButton status="basic">
+        Cancel
+      </button>
+      <button
+        (click)="confirm()"
+        [disabled]="!canDelete()"
+        nbButton
+        status="danger">
+        <nb-icon icon="trash-2-outline"></nb-icon>
+        Delete Strategy
+      </button>
+    </div>
+  </nb-card-footer>
+
+</nb-card>
