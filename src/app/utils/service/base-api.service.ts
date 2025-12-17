@@ -1,8 +1,8 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import {inject, Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 
 @Injectable({
@@ -19,7 +19,7 @@ export abstract class BaseApiService {
     const url = `${this.baseUrl}${endpoint}`;
     const httpParams = this.buildParams(params);
 
-    return this.http.get<T>(url, { params: httpParams }).pipe(
+    return this.http.get<T>(url, {params: httpParams}).pipe(
       catchError(this.handleError)
     );
   }

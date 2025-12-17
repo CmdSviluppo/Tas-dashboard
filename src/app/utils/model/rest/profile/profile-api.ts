@@ -1,16 +1,18 @@
+import {MarketRegime} from '../../enum';
+
 export interface ProfileSummaryDTO {
-  id: string;
+  id: number;
   name: string;
   code: string;
   description: string;
   active: boolean;
-  marketRegime?: string;
+  marketRegime?: MarketRegime;
   strategiesCount: number;
 }
 
 export interface ProfileStrategyConfigDTO {
-  id: string;
-  strategyId: string;
+  id: number;
+  strategyId: number;
   strategyCode: string;
   strategyName: string;
   timeframe: string;
@@ -20,7 +22,7 @@ export interface ProfileStrategyConfigDTO {
 }
 
 export interface ProfileScoringRulesDTO {
-  id: string;
+  id?: string;
   weight4h: number;
   weight1h: number;
   weight30m: number;
@@ -31,16 +33,16 @@ export interface ProfileScoringRulesDTO {
   minConfidence: number;
   require4hAlignment: boolean;
   requireVolumeConfirmation: boolean;
-  maxVolatilityThreshold: number;
+  maxVolatilityThreshold: number | null;
 }
 
 export interface ProfileDTO {
-  id: string;
+  id: number;
   name: string;
   code: string;
   description: string;
   active: boolean;
-  marketRegime?: string;
+  marketRegime?: MarketRegime;
   createdAt: Date;
   updatedAt: Date;
   strategyConfigs: ProfileStrategyConfigDTO[];
@@ -50,17 +52,19 @@ export interface ProfileDTO {
 export interface CreateProfileRequest {
   name: string;
   code: string;
-  description: string;
+  description?: string;
   marketRegime?: string;
   active: boolean;
 }
 
 export interface UpdateStrategiesRequest {
-  strategies: {
-    strategyId: string;
-    timeframe: string;
-    weight: number;
-    parametersOverride?: any;
-    isEnabled: boolean;
-  }[];
+  strategies: UpdateStrategyDto[];
+}
+
+export interface UpdateStrategyDto {
+  strategyId: number;
+  timeframe: string;
+  weight: number;
+  parametersOverride?: any;
+  isEnabled: boolean;
 }

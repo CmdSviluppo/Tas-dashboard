@@ -1,7 +1,7 @@
 <div
-  class="direction-indicator"
+  [class.animated]="animated && shouldAnimate"
   [class]="'size-' + size"
-  [class.animated]="animated && shouldAnimate">
+  class="direction-indicator">
 
   <nb-icon
     [icon]="iconName"

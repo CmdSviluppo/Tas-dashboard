@@ -1,7 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BaseApiService } from './base-api.service';
-import { SymbolSummaryDTO, SymbolConfigDTO, CreateSymbolRequest, AssignProfilesRequest, ActiveProfileDTO } from '../model/rest/symbol/symbol-api';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {BaseApiService} from './base-api.service';
+import {
+  ActiveProfileDTO,
+  AssignProfilesRequest,
+  CreateSymbolRequest,
+  SymbolConfigDTO,
+  SymbolSummaryDTO
+} from '../model/rest/symbol/symbol-api';
 
 
 @Injectable({

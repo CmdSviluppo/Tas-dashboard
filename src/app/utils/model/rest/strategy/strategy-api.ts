@@ -1,4 +1,4 @@
-import { StrategyType } from "../../enum";
+import {StrategyType} from "../../enum";
 
 /**
  * Strategy Entity (completo)
@@ -26,6 +26,7 @@ export interface StrategySummary {
   type: StrategyType;
   isActive: boolean;
   usageCount: number;
+  defaultParameters: any;
 }
 
 /**

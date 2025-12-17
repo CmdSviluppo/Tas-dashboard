@@ -1,8 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BaseApiService } from './base-api.service';
-import { SignalSummaryDTO, SignalDTO, ExecuteSignalRequest, CloseSignalRequest, SignalFilters } from '../model/rest/signal/signal-api';
-import { Page } from '../model/rest/ApiResponse';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {BaseApiService} from './base-api.service';
+import {
+  CloseSignalRequest,
+  ExecuteSignalRequest,
+  SignalDTO,
+  SignalFilters,
+  SignalSummaryDTO
+} from '../model/rest/signal/signal-api';
+import {Page} from '../model/rest/ApiResponse';
 
 
 @Injectable({

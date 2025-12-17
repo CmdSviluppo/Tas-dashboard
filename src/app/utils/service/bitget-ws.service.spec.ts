@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { BitgetWsService } from './bitget-ws.service';
+import {BitgetWsService} from './bitget-ws.service';
 
 describe('BitgetWsService', () => {
   let service: BitgetWsService;

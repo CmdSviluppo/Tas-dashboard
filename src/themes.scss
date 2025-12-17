@@ -4,63 +4,63 @@
 @forward '@nebular/theme/styles/theming';
 
 
-$nb-themes: nb-register-theme(( // HEADER
-      header-background-color: #ffffff,
-      header-text-color: #ffffff,
-      actions-text-color: #ffffff,
-      actions-icon-color: #ffffff,
-      //SIDEBAR
-      sidebar-padding: 0 0 0 0rem,
-      sidebar-scrollbar-width:none,
-      //MENU
-      menu-text-color: #787878,
-      menu-item-icon-color: #787878,
-      menu-item-active-background-color: #0f3250,
-      menu-item-active-text-color:#c62828,
-      menu-item-icon-active-color: #c62828,
-      menu-item-hover-background-color:#0f3250,
-      menu-item-hover-text-color: #ffffff,
-      menu-item-icon-hover-color: #ffffff,
-      menu-submenu-item-active-hover-text-color: #ffffff,
-      menu-submenu-item-active-hover-background-color:#001e53,
-      menu-submenu-item-hover-background-color: #26487d,
-      menu-submenu-item-hover-text-color: #ffffff,
-      menu-submenu-item-hover-icon-color: #ffffff,
-      menu-submenu-item-active-background-color: #abb9ce,
-      menu-item-hover-curso:pointer,
-      menu-item-padding: 0.5rem 1rem, // top/bottom, left/right
-      menu-submenu-padding: none, // padding interno del contenitore submenu
-      button-outline-color: #ffffff,
-
-      button-filled-primary-background-color: #0f3250,
-      button-filled-primary-border-color: #0f3250,
-      //CARD
-      card-header-text-font-size: 1.5rem,
-      //SPINNER
-      spinner-height-giant: 5rem,
-      //LAYOUT-COLUMN
-      layout-padding:0 0 0 0rem,
-      // POPPOVER
-      popover-border-width: 1px,
-      popover-border-color:#8f9bb3,
-      popover-background-color:#edf1f7,
-
-      //SELECT MINI
-      select-small-max-width:6rem,
-      card-header-primary-background-color:blue,
-      //INPUT GROUP
-      input-basic-background-color: #ffffff,
-      input-basic-disabled-background-color:rgb(238, 238, 238),
-
-      //CARD
-      card-border-radius: 0.3rem,
-      card-header-text-color:white,
-      //INPUT
-      //CHECKBOX :
-      checkbox-basic-checked-checkmark-color:green,
-      checkbox-basic-checked-background-color:white,
-      checkbox-basic-checked-border-color:white,
-      //ACCORDION
-      accordion-border-radius: 0.3rem,
-
-    ), corporate, corporate);
+//$nb-themes: nb-register-theme(( // HEADER
+//      header-background-color: #ffffff,
+//      header-text-color: #ffffff,
+//      actions-text-color: #ffffff,
+//      actions-icon-color: #ffffff,
+//      //SIDEBAR
+//      sidebar-padding: 0 0 0 0rem,
+//      sidebar-scrollbar-width:none,
+//      //MENU
+//      menu-text-color: #787878,
+//      menu-item-icon-color: #787878,
+//      menu-item-active-background-color: #0f3250,
+//      menu-item-active-text-color:#c62828,
+//      menu-item-icon-active-color: #c62828,
+//      menu-item-hover-background-color:#0f3250,
+//      menu-item-hover-text-color: #ffffff,
+//      menu-item-icon-hover-color: #ffffff,
+//      menu-submenu-item-active-hover-text-color: #ffffff,
+//      menu-submenu-item-active-hover-background-color:#001e53,
+//      menu-submenu-item-hover-background-color: #26487d,
+//      menu-submenu-item-hover-text-color: #ffffff,
+//      menu-submenu-item-hover-icon-color: #ffffff,
+//      menu-submenu-item-active-background-color: #abb9ce,
+//      menu-item-hover-curso:pointer,
+//      menu-item-padding: 0.5rem 1rem, // top/bottom, left/right
+//      menu-submenu-padding: none, // padding interno del contenitore submenu
+//      button-outline-color: #ffffff,
+//
+//      button-filled-primary-background-color: #0f3250,
+//      button-filled-primary-border-color: #0f3250,
+//      //CARD
+//      card-header-text-font-size: 1.5rem,
+//      //SPINNER
+//      spinner-height-giant: 5rem,
+//      //LAYOUT-COLUMN
+//      layout-padding:0 0 0 0rem,
+//      // POPPOVER
+//      popover-border-width: 1px,
+//      popover-border-color:#8f9bb3,
+//      popover-background-color:#edf1f7,
+//
+//      //SELECT MINI
+//      select-small-max-width:6rem,
+//      card-header-primary-background-color:blue,
+//      //INPUT GROUP
+//      input-basic-background-color: #ffffff,
+//      input-basic-disabled-background-color:rgb(238, 238, 238),
+//
+//      //CARD
+//      card-border-radius: 0.3rem,
+//      card-header-text-color:white,
+//      //INPUT
+//      //CHECKBOX :
+//      checkbox-basic-checked-checkmark-color:green,
+//      checkbox-basic-checked-background-color:white,
+//      checkbox-basic-checked-border-color:white,
+//      //ACCORDION
+//      accordion-border-radius: 0.3rem,
+//
+//    ), corporate, corporate);

@@ -1,7 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BaseApiService } from './base-api.service';
-import { ProfileSummaryDTO, ProfileDTO, CreateProfileRequest, UpdateStrategiesRequest, ProfileStrategyConfigDTO, ProfileScoringRulesDTO } from '../model/rest/profile/profile-api';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {BaseApiService} from './base-api.service';
+import {
+  CreateProfileRequest,
+  ProfileDTO,
+  ProfileScoringRulesDTO,
+  ProfileStrategyConfigDTO,
+  ProfileSummaryDTO,
+  UpdateStrategiesRequest
+} from '../model/rest/profile/profile-api';
 
 
 @Injectable({
@@ -19,7 +26,7 @@ export class ProfileApiService extends BaseApiService {
   /**
    * GET /api/profiles/{id}
    */
-  getById(id: string): Observable<ProfileDTO> {
+  getById(id: number): Observable<ProfileDTO> {
     return this.get<ProfileDTO>(`/profiles/${id}`);
   }
 
@@ -33,42 +40,42 @@ export class ProfileApiService extends BaseApiService {
   /**
    * PUT /api/profiles/{id}
    */
-  update(id: string, request: CreateProfileRequest): Observable<ProfileDTO> {
+  update(id: number, request: CreateProfileRequest): Observable<ProfileDTO> {
     return this.put<ProfileDTO>(`/profiles/${id}`, request);
   }
 
   /**
    * PUT /api/profiles/{id}/strategies
    */
-  updateStrategies(id: string, request: UpdateStrategiesRequest): Observable<ProfileStrategyConfigDTO[]> {
+  updateStrategies(id: number, request: UpdateStrategiesRequest): Observable<ProfileStrategyConfigDTO[]> {
     return this.put<ProfileStrategyConfigDTO[]>(`/profiles/${id}/strategies`, request);
   }
 
   /**
    * PUT /api/profiles/{id}/scoring-rules
    */
-  updateScoringRules(id: string, rules: ProfileScoringRulesDTO): Observable<ProfileScoringRulesDTO> {
+  updateScoringRules(id: number, rules: ProfileScoringRulesDTO): Observable<ProfileScoringRulesDTO> {
     return this.put<ProfileScoringRulesDTO>(`/profiles/${id}/scoring-rules`, rules);
   }
 
   /**
    * PATCH /api/profiles/{id}/activate
    */
-  activate(id: string): Observable<ProfileDTO> {
+  activate(id: number): Observable<ProfileDTO> {
     return this.patch<ProfileDTO>(`/profiles/${id}/activate`);
   }
 
   /**
    * PATCH /api/profiles/{id}/deactivate
    */
-  deactivate(id: string): Observable<ProfileDTO> {
+  deactivate(id: number): Observable<ProfileDTO> {
     return this.patch<ProfileDTO>(`/profiles/${id}/deactivate`);
   }
 
   /**
    * DELETE /api/profiles/{id}
    */
-  deleteProfile(id: string): Observable<void> {
+  deleteProfile(id: number): Observable<void> {
     return this.delete<void>(`/profiles/${id}`);
   }
 }

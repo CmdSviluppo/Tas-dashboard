@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StrategyListComponent } from './strategy-list.component';
+import {StrategyListComponent} from './strategy-list.component';
 
 describe('StrategyListComponent', () => {
   let component: StrategyListComponent;
@@ -10,7 +10,7 @@ describe('StrategyListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [StrategyListComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(StrategyListComponent);
     component = fixture.componentInstance;

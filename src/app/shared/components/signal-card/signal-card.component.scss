@@ -1,4 +1,4 @@
-@use 'src/styles/variables' as *;
+@use '../../../../styles/variables' as *;
 
 nb-card {
   margin-bottom: 1rem;
@@ -81,14 +81,14 @@ nb-card {
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
-  color: $text-primary;
+  color: $tas-text-primary;
   font-weight: 600;
   font-size: 0.875rem;
 
-  nb-icon {
-    font-size: 1.125rem;
-    color: $primary;
-  }
+  // nb-icon {
+  //   font-size: 1.125rem;
+  //   //color: $primary;
+  // }
 }
 
 .setup-grid {
@@ -113,13 +113,13 @@ nb-card {
 
   .label {
     font-size: 0.75rem;
-    color: $text-secondary;
+    color: $tas-text-secondary;
     font-weight: 500;
   }
 
   .value {
     font-size: 0.875rem;
-    color: $text-primary;
+    color: $tas-text-primary;
     font-weight: 600;
     font-family: 'Courier New', monospace;
   }
@@ -132,7 +132,7 @@ nb-card {
 
   .distance {
     font-size: 0.75rem;
-    color: $text-hint;
+    color: $tas-text-hint;
   }
 
   &.stop-loss .value.bearish {
@@ -160,7 +160,7 @@ nb-card {
 
 .timestamp {
   font-size: 0.75rem;
-  color: $text-hint;
+  color: $tas-text-hint;
   font-style: italic;
 }
 

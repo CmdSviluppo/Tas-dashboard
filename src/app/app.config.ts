@@ -1,47 +1,39 @@
-import {
-  ApplicationConfig,
-  importProvidersFrom, LOCALE_ID,
-  provideZoneChangeDetection,
-} from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import {ApplicationConfig, importProvidersFrom, LOCALE_ID, provideZoneChangeDetection,} from '@angular/core';
+import {provideAnimations} from '@angular/platform-browser/animations';
 import localeIt from '@angular/common/locales/it';
 import {
-  NbThemeModule,
-  NbSidebarModule,
-  NbMenuModule,
-  NbToastrModule,
+  NbDatepickerModule,
+  NbDateService,
   NbDialogModule,
-  NbDatepickerModule, NbLayoutModule, NbSpinnerModule, NbTimepickerModule, NbDateService,
+  NbLayoutModule,
+  NbMenuModule,
+  NbSidebarModule,
+  NbSpinnerModule,
+  NbThemeModule,
+  NbTimepickerModule,
+  NbToastrModule,
 } from '@nebular/theme';
 
-import { NbMomentDateModule, NbMomentDateService } from '@nebular/moment';
-import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken } from '@nebular/auth';
-import { provideRouter } from '@angular/router';
-import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
-import {
-  HTTP_INTERCEPTORS,
-  HttpBackend,
-  provideHttpClient,
-  withFetch,
-  withInterceptors,
-  withInterceptorsFromDi
-} from '@angular/common/http';
-import { routes } from './app.routes';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { HttpClient } from '@angular/common/http';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {NbMomentDateModule, NbMomentDateService} from '@nebular/moment';
+import {NbAuthJWTToken, NbAuthModule, NbPasswordAuthStrategy} from '@nebular/auth';
+import {provideRouter} from '@angular/router';
+import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
+import {HttpBackend, provideHttpClient, withInterceptors, withInterceptorsFromDi} from '@angular/common/http';
+import {routes} from './app.routes';
+import {NbEvaIconsModule} from '@nebular/eva-icons';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {registerLocaleData} from '@angular/common';
-import { loadingInterceptor } from './utils/interceptor/loading.interceptor';
-import { apiErrorInterceptor } from './utils/interceptor/api-error.interceptor';
-import { authInterceptor } from './utils/interceptor/auth.interceptor';
-import { headerInterceptor } from './utils/interceptor';
+import {loadingInterceptor} from './utils/interceptor/loading.interceptor';
+import {apiErrorInterceptor} from './utils/interceptor/api-error.interceptor';
+import {authInterceptor} from './utils/interceptor/auth.interceptor';
+import {headerInterceptor} from './utils/interceptor';
 
 // factory per caricare i file JSON delle traduzioni
 export function HttpLoaderFactory(httpBackend: HttpBackend): MultiTranslateHttpLoader {
   return new MultiTranslateHttpLoader(httpBackend, [
-    { prefix: 'assets/i18n/', suffix: '.json' },
-    { prefix: 'assets/i18n/errorcode/', suffix: '.json' },
+    {prefix: 'assets/i18n/', suffix: '.json'},
+    {prefix: 'assets/i18n/errorcode/', suffix: '.json'},
   ]);
 }
 
@@ -57,10 +49,10 @@ registerLocaleData(localeIt);
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    { provide: LOCALE_ID, useValue: 'it' },
-    { provide: NbDateService, useClass: NbMomentDateService },
+    {provide: LOCALE_ID, useValue: 'it'},
+    {provide: NbDateService, useClass: NbMomentDateService},
     provideHttpClient(withInterceptorsFromDi()),
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(
@@ -71,7 +63,7 @@ export const appConfig: ApplicationConfig = {
         headerInterceptor
       ])),
     importProvidersFrom(
-      NbThemeModule.forRoot({ name: 'corporate' }),
+      NbThemeModule.forRoot({name: 'corporate'}),
       NbLayoutModule,
       NbEvaIconsModule,
       ReactiveFormsModule,
@@ -90,9 +82,9 @@ export const appConfig: ApplicationConfig = {
           NbPasswordAuthStrategy.setup({
             name: 'email',
             baseEndpoint: 'http://localhost:8080/api/auth/',
-            login: { endpoint: 'login', method: 'post' },
-            refreshToken: { endpoint: 'refresh', method: 'post' },
-            token: { class: NbAuthJWTToken, key: 'accessToken' },
+            login: {endpoint: 'login', method: 'post'},
+            refreshToken: {endpoint: 'refresh', method: 'post'},
+            token: {class: NbAuthJWTToken, key: 'accessToken'},
           }),
         ],
         forms: {},

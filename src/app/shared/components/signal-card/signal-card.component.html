@@ -14,9 +14,9 @@
       </div>
       <div class="header-right">
         <app-state-badge
+          [animated]="true"
           [state]="signal.currentState"
-          variant="solid"
-          [animated]="true">
+          variant="solid">
         </app-state-badge>
       </div>
     </div>
@@ -26,25 +26,25 @@
     <!-- Score Row -->
     <div class="score-row">
       <app-score-display
-        [score]="signal.aggregatedScore"
+        [animated]="true"
         [confidence]="signal.confidence"
+        [score]="signal.aggregatedScore"
         size="small"
-        timeframe="Aggregated"
-        [animated]="true">
+        timeframe="Aggregated">
       </app-score-display>
 
       <app-timeframe-breakdown
-        [score4h]="signal.score4h || 0"
+        [confidence1h]="signal.confidence1h || 0"
+        [confidence30m]="signal.confidence30m || 0"
         [confidence4h]="signal.confidence4h || 0"
         [score1h]="signal.score1h || 0"
-        [confidence1h]="signal.confidence1h || 0"
         [score30m]="signal.score30m || 0"
-        [confidence30m]="signal.confidence30m || 0">
+        [score4h]="signal.score4h || 0">
       </app-timeframe-breakdown>
     </div>
 
     <!-- Trade Setup (only if not compact) -->
-    <div class="trade-setup" *ngIf="!compact">
+    <div *ngIf="!compact" class="trade-setup">
       <div class="setup-header">
         <nb-icon icon="settings-2-outline"></nb-icon>
         <span>Trade Setup</span>
@@ -60,7 +60,7 @@
           <span class="label">Stop Loss:</span>
           <div class="value-group">
             <span class="value bearish">{{ signal.suggestedStopLoss | number:'1.2-8' }}</span>
-            <span class="distance" *ngIf="stopLossDistancePct">
+            <span *ngIf="stopLossDistancePct" class="distance">
               ({{ stopLossDistancePct | percent:'1.2-2' }})
             </span>
           </div>
@@ -70,7 +70,7 @@
           <span class="label">Take Profit:</span>
           <div class="value-group">
             <span class="value bullish">{{ signal.suggestedTakeProfit | number:'1.2-8' }}</span>
-            <span class="distance" *ngIf="takeProfitDistancePct">
+            <span *ngIf="takeProfitDistancePct" class="distance">
               ({{ takeProfitDistancePct | percent:'1.2-2' }})
             </span>
           </div>
@@ -78,14 +78,14 @@
 
         <div class="setup-row risk-reward">
           <span class="label">R/R Ratio:</span>
-          <span class="value highlight" [style.color]="riskRewardColor">
+          <span [style.color]="riskRewardColor" class="value highlight">
             {{ signal.riskRewardRatio | number:'1.2-2' }}
           </span>
         </div>
 
         <div class="setup-row position-size">
           <span class="label">Position Size:</span>
-          <span class="value" [style.color]="positionSizeColor">
+          <span [style.color]="positionSizeColor" class="value">
             {{ signal.positionSizePct | percent:'1.2-2' }}
           </span>
         </div>
@@ -95,8 +95,8 @@
     <!-- Status Badge -->
     <div class="status-section">
       <nb-badge
-        [text]="getStatusLabel(signal.status)"
         [status]="getStatusColor(signal.status)"
+        [text]="getStatusLabel(signal.status)"
         position="top right">
       </nb-badge>
       <span class="timestamp">{{ signal.timestamp | date:'short' }}</span>
@@ -107,30 +107,30 @@
   <nb-card-footer *ngIf="showActions">
     <div class="actions-row">
       <button
-        nbButton
-        status="success"
-        size="small"
+        (click)="executeSignal()"
         *ngIf="signal.status === SignalStatus.PENDING"
-        (click)="executeSignal()">
+        nbButton
+        size="small"
+        status="success">
         <nb-icon icon="checkmark-circle-outline"></nb-icon>
         Execute
       </button>
 
       <button
-        nbButton
-        status="danger"
-        size="small"
+        (click)="closeSignal()"
         *ngIf="signal.status === SignalStatus.EXECUTED"
-        (click)="closeSignal()">
+        nbButton
+        size="small"
+        status="danger">
         <nb-icon icon="close-circle-outline"></nb-icon>
         Close
       </button>
 
       <button
+        (click)="viewSignal()"
         nbButton
-        status="basic"
         size="small"
-        (click)="viewSignal()">
+        status="basic">
         <nb-icon icon="eye-outline"></nb-icon>
         Details
       </button>

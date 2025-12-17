@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { SymbolApiService } from './symbol-api.service';
+import {SymbolApiService} from './symbol-api.service';
 
 describe('SymbolApiService', () => {
   let service: SymbolApiService;

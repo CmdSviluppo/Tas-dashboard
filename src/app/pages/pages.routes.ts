@@ -13,10 +13,6 @@ export const PAGES_ROUTES: Routes = [
         pathMatch: 'full'
       },
       {
-        path: '**',
-        redirectTo: 'dashboard'
-      },
-      {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.routes')
           .then(m => m.DASHBOARD_ROUTES),
@@ -85,6 +81,10 @@ export const PAGES_ROUTES: Routes = [
           roles: ['ROLE_ADMIN'],
           title: 'Settings'
         }
+      },
+      {
+        path: '**',
+        redirectTo: 'dashboard'
       }
     ]
   }

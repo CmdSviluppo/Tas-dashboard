@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
 export const SIGNAL_MANAGEMENT_ROUTES: Routes = [
   // {

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TimeframeBreakdownComponent } from './timeframe-breakdown.component';
+import {TimeframeBreakdownComponent} from './timeframe-breakdown.component';
 
 describe('TimeframeBreakdownComponent', () => {
   let component: TimeframeBreakdownComponent;
@@ -10,7 +10,7 @@ describe('TimeframeBreakdownComponent', () => {
     await TestBed.configureTestingModule({
       imports: [TimeframeBreakdownComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TimeframeBreakdownComponent);
     component = fixture.componentInstance;

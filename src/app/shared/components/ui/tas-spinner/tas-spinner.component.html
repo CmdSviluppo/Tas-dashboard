@@ -1,16 +1,16 @@
-<div class="tas-spinner-container" *ngIf="show" [class.overlay]="overlay">
-  <div class="spinner-content" [class]="'size-' + size">
+<div *ngIf="show" [class.overlay]="overlay" class="tas-spinner-container">
+  <div [class]="'size-' + size" class="spinner-content">
     <app-tas-logo
-      [size]="logoSize"
       [animated]="true"
+      [size]="logoSize"
+      chartLineColor="#00E676"
+      outlineColor="#00A8FF"
       primaryColor="#00A8FF"
       secondaryColor="#0086CC"
-      outlineColor="#00A8FF"
-      chartLineColor="#00E676"
       textColor="#FFFFFF">
     </app-tas-logo>
 
-    <div class="loading-text" *ngIf="showText" [style.font-size]="fontSize">
+    <div *ngIf="showText" [style.font-size]="fontSize" class="loading-text">
       {{ text }}
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { SignalDirection, SignalStatus, TradingState } from "../../enum";
+import {SignalDirection, SignalStatus, TradingState} from "../../enum";
 
 export interface SignalSummaryDTO {
   id: string;

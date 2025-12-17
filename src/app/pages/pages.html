@@ -3,10 +3,10 @@
   <!-- ============================================ -->
   <!-- HEADER -->
   <!-- ============================================ -->
-  <nb-layout-header fixed class="tas-header">
+  <nb-layout-header class="tas-header" fixed>
     <app-header
-      (sidebarToggle)="onSidebarToggle()"
-      (notificationsToggle)="onNotificationsToggle()">
+      (notificationsToggle)="onNotificationsToggle()"
+      (sidebarToggle)="onSidebarToggle()">
     </app-header>
   </nb-layout-header>
 
@@ -14,10 +14,10 @@
   <!-- MAIN SIDEBAR -->
   <!-- ============================================ -->
   <nb-sidebar
+    [state]="sidebarState"
     class="menu"
-    tag="menu"
     responsive
-    [state]="sidebarState">
+    tag="menu">
     <app-sidebar-menu [collapsed]="sidebarState === 'collapsed'"></app-sidebar-menu>
   </nb-sidebar>
 
@@ -34,25 +34,25 @@
 <!-- NOTIFICATION SIDEBAR -->
 <!-- ============================================ -->
 <nb-sidebar
+  [state]="notificationSidebarState"
   class="notification-sidebar"
   right
-  tag="notification-sidebar"
-  [state]="notificationSidebarState">
+  tag="notification-sidebar">
 
   <div class="notification-header">
     <h5>Notifiche</h5>
-    <button nbButton ghost size="small" (click)="closeNotifications()">
+    <button (click)="closeNotifications()" ghost nbButton size="small">
       <nb-icon icon="close-outline" pack="eva"></nb-icon>
     </button>
   </div>
 
   <div class="notification-list">
     <div
-      class="notification-item"
+      (click)="markAsRead(notification)"
       *ngFor="let notification of notifications"
       [class.unread]="!notification.read"
-      (click)="markAsRead(notification)">
-      <div class="notification-icon" [ngClass]="'type-' + notification.type">
+      class="notification-item">
+      <div [ngClass]="'type-' + notification.type" class="notification-icon">
         <nb-icon [icon]="getNotificationIcon(notification.type)" pack="eva"></nb-icon>
       </div>
       <div class="notification-content">
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <div class="empty-notifications" *ngIf="notifications.length === 0">
+    <div *ngIf="notifications.length === 0" class="empty-notifications">
       <nb-icon icon="bell-off-outline" pack="eva"></nb-icon>
       <p>Nessuna notifica</p>
     </div>

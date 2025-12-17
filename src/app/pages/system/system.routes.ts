@@ -1,5 +1,5 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from '../dashboard/home/home.component';
+import {Routes} from '@angular/router';
+import {HomeComponent} from '../dashboard/home/home.component';
 
 export const SYSTEM_ROUTES: Routes = [
   {

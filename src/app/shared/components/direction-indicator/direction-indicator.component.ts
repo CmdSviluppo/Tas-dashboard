@@ -1,7 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NbIconModule } from '@nebular/theme';
-import { SignalDirection } from '../../../../utils/model/enum';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NbIconModule} from '@nebular/theme';
+import {SignalDirection} from '../../../utils/model/enum';
 
 
 @Component({
@@ -18,16 +18,6 @@ export class DirectionIndicatorComponent implements OnChanges {
 
   SignalDirection = SignalDirection;
   shouldAnimate = false;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['direction'] && !changes['direction'].firstChange) {
-      // Trigger animation on direction change
-      this.shouldAnimate = true;
-      setTimeout(() => {
-        this.shouldAnimate = false;
-      }, 600);
-    }
-  }
 
   get iconName(): string {
     switch (this.direction) {
@@ -58,5 +48,15 @@ export class DirectionIndicatorComponent implements OnChanges {
       large: '2.5rem'
     };
     return sizes[this.size];
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['direction'] && !changes['direction'].firstChange) {
+      // Trigger animation on direction change
+      this.shouldAnimate = true;
+      setTimeout(() => {
+        this.shouldAnimate = false;
+      }, 600);
+    }
   }
 }

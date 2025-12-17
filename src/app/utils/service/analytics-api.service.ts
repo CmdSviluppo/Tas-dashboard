@@ -1,7 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BaseApiService } from './base-api.service';
-import { AnalyticsReportDTO, ProfileStatsDTO, StateTransitionDTO, SymbolStatsDTO, SystemStatsDTO, TradingPerformanceDTO } from '../model/rest/analytics/analytics-api';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {BaseApiService} from './base-api.service';
+import {
+  AnalyticsReportDTO,
+  ProfileStatsDTO,
+  StateTransitionDTO,
+  SymbolStatsDTO,
+  SystemStatsDTO,
+  TradingPerformanceDTO
+} from '../model/rest/analytics/analytics-api';
 
 
 export interface AnalyticsFilters {

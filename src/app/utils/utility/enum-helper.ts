@@ -1,4 +1,4 @@
-import { StrategyType, SignalDirection, SignalStatus } from "../model/enum";
+import {MarketRegime, SignalDirection, SignalStatus, StrategyType} from "../model/enum";
 
 export class EnumHelper {
 
@@ -85,5 +85,26 @@ export class EnumHelper {
       [SignalStatus.SKIPPED]: 'basic'
     };
     return colors[status] || 'basic';
+  }
+
+  static getMarketRegimeLabel(regime: MarketRegime): string {
+    const labels: Record<MarketRegime, string> = {
+      [MarketRegime.BULLISH]: 'Bullish',
+      [MarketRegime.BEARISH]: 'Bearish',
+      [MarketRegime.SIDEWAYS]: 'Sideways',
+      [MarketRegime.VOLATILE]: 'Volatile',
+      [MarketRegime.LOW_VOLATILITY]: 'Low Volatility',
+      [MarketRegime.STRONG_UPTREND]: "",
+      [MarketRegime.WEAK_UPTREND]: "",
+      [MarketRegime.WEAK_DOWNTREND]: "",
+      [MarketRegime.STRONG_DOWNTREND]: "",
+      [MarketRegime.HIGH_VOLATILITY]: ""
+    };
+
+    return labels[regime] || regime;
+  }
+
+  static getStrategyTypeColor(type: StrategyType) {
+    return '';
   }
 }

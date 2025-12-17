@@ -1,30 +1,30 @@
-<div class="score-display" [class]="'size-' + size">
+<div [class]="'size-' + size" class="score-display">
   <div class="gauge-wrapper">
     <div
-      class="gauge-container"
       #gaugeContainer
+      [class.has-breakdown]="showBreakdown && breakdown"
       [nbPopover]="breakdownTemplate"
-      nbPopoverTrigger="hover"
+      class="gauge-container"
       nbPopoverPlacement="top"
-      [class.has-breakdown]="showBreakdown && breakdown">
+      nbPopoverTrigger="hover">
     </div>
 
     <div class="score-info">
-      <div class="timeframe-label" *ngIf="timeframe">{{ timeframe }}</div>
-      <div class="confidence-badge" [style.background-color]="scoreColor">
+      <div *ngIf="timeframe" class="timeframe-label">{{ timeframe }}</div>
+      <div [style.background-color]="scoreColor" class="confidence-badge">
         {{ confidencePercent }}
       </div>
     </div>
   </div>
 
-  <div class="sparkline-wrapper" *ngIf="showSparkline && sparklineData">
-    <div class="sparkline-container" #sparklineContainer></div>
+  <div *ngIf="showSparkline && sparklineData" class="sparkline-wrapper">
+    <div #sparklineContainer class="sparkline-container"></div>
   </div>
 </div>
 
 <!-- Popover Template (mostra solo se showBreakdown è true) -->
 <ng-template #breakdownTemplate>
-  <nb-card class="breakdown-popover" *ngIf="showBreakdown && breakdown">
+  <nb-card *ngIf="showBreakdown && breakdown" class="breakdown-popover">
     <nb-card-header>
       <h6>Strategy Contributions</h6>
     </nb-card-header>
@@ -33,7 +33,7 @@
         <div *ngFor="let entry of breakdownEntries" class="strategy-row">
           <span class="strategy-name">{{ entry.key }}</span>
           <div class="strategy-values">
-            <span class="strategy-score" [style.color]="entry.value.score >= 0 ? '#00C853' : '#FF3D71'">
+            <span [style.color]="entry.value.score >= 0 ? '#00C853' : '#FF3D71'" class="strategy-score">
               {{ entry.value.score >= 0 ? '+' : '' }}{{ entry.value.score }}
             </span>
             <span class="strategy-confidence">

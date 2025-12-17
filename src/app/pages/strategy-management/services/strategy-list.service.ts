@@ -1,12 +1,12 @@
-import { Injectable, inject } from '@angular/core';
-import { Observable, of, catchError, tap } from 'rxjs';
-import { NotificationService, StrategyApiService } from '../../../utils/service';
-import { StrategyType } from '../../../utils/model/enum';
-import { StrategyUsage, Strategy } from '../../../utils/model/rest/strategy/strategy-api';
-import { StrategyListState } from '../pages/strategy-list/strategy-list.state';
+import {inject, Injectable} from '@angular/core';
+import {catchError, Observable, of, tap} from 'rxjs';
+import {NotificationService, StrategyApiService} from '../../../utils/service';
+import {StrategyType} from '../../../utils/model/enum';
+import {Strategy, StrategyUsage} from '../../../utils/model/rest/strategy/strategy-api';
+import {StrategyListState} from '../pages/strategy-list/strategy-list.state';
 
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class StrategyListService {
 
   private strategyApi = inject(StrategyApiService);

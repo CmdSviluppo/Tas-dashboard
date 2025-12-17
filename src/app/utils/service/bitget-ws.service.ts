@@ -1,7 +1,7 @@
-import { Injectable, signal } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { environment } from '../../../environments/environment';
+import {Injectable, signal} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
+import {environment} from '../../../environments/environment';
 
 export interface BitgetKline {
   symbol: string;
@@ -31,9 +31,8 @@ interface BitgetSubscription {
   providedIn: 'root'
 })
 export class BitgetWebSocketService {
-  private ws$: WebSocketSubject<any> | null = null;
   public connected = signal<boolean>(false);
-
+  private ws$: WebSocketSubject<any> | null = null;
   // Map of subscription keys to subjects
   private subscriptions = new Map<string, Subject<any>>();
 

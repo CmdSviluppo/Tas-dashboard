@@ -1,10 +1,10 @@
-import { Component, Input, HostBinding, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { NbMenuModule, NbIconModule, NbMenuItem, NbMenuService } from '@nebular/theme';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { UserStoreService } from '../../utils/service/user-store.service';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Router} from '@angular/router';
+import {NbIconModule, NbMenuItem, NbMenuModule, NbMenuService} from '@nebular/theme';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {UserStoreService} from '../../utils/service/user-store.service';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -38,7 +38,7 @@ export class SidebarMenuComponent implements OnInit, OnDestroy {
     this.menuService
       .onItemClick()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(({ item }) => {
+      .subscribe(({item}) => {
         this.selectedItem = item.title;
       });
   }
@@ -49,23 +49,7 @@ export class SidebarMenuComponent implements OnInit, OnDestroy {
         title: 'Dashboard',
         icon: 'home-outline',
         expanded: true,
-        children: [
-          {
-            title: 'Home',
-            link: '/pages/dashboard/home',
-            icon: 'grid-outline',
-          },
-          {
-            title: 'Panoramica segnali',
-            link: '/pages/dashboard/signals',
-            icon: 'activity-outline',
-          },
-          {
-            title: 'Sentiment crypto',
-            link: '/pages/dashboard/sentiment',
-            icon: 'trending-up-outline',
-          },
-        ],
+        children: [],
       },
       {
         title: 'Strategie',
@@ -73,49 +57,80 @@ export class SidebarMenuComponent implements OnInit, OnDestroy {
         expanded: true,
         children: [
           {
-            title: 'Gestione strategie',
-            link: '/pages/strategies/manage',
-            icon: 'settings-outline',
+            title: 'Catalogo strategie',
+            link: '/pages/strategies',
+            icon: 'list-outline',
           },
           {
-            title: 'Backtesting',
-            link: '/pages/strategies/backtest',
-            icon: 'bar-chart-outline',
+            title: 'Crea strategia',
+            link: '/pages/strategies/new',
+            icon: 'plus-circle-outline',
           },
+        ],
+      },
+      {
+        title: 'Profili',
+        icon: 'person-outline',
+        expanded: false,
+        children: [
           {
-            title: 'Debug step-by-step',
-            link: '/pages/strategies/debug',
-            icon: 'bug-outline',
+            title: 'Configurazione profili',
+            link: '/pages/profiles',
+            icon: 'settings-2-outline',
           },
+        ],
+      },
+      {
+        title: 'Simboli',
+        icon: 'trending-up-outline',
+        expanded: false,
+        children: [
           {
-            title: 'Confronto strategie',
-            link: '/pages/strategies/compare',
-            icon: 'swap-outline',
+            title: 'Monitoraggio simboli',
+            link: '/pages/symbols',
+            icon: 'activity-outline',
+          },
+        ],
+      },
+      {
+        title: 'Segnali',
+        icon: 'bell-outline',
+        expanded: false,
+        children: [
+          {
+            title: 'Gestione segnali',
+            link: '/pages/signals',
+            icon: 'alert-circle-outline',
+          },
+        ],
+      },
+      {
+        title: 'Analytics',
+        icon: 'bar-chart-outline',
+        expanded: false,
+        children: [
+          {
+            title: 'Analytics',
+            link: '/pages/analytics',
+            icon: 'pie-chart-outline',
+          },
+        ],
+      },
+      {
+        title: 'Impostazioni',
+        icon: 'settings-outline',
+        expanded: false,
+        children: [
+          {
+            title: 'Settings',
+            link: '/pages/settings',
+            icon: 'options-2-outline',
           },
         ],
       },
     ];
-
-    // Sottoscrivi ai ruoli utente e filtra il menu
-    this.userStoreService.getUserRoles().pipe(takeUntil(this.destroy$)).subscribe((userRoles) => {
-      if (userRoles) {
-        this.menuItems = this.menuItems
-          .map((item) => {
-            if (item.children) {
-              // Filtra solo le children in base ai ruoli
-              item.children = item.children.filter(
-                (child) =>
-                  !child.data?.roles ||
-                  child.data.roles.some((role: string) => userRoles.includes(role))
-              );
-            }
-            return item;
-          });
-          // Mostra la sezione se ha almeno una child visibile, oppure se non ha children
-         // .filter((item) => !item.children || item.children.length > 0);
-      }
-    });
   }
+
 
   getSelectedItem(): void {
     if (!this.menuItems) return;

@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 /**
  * Custom validation utilities for Angular forms
@@ -25,6 +25,23 @@ export class ValidationUtils {
           message: 'Code must start with uppercase letter and contain only uppercase letters, numbers, and underscores'
         }
       };
+    };
+  }
+
+  /**
+   * Validator per Java class name
+   * Accetta formato com.package.ClassName
+   */
+  static javaClassNameValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) {
+        return null;
+      }
+
+      const classNameRegex = /^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)*\.[A-Z][a-zA-Z0-9_]*$/;
+      const valid = classNameRegex.test(control.value);
+
+      return valid ? null : {invalidClassName: true};
     };
   }
 
@@ -236,4 +253,60 @@ export class ValidationUtils {
     // Fallback to generic message
     return 'Invalid value';
   }
+
+  /**
+   * Validator for profile code format
+   * Must contain only uppercase letters, numbers, and underscores
+   */
+  // static codeValidator(): ValidatorFn {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     if (!control.value) {
+  //       return null;
+  //     }
+
+  //     const pattern = /^[A-Z0-9_]+$/;
+  //     const valid = pattern.test(control.value);
+
+  //     return valid ? null : { invalidCode: true };
+  //   };
+  // }
+
+  /**
+   * Validator for JSON format
+   */
+  static jsonValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) {
+        return null;
+      }
+
+      try {
+        JSON.parse(control.value);
+        return null;
+      } catch (e) {
+        return { invalidJson: true };
+      }
+    };
+  }
+
+  /**
+   * Validator for weight sum (must equal 1.0 with tolerance)
+   */
+  // static weightSumValidator(tolerance: number = 0.01): ValidatorFn {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     const group = control as any;
+
+  //     if (!group.value) {
+  //       return null;
+  //     }
+
+  //     const sum = (group.value.weight4h || 0) +
+  //                 (group.value.weight1h || 0) +
+  //                 (group.value.weight30m || 0);
+
+  //     const valid = Math.abs(sum - 1.0) < tolerance;
+
+  //     return valid ? null : { invalidWeightSum: { sum, expected: 1.0 } };
+  //   };
+  // }
 }

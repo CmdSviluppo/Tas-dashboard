@@ -1,0 +1,90 @@
+<nb-card (click)="openDetail()" class="strategy-card">
+
+  <!-- Header -->
+  <nb-card-header>
+    <div class="card-header-content">
+      <div class="title-section">
+        <h6 class="strategy-name">{{ strategy.name }}</h6>
+        <code class="strategy-code">{{ strategy.code }}</code>
+      </div>
+
+      <nb-badge
+        [status]="strategy.isActive ? 'success' : 'basic'"
+        [text]="strategy.isActive ? 'Active' : 'Inactive'"
+        class="status-badge">
+      </nb-badge>
+    </div>
+  </nb-card-header>
+
+  <!-- Body -->
+  <nb-card-body>
+    <div class="card-body-content">
+
+      <!-- Type Badge -->
+      <div class="info-row">
+        <span class="label">Type:</span>
+        <app-strategy-type-badge [type]="strategy.type"></app-strategy-type-badge>
+      </div>
+
+      <!-- Usage -->
+      <div class="info-row">
+        <span class="label">Usage:</span>
+        <app-strategy-usage-indicator
+          [strategyId]="strategy.id"
+          [usageCount]="strategy.usageCount">
+        </app-strategy-usage-indicator>
+      </div>
+
+    </div>
+  </nb-card-body>
+
+  <!-- Footer -->
+  <nb-card-footer>
+    <div class="card-footer-actions">
+      <!-- Details (EXISTING) -->
+      <button
+        nbButton
+        size="small"
+        status="info"
+        ghost
+        (click)="openDetail()"
+        nbTooltip="View details">
+        <nb-icon icon="eye-outline"></nb-icon>
+      </button>
+
+      <!-- NEW: Edit -->
+      <button
+        nbButton
+        size="small"
+        status="primary"
+        ghost
+        (click)="onEdit($event)"
+        nbTooltip="Edit">
+        <nb-icon icon="edit-outline"></nb-icon>
+      </button>
+
+      <!-- NEW: Toggle Active -->
+      <button
+        nbButton
+        size="small"
+        [status]="strategy.isActive ? 'success' : 'basic'"
+        ghost
+        (click)="onToggleActive($event)"
+        [nbTooltip]="strategy.isActive ? 'Deactivate' : 'Activate'">
+        <nb-icon [icon]="strategy.isActive ? 'checkmark-circle-outline' : 'close-circle-outline'"></nb-icon>
+      </button>
+
+      <!-- NEW: Delete -->
+      <button
+        nbButton
+        size="small"
+        status="danger"
+        ghost
+        (click)="onDelete($event)"
+        nbTooltip="Delete">
+        <nb-icon icon="trash-2-outline"></nb-icon>
+      </button>
+    </div>
+  </nb-card-footer>
+
+</nb-card>

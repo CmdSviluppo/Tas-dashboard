@@ -1,14 +1,14 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { 
-  NbIconModule, 
-  NbButtonModule, 
-  NbInputModule, 
+import {Component, EventEmitter, Output} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
+import {
+  NbButtonModule,
   NbContextMenuModule,
-  NbTooltipModule,
-  NbMenuService 
+  NbIconModule,
+  NbInputModule,
+  NbMenuService,
+  NbTooltipModule
 } from "@nebular/theme";
 
 interface SearchResult {
@@ -54,21 +54,21 @@ export class HeaderComponent {
 
   // User menu configuration
   userMenu = [
-    { title: 'Profilo', icon: 'person-outline' },
-    { title: 'Impostazioni', icon: 'settings-outline' },
-    { title: 'Aiuto', icon: 'question-mark-circle-outline' },
-    { title: 'Logout', icon: 'log-out-outline' }
+    {title: 'Profilo', icon: 'person-outline'},
+    {title: 'Impostazioni', icon: 'settings-outline'},
+    {title: 'Aiuto', icon: 'question-mark-circle-outline'},
+    {title: 'Logout', icon: 'log-out-outline'}
   ];
 
   // Mock search data
   private mockSearchData: SearchResult[] = [
-    { id: '1', label: 'RSI Divergence Strategy', icon: 'trending-up-outline', type: 'strategy', route: '/strategies/1' },
-    { id: '2', label: 'Bitcoin Analysis', icon: 'bar-chart-outline', type: 'analysis', route: '/analysis/btc' },
-    { id: '3', label: 'EURUSD', icon: 'swap-outline', type: 'symbol', route: '/symbols/eurusd' },
-    { id: '4', label: 'AI Sentiment Model', icon: 'cpu-outline', type: 'ai', route: '/ai/sentiment' },
-    { id: '5', label: 'Live Trading Session', icon: 'radio-outline', type: 'live', route: '/live/trading' },
-    { id: '6', label: 'Moving Average Cross', icon: 'trending-up-outline', type: 'strategy', route: '/strategies/2' },
-    { id: '7', label: 'Ethereum Prediction', icon: 'cpu-outline', type: 'ai', route: '/ai/eth-prediction' }
+    {id: '1', label: 'RSI Divergence Strategy', icon: 'trending-up-outline', type: 'strategy', route: '/strategies/1'},
+    {id: '2', label: 'Bitcoin Analysis', icon: 'bar-chart-outline', type: 'analysis', route: '/analysis/btc'},
+    {id: '3', label: 'EURUSD', icon: 'swap-outline', type: 'symbol', route: '/symbols/eurusd'},
+    {id: '4', label: 'AI Sentiment Model', icon: 'cpu-outline', type: 'ai', route: '/ai/sentiment'},
+    {id: '5', label: 'Live Trading Session', icon: 'radio-outline', type: 'live', route: '/live/trading'},
+    {id: '6', label: 'Moving Average Cross', icon: 'trending-up-outline', type: 'strategy', route: '/strategies/2'},
+    {id: '7', label: 'Ethereum Prediction', icon: 'cpu-outline', type: 'ai', route: '/ai/eth-prediction'}
   ];
 
   constructor(
@@ -118,6 +118,14 @@ export class HeaderComponent {
     }
   }
 
+  selectSearchResult(item: SearchResult): void {
+    this.searchQuery = '';
+    this.showSearchResults = false;
+    if (item.route) {
+      this.router.navigate([item.route]);
+    }
+  }
+
   private performSearch(): void {
     const query = this.searchQuery.toLowerCase().trim();
     const filteredResults = this.mockSearchData.filter(item =>
@@ -154,14 +162,6 @@ export class HeaderComponent {
       symbol: 'Simboli'
     };
     return displayNames[type] || type;
-  }
-
-  selectSearchResult(item: SearchResult): void {
-    this.searchQuery = '';
-    this.showSearchResults = false;
-    if (item.route) {
-      this.router.navigate([item.route]);
-    }
   }
 
   private onUserMenuClick(title: string): void {

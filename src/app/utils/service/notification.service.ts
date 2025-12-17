@@ -1,6 +1,6 @@
-import { Injectable, inject } from '@angular/core';
-import { NbToastrService, NbGlobalPhysicalPosition } from '@nebular/theme';
-import { environment } from '../../../environments/environment';
+import {inject, Injectable} from '@angular/core';
+import {NbGlobalPhysicalPosition, NbToastrService} from '@nebular/theme';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

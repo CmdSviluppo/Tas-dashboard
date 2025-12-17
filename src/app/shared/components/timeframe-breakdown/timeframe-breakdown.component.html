@@ -1,0 +1,46 @@
+<div class="timeframe-breakdown">
+  <!-- 4H Timeframe -->
+  <div class="timeframe-item">
+    <div class="timeframe-header">
+      <span class="timeframe-label">4H</span>
+      <span *ngIf="lastUpdate4h" class="last-update">{{ formatLastUpdate(lastUpdate4h) }}</span>
+    </div>
+    <div #gauge4h class="mini-gauge"></div>
+    <div [style.color]="getScoreColor(score4h)" class="score-value">
+      {{ score4h | number:'1.0-0' }}
+    </div>
+    <div [style.background-color]="getScoreColor(score4h)" class="confidence-badge">
+      {{ confidence4h | percent:'1.0-0' }}
+    </div>
+  </div>
+
+  <!-- 1H Timeframe -->
+  <div class="timeframe-item">
+    <div class="timeframe-header">
+      <span class="timeframe-label">1H</span>
+      <span *ngIf="lastUpdate1h" class="last-update">{{ formatLastUpdate(lastUpdate1h) }}</span>
+    </div>
+    <div #gauge1h class="mini-gauge"></div>
+    <div [style.color]="getScoreColor(score1h)" class="score-value">
+      {{ score1h | number:'1.0-0' }}
+    </div>
+    <div [style.background-color]="getScoreColor(score1h)" class="confidence-badge">
+      {{ confidence1h | percent:'1.0-0' }}
+    </div>
+  </div>
+
+  <!-- 30M Timeframe -->
+  <div class="timeframe-item">
+    <div class="timeframe-header">
+      <span class="timeframe-label">30M</span>
+      <span *ngIf="lastUpdate30m" class="last-update">{{ formatLastUpdate(lastUpdate30m) }}</span>
+    </div>
+    <div #gauge30m class="mini-gauge"></div>
+    <div [style.color]="getScoreColor(score30m)" class="score-value">
+      {{ score30m | number:'1.0-0' }}
+    </div>
+    <div [style.background-color]="getScoreColor(score30m)" class="confidence-badge">
+      {{ confidence30m | percent:'1.0-0' }}
+    </div>
+  </div>
+</div>

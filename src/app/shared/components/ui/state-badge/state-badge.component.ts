@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NbIconModule, NbTooltipModule, NbBadgeModule } from '@nebular/theme';
-import { TradingState } from '../../../../utils/model/enum';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NbBadgeModule, NbIconModule, NbTooltipModule} from '@nebular/theme';
+import {TradingState} from '../../../../utils/model/enum';
 
 interface StateConfig {
   color: string;
