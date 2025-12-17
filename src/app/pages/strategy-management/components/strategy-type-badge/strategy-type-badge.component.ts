@@ -1,8 +1,8 @@
-import {Component, Input} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {NbBadgeModule, NbTooltipModule} from '@nebular/theme';
-import {StrategyType} from '../../../../utils/model/enum';
-import {EnumHelper} from '../../../../utils/utility/enum-helper';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NbBadgeModule, NbTooltipModule } from '@nebular/theme';
+import { StrategyType } from '../../../../utils/model/enum';
+import { EnumHelper } from '../../../../utils/utility/enum-helper';
 
 
 @Component({
@@ -24,7 +24,7 @@ import {EnumHelper} from '../../../../utils/utility/enum-helper';
 })
 export class StrategyTypeBadgeComponent {
 
-  @Input({required: true}) type!: StrategyType;
+  @Input({ required: true }) type!: StrategyType;
 
   protected getTypeLabel(): string {
     return EnumHelper.getStrategyTypeLabel(this.type);

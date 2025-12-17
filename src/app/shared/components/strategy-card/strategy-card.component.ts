@@ -13,12 +13,10 @@ import {
   StrategyDetailModalComponent
 } from '../../../pages/strategy-management/components/strategy-detail-modal/strategy-detail-modal.component';
 import {
-  StrategyTypeBadgeComponent
-} from '../../../pages/strategy-management/components/strategy-type-badge/strategy-type-badge.component';
-import {
   StrategyUsageIndicatorComponent
 } from '../../../pages/strategy-management/components/strategy-usage-indicator/strategy-usage-indicator.component';
 import {StrategySummary} from '../../../utils/model/rest/strategy/strategy-api';
+import { StrategyTypeBadgeComponent } from "../../../pages/strategy-management/components/strategy-type-badge/strategy-type-badge.component";
 
 @Component({
   selector: 'app-strategy-card',
@@ -30,9 +28,9 @@ import {StrategySummary} from '../../../utils/model/rest/strategy/strategy-api';
     NbIconModule,
     NbBadgeModule,
     NbTooltipModule,
-    StrategyTypeBadgeComponent,
-    StrategyUsageIndicatorComponent
-  ],
+    StrategyUsageIndicatorComponent,
+    StrategyTypeBadgeComponent
+],
   templateUrl: './strategy-card.component.html',
   styleUrls: ['./strategy-card.component.scss']
 })

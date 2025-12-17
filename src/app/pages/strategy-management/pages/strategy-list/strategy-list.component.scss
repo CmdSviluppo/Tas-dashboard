@@ -8,6 +8,7 @@
   display: flex;
   gap: 0.25rem;
   align-items: center;
+  justify-content: center;
 }
 
 // Header
@@ -102,6 +103,10 @@
         font-weight: 600;
         white-space: nowrap;
 
+        &.text-center {
+          text-align: center;
+        }
+
         &.sortable {
           cursor: pointer;
           user-select: none;
@@ -128,6 +133,10 @@
 
         td {
           padding: 1rem;
+
+          &.text-center {
+            text-align: center;
+          }
 
           code {
             background: var(--background-basic-color-2);
