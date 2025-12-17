@@ -4,80 +4,80 @@
 // ============================================================================
 
 // ----------------------------------------------------------------------------
-// PRIMARY COLORS
+// PRIMARY COLORS (Professional Blue)
 // ----------------------------------------------------------------------------
-$tas-primary-main: #00A8FF;
-$tas-primary-hover: #0086CC;
-$tas-primary-active: #006BA8;
-$tas-primary-light: rgba(0, 168, 255, 0.1);
-$tas-primary-glow: rgba(0, 168, 255, 0.4);
+$tas-primary-main: #3b82f6;      // Bright professional blue
+$tas-primary-hover: #2563eb;     // Darker blue on hover
+$tas-primary-active: #1d4ed8;    // Even darker when active
+$tas-primary-light: rgba(59, 130, 246, 0.12);
+$tas-primary-glow: rgba(59, 130, 246, 0.4);
 
 // ----------------------------------------------------------------------------
-// BACKGROUND COLORS
+// BACKGROUND COLORS (Dark Professional Theme)
 // ----------------------------------------------------------------------------
-$tas-bg-primary: #0A0E1A;        // Main app background
-$tas-bg-secondary: #141932;      // Cards, panels
-$tas-bg-tertiary: #1A1F3A;       // Elevated surfaces, modals
-$tas-bg-input: #0F1428;          // Input fields background
-$tas-bg-hover: rgba(0, 168, 255, 0.08);
-$tas-bg-active: rgba(0, 168, 255, 0.15);
-$tas-bg-disabled: #1C2138;
+$tas-bg-primary: #0a0e1a;        // Main app background - Deep dark blue
+$tas-bg-secondary: #141827;      // Cards, panels - Slightly lighter
+$tas-bg-tertiary: #1a1f2e;       // Elevated surfaces, modals
+$tas-bg-input: #0d1117;          // Input fields background - Almost black
+$tas-bg-hover: rgba(59, 130, 246, 0.08);  // Blue tint on hover
+$tas-bg-active: rgba(59, 130, 246, 0.15); // Blue tint when active
+$tas-bg-disabled: #1c2030;
 $tas-bg-overlay: rgba(10, 14, 26, 0.95);
 
 // ----------------------------------------------------------------------------
-// TEXT COLORS
+// TEXT COLORS (High Contrast for Dark Theme)
 // ----------------------------------------------------------------------------
-$tas-text-primary: #f6f0f0;
-$tas-text-secondary: #9AADBC;
-$tas-text-muted: #6C757D;
-$tas-text-disabled: #4A5568;
-$tas-text-hint: #718096;
+$tas-text-primary: #e4e6eb;      // Almost white - high readability
+$tas-text-secondary: #b0b8c1;    // Light gray - secondary text
+$tas-text-muted: #8b92a0;        // Medium gray - muted text
+$tas-text-disabled: #4a5568;     // Dark gray - disabled state
+$tas-text-hint: #6b7280;         // Hint text
 
 // ----------------------------------------------------------------------------
-// BORDER COLORS
+// BORDER COLORS (Subtle borders for dark theme)
 // ----------------------------------------------------------------------------
-$tas-border-primary: rgba(255, 255, 255, 0.12);
-$tas-border-secondary: rgba(255, 255, 255, 0.08);
-$tas-border-tertiary: rgba(255, 255, 255, 0.1);
+$tas-border-primary: rgba(255, 255, 255, 0.06);   // Very subtle
+$tas-border-secondary: rgba(255, 255, 255, 0.04); // Even more subtle
+$tas-border-tertiary: rgba(255, 255, 255, 0.08);  // Slightly more visible
 $tas-border-focus: $tas-primary-main;
-$tas-border-error: #FF3D71;
-$tas-border-success: #00C853;
+$tas-border-error: #ef4444;
+$tas-border-success: #10b981;
 
 // ----------------------------------------------------------------------------
-// TRADING COLORS
+// TRADING COLORS (Vibrant for dark background)
 // ----------------------------------------------------------------------------
-$tas-bullish: #00C853;           // Green for bullish
-$tas-bullish-light: rgba(0, 200, 83, 0.15);
-$tas-bearish: #FF3D71;           // Red for bearish
-$tas-bearish-light: rgba(255, 61, 113, 0.15);
-$tas-warning: #FFA726;           // Orange for warnings
-$tas-warning-light: rgba(255, 167, 38, 0.15);
-$tas-info: #00A8FF;              // Blue for info
-$tas-info-light: rgba(0, 168, 255, 0.15);
-$tas-neutral: #9AADBC;           // Neutral gray
+$tas-bullish: #10b981;           // Modern green for bullish
+$tas-bullish-light: rgba(16, 185, 129, 0.15);
+$tas-bearish: #ef4444;           // Modern red for bearish
+$tas-bearish-light: rgba(239, 68, 68, 0.15);
+$tas-warning: #f59e0b;           // Amber for warnings
+$tas-warning-light: rgba(245, 158, 11, 0.15);
+$tas-info: #3b82f6;              // Blue for info
+$tas-info-light: rgba(59, 130, 246, 0.15);
+$tas-neutral: #94a3b8;           // Neutral slate gray
 
 // ----------------------------------------------------------------------------
-// STATE MACHINE COLORS
+// STATE MACHINE COLORS (Updated for dark theme)
 // ----------------------------------------------------------------------------
-$tas-state-neutral: #6C757D;         // Gray - No signal
-$tas-state-watching: #FFA726;        // Orange - Monitoring
-$tas-state-signal-generated: #00A8FF; // Blue - Signal ready
-$tas-state-signal-strong: #00C853;   // Green - Strong signal
-$tas-state-cooling-down: #8B5CF6;    // Purple - Cooldown
+$tas-state-neutral: #64748b;         // Slate - No signal
+$tas-state-watching: #f59e0b;        // Amber - Monitoring
+$tas-state-signal-generated: #3b82f6; // Blue - Signal ready
+$tas-state-signal-strong: #10b981;   // Green - Strong signal
+$tas-state-cooling-down: #8b5cf6;    // Purple - Cooldown
 
 // State backgrounds (lighter versions)
-$tas-state-neutral-bg: rgba(108, 117, 125, 0.15);
-$tas-state-watching-bg: rgba(255, 167, 38, 0.15);
-$tas-state-signal-generated-bg: rgba(0, 168, 255, 0.15);
-$tas-state-signal-strong-bg: rgba(0, 200, 83, 0.15);
+$tas-state-neutral-bg: rgba(100, 116, 139, 0.15);
+$tas-state-watching-bg: rgba(245, 158, 11, 0.15);
+$tas-state-signal-generated-bg: rgba(59, 130, 246, 0.15);
+$tas-state-signal-strong-bg: rgba(16, 185, 129, 0.15);
 $tas-state-cooling-down-bg: rgba(139, 92, 246, 0.15);
 
 // ----------------------------------------------------------------------------
-// SCORE GRADIENT COLORS (for gauge charts)
+// SCORE GRADIENT COLORS (Updated for dark theme)
 // ----------------------------------------------------------------------------
-$tas-score-low: #FF3D71;         // Red (0-30)
-$tas-score-medium: #FFA726;      // Orange (30-70)
-$tas-score-high: #00C853;        // Green (70-100)
+$tas-score-low: #ef4444;         // Red (0-30)
+$tas-score-medium: #f59e0b;      // Amber (30-70)
+$tas-score-high: #10b981;        // Green (70-100)
 
 // Gradient stops for smooth transitions
 $tas-score-gradient: linear-gradient(
@@ -88,14 +88,14 @@ $tas-score-gradient: linear-gradient(
 );
 
 // ----------------------------------------------------------------------------
-// SHADOWS
+// SHADOWS (Enhanced for dark theme - deeper shadows)
 // ----------------------------------------------------------------------------
-$tas-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-$tas-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
-$tas-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
-$tas-shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.6);
-$tas-shadow-glow: 0 0 20px rgba(0, 168, 255, 0.3);
-$tas-shadow-glow-strong: 0 0 30px rgba(0, 168, 255, 0.5);
+$tas-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+$tas-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.5);
+$tas-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.6);
+$tas-shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.7);
+$tas-shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+$tas-shadow-glow-strong: 0 0 30px rgba(59, 130, 246, 0.5);
 
 // ----------------------------------------------------------------------------
 // BORDER RADIUS
@@ -176,21 +176,21 @@ $tas-breakpoint-xl: 1200px;
 $tas-breakpoint-xxl: 1400px;
 
 // ----------------------------------------------------------------------------
-// CHART COLORS (for consistency across charts)
+// CHART COLORS (Updated for dark theme)
 // ----------------------------------------------------------------------------
 $tas-chart-primary: $tas-primary-main;
-$tas-chart-secondary: #8B5CF6;
-$tas-chart-tertiary: #FFA726;
-$tas-chart-grid: rgba(255, 255, 255, 0.05);
-$tas-chart-axis: rgba(255, 255, 255, 0.3);
-$tas-chart-crosshair: rgba(255, 255, 255, 0.2);
+$tas-chart-secondary: #8b5cf6;   // Purple
+$tas-chart-tertiary: #f59e0b;    // Amber
+$tas-chart-grid: rgba(255, 255, 255, 0.03);     // Very subtle grid
+$tas-chart-axis: rgba(255, 255, 255, 0.2);      // Subtle axis
+$tas-chart-crosshair: rgba(255, 255, 255, 0.15); // Crosshair
 
 // ----------------------------------------------------------------------------
-// MARKET REGIME COLORS
+// MARKET REGIME COLORS (Updated for dark theme)
 // ----------------------------------------------------------------------------
-$tas-regime-strong-uptrend: #00C853;
-$tas-regime-weak-uptrend: #4CAF50;
-$tas-regime-sideways: #9AADBC;
-$tas-regime-weak-downtrend: #FF6B6B;
-$tas-regime-strong-downtrend: #FF3D71;
-$tas-regime-high-volatility: #FFA726;
+$tas-regime-strong-uptrend: #10b981;     // Bright green
+$tas-regime-weak-uptrend: #34d399;       // Light green
+$tas-regime-sideways: #94a3b8;           // Slate gray
+$tas-regime-weak-downtrend: #f87171;     // Light red
+$tas-regime-strong-downtrend: #ef4444;   // Bright red
+$tas-regime-high-volatility: #f59e0b;    // Amber

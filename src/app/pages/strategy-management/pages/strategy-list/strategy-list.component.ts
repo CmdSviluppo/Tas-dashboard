@@ -16,7 +16,6 @@ import {
 import {StrategyCardComponent} from '../../../../shared/components/strategy-card/strategy-card.component';
 import {StrategyListService} from '../../services/strategy-list.service';
 import {StrategyFilterComponent} from '../../components/strategy-filter/strategy-filter.component';
-import {StrategyTypeBadgeComponent} from '../../components/strategy-type-badge/strategy-type-badge.component';
 import {
   StrategyUsageIndicatorComponent
 } from '../../components/strategy-usage-indicator/strategy-usage-indicator.component';
@@ -27,6 +26,7 @@ import {
 import {Router} from '@angular/router';
 import {StrategyDetailModalComponent} from '../../components/strategy-detail-modal/strategy-detail-modal.component';
 import {StrategyType} from '../../../../utils/model/enum';
+import { StrategyTypeBadgeComponent } from '../../components/strategy-type-badge/strategy-type-badge.component';
 
 
 @Component({

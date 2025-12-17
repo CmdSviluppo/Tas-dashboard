@@ -63,7 +63,7 @@ export const appConfig: ApplicationConfig = {
         headerInterceptor
       ])),
     importProvidersFrom(
-      NbThemeModule.forRoot({name: 'corporate'}),
+      NbThemeModule.forRoot({name: 'dark'}),
       NbLayoutModule,
       NbEvaIconsModule,
       ReactiveFormsModule,

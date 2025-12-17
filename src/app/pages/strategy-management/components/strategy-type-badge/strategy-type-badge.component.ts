@@ -9,18 +9,8 @@ import {EnumHelper} from '../../../../utils/utility/enum-helper';
   selector: 'app-strategy-type-badge',
   standalone: true,
   imports: [CommonModule, NbBadgeModule, NbTooltipModule],
-  template: `
-    <nb-badge
-      [status]="getTypeColor()"
-      [text]="getTypeLabel()"
-      [nbTooltip]="getTypeDescription()">
-    </nb-badge>
-  `,
-  styles: [`
-    :host {
-      display: inline-block;
-    }
-  `]
+  templateUrl: './strategy-type-badge.component.html',
+  styleUrl: './strategy-type-badge.component.scss'
 })
 export class StrategyTypeBadgeComponent {
 

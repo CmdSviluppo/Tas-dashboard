@@ -10,8 +10,8 @@ import {
   NbSpinnerModule
 } from '@nebular/theme';
 import {StrategyListService} from '../../services/strategy-list.service';
-import {StrategyTypeBadgeComponent} from '../strategy-type-badge/strategy-type-badge.component';
 import {Strategy} from '../../../../utils/model/rest/strategy/strategy-api';
+import { StrategyTypeBadgeComponent } from '../strategy-type-badge/strategy-type-badge.component';
 
 @Component({
   selector: 'app-strategy-detail-modal',

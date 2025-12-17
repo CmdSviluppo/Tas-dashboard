@@ -1,3 +1,5 @@
+@import '../../../../../styles/variables';
+
 .scoring-rules-form {
   .form-section {
     margin-bottom: $tas-spacing-2xl;
@@ -11,7 +13,7 @@
     h4 {
       margin: 0 0 $tas-spacing-sm 0;
       color: $tas-text-primary;
-      font-size: $tas-font-size-xl;
+      font-size: $tas-text-xl;
       display: flex;
       align-items: center;
       gap: $tas-spacing-md;
@@ -20,7 +22,7 @@
     .section-description {
       margin: 0 0 $tas-spacing-lg 0;
       color: $tas-text-secondary;
-      font-size: $tas-font-size-sm;
+      font-size: $tas-text-sm;
       line-height: 1.5;
     }
   }
@@ -32,14 +34,14 @@
       display: block;
       margin-bottom: $tas-spacing-xs;
       color: $tas-text-primary;
-      font-size: $tas-font-size-md;
-      font-weight: $tas-font-weight-medium;
+      font-size: $tas-text-base;
+      font-weight: $tas-font-medium;
     }
 
     .caption {
       display: block;
       margin-top: $tas-spacing-xs;
-      font-size: $tas-font-size-xs;
+      font-size: $tas-text-xs;
       color: $tas-text-secondary;
       font-style: italic;
     }
@@ -60,13 +62,13 @@
         appearance: none;
         width: 18px;
         height: 18px;
-        background: $tas-accent;
+        background: $tas-bg-primary;
         cursor: pointer;
         border-radius: 50%;
         transition: all 0.2s;
 
         &:hover {
-          background: $tas-accent-light;
+          background: $tas-bg-primary;
           transform: scale(1.2);
         }
       }
@@ -74,14 +76,14 @@
       &::-moz-range-thumb {
         width: 18px;
         height: 18px;
-        background: $tas-accent;
+        background: $tas-bg-primary;
         cursor: pointer;
         border-radius: 50%;
         border: none;
         transition: all 0.2s;
 
         &:hover {
-          background: $tas-accent-light;
+          background: $tas-bg-primary;
           transform: scale(1.2);
         }
       }
@@ -92,13 +94,13 @@
         &::-webkit-slider-thumb {
           width: 22px;
           height: 22px;
-          background: $tas-primary;
+          background: $tas-bg-primary;
         }
 
         &::-moz-range-thumb {
           width: 22px;
           height: 22px;
-          background: $tas-primary;
+          background: $tas-bg-primary;
         }
       }
     }
@@ -106,7 +108,7 @@
     .score-legend {
       display: flex;
       justify-content: space-between;
-      font-size: $tas-font-size-xs;
+      font-size: $tas-text-xs;
       color: $tas-text-secondary;
       margin-top: $tas-spacing-xs;
     }
@@ -117,6 +119,6 @@
     padding: $tas-spacing-lg;
     background: $tas-bg-tertiary;
     border-radius: $tas-radius-md;
-    border-left: 4px solid $tas-primary;
+    border-left: 4px solid $tas-border-primary;
   }
 }

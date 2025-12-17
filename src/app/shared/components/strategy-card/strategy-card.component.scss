@@ -67,6 +67,13 @@
           color: var(--text-hint-color);
           font-size: 0.875rem;
         }
+
+        // Assicura che i componenti siano correttamente posizionati
+        app-strategy-type-badge,
+        app-strategy-usage-indicator {
+          display: inline-flex;
+          align-items: center;
+        }
       }
     }
   }
